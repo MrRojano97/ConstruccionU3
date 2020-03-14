@@ -10882,3 +10882,273 @@ a.text-dark:focus {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+footer {
+  background-color: rgb(114, 114, 114);
+  color: white;
+}
+
+
+img{
+  width: 400px; height: 250px;
+}
+
+#titulo img {
+  width: 500px; height: 220px;
+}  
+
+.service {
+  padding: 50px;
+}
+
+.service .service-element,
+.service .service-info {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.service .service-icon {
+  display: block;
+  font-size: 30px;
+  color: #999caa;
+  margin-bottom: 30px;
+}
+
+.service:hover .service-element {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0);
+  -moz-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.service:hover .service-info {
+  -webkit-transform: translate3d(0, -30%, 0);
+  -moz-transform: translate3d(0, -30%, 0);
+  transform: translate3d(0, -30%, 0);
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.service img {
+  width: 150px; height: 150px;
+}
+
+.service img.grande{
+  width: 200px; height: 150px;
+}
+
+section { 
+  background: url(https://previews.123rf.com/images/kran77/kran771707/kran77170700034/82556435-resumen-concepto-de-fondo-tecnol%C3%B3gico-con-diversos-elementos-tecnol%C3%B3gicos-ilustraci%C3%B3n-del-vector.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #000000;
+}
+
+.caja { 
+  padding-left: 60px;
+  font-family: sans-serif; 
+  font-size: 18px; 
+  font-weight: 400; 
+  color: #ffffff; 
+  }
+#uno1{
+  color: #D98880;
+}
+#dos2{
+  color: #F1948A;
+}
+#tres3{
+  color: #C39BD3;
+}
+#cuatro4{
+  color: #BB8FCE;
+}
+#cinco5{
+  color: #7FB3D5;
+}
+#seis6{
+  color: #76D7C4;
+}
+
+
+
+
+
+#titulo img {
+    width: 500px; height: 220px;
+  }  
+  
+  .service {
+    padding: 50px;
+  }
+  
+  .service .service-element,
+  .service .service-info {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    transition-duration: 300ms;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+  }
+  
+  .service .service-icon {
+    display: block;
+    font-size: 30px;
+    color: #999caa;
+    margin-bottom: 30px;
+  }
+  
+  .service:hover .service-element {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    transition-duration: 300ms;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+  }
+  
+  .service:hover .service-info {
+    -webkit-transform: translate3d(0, -30%, 0);
+    -moz-transform: translate3d(0, -30%, 0);
+    transform: translate3d(0, -30%, 0);
+    transition-duration: 300ms;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+  }
+  
+ 
+
+
+
+
+  .container-fluid {
+    height: 90%;
+    width: 100%;
+  }  
+  .carousel-inner img {
+    height: 450px;
+  }
+  
+  
+  
+  .flip-card {
+      background-color: transparent;
+      width: 300px;
+      height: 300px;
+      perspective: 1000px;
+    }
+    
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+    
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+    
+    .flip-card-front {
+      background-color: #bbb;
+      color: black;
+    }
+    
+    .flip-card-back {
+      background-color: #2980b9;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    
+
+
+
+
+
+    .sidenav {
+      width: 200px;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+    }
+    
+    /* Style the sidenav links and the dropdown button */
+    .sidenav a, .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width:100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    /* On mouse-over */
+    .sidenav a:hover, .dropdown-btn:hover {
+      color: #f1f1f1;
+    }
+    
+    /* Main content */
+    .main {
+      margin-left: 200px; /* Same as the width of the sidenav */
+      font-size: 20px; /* Increased text to enable scrolling */
+      padding: 0px 10px;
+    }
+    
+    /* Add an active class to the active dropdown button */
+    .active {
+      background-color: green;
+      color: white;
+    }
+    
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      display: none;
+      background-color: #262626;
+      padding-left: 8px;
+    }
+    
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+    }
