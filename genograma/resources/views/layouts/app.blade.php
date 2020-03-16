@@ -79,8 +79,13 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="wrapper">
+            @yield('sidebar')
+            <div id="content">
+                @yield('content')
+            </div>
+        </div>   
     </div>
+
+
+   
