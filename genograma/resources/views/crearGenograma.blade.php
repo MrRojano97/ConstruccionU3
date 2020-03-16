@@ -84,7 +84,6 @@
 @endsection
 @section('content')
 <!-- https://www.w3schools.com/howto/howto_js_dropdown_sidenav.asp -->
-asdsd
 
 <html lang="en", xmlns="https://www.w3.org/1999/xhtml">
     <head>
@@ -126,7 +125,7 @@ asdsd
 
     </head>
     <body onload="init()">
-        <div id="myDiagramDiv" style="flex-grow: 1; height:900px; border: solid 1px black"></div>
+        <div id="myDiagramDiv" style="flex-grow: 1; height:900px; width:1650px; border: solid 1px black"></div>
     </body>
 
     <script src="{{asset('js/app.js')}}" defer></script>
