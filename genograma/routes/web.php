@@ -41,8 +41,8 @@ Route::get('/colaboradores', function(){
     return view('colaboradores');
 });
 Route::get('/informacion', function(){
-});
     return view('informacion');
+});  
 Route::get('/crearGenograma', function(){
     return view('crearGenograma');
 });
