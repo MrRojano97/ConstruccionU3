@@ -49,3 +49,6 @@ Route::get('/crearGenograma', function(){
 Route::get('/verGenogramas', function(){
     return view('verGenogramas');
 });
+Route::get('/leandro', function(){
+    return view('leandro');
+});

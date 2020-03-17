@@ -45,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/verGenogramas">Ver Genogramas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leandro">Crear Genograma (leandro)</a>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
