@@ -72,36 +72,35 @@
     float: left;
   }
 </style>
-<script id="code"> function init() {
-  if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
-  var $ = go.GraphObject.make;  // for conciseness in defining templates
+<script id="code"> function init() {  
+  var $ = go.GraphObject.make; 
 
-  myDiagram =
-    $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+    myDiagram =
+    $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV 
       {
         grid: $(go.Panel, "Grid",
           $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
           $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
           $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
           $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
-        ),
-        "draggingTool.dragsLink": true,
-        "draggingTool.isGridSnapEnabled": true,
-        "linkingTool.isUnconnectedLinkValid": true,
-        "linkingTool.portGravity": 20,
-        "relinkingTool.isUnconnectedLinkValid": true,
-        "relinkingTool.portGravity": 20,
-        "relinkingTool.fromHandleArchetype":
-          $(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
-        "relinkingTool.toHandleArchetype":
-          $(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
-        "linkReshapingTool.handleArchetype":
-          $(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
-        "rotatingTool.handleAngle": 270,
-        "rotatingTool.handleDistance": 30,
-        "rotatingTool.snapAngleMultiple": 15,
-        "rotatingTool.snapAngleEpsilon": 15,
-        "undoManager.isEnabled": true
+        )
+        //"draggingTool.dragsLink": true,
+        //"draggingTool.isGridSnapEnabled": true,
+        //"linkingTool.isUnconnectedLinkValid": true,
+        //"linkingTool.portGravity": 20,
+        //"relinkingTool.isUnconnectedLinkValid": true,
+        //"relinkingTool.portGravity": 20,
+        //"relinkingTool.fromHandleArchetype":
+          //$(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
+        //"relinkingTool.toHandleArchetype":
+          //$(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
+        //"linkReshapingTool.handleArchetype":
+          //$(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+        //"rotatingTool.handleAngle": 270,
+        //"rotatingTool.handleDistance": 30,
+        //"rotatingTool.snapAngleMultiple": 15,
+        //"rotatingTool.snapAngleEpsilon": 15,
+        //"undoManager.isEnabled": true
       });
 
   // when the document is modified, add a "*" to the title and enable the "Save" button
