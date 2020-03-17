@@ -1916,26 +1916,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -1953,6 +1933,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6704,7 +6691,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Aca va le stilo del componente */\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n/* Aca va le stilo del componente */\n\n", ""]);
 
 // exports
 
@@ -6723,7 +6710,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.sidenav[data-v-54833a28] {\r\n      width: 200px;\r\n      top: 0;\r\n      left: 0;\r\n      background-color: #111;\r\n      overflow-x: hidden;\n}\r\n    \r\n    /* Style the sidenav links and the dropdown button */\n.sidenav a[data-v-54833a28], .dropdown-btn[data-v-54833a28] {\r\n      padding: 6px 8px 6px 16px;\r\n      text-decoration: none;\r\n      font-size: 20px;\r\n      color: #818181;\r\n      display: block;\r\n      border: none;\r\n      background: none;\r\n      width:100%;\r\n      text-align: left;\r\n      cursor: pointer;\r\n      outline: none;\n}\r\n    \r\n    /* On mouse-over */\n.sidenav a[data-v-54833a28]:hover, .dropdown-btn[data-v-54833a28]:hover {\r\n      color: #f1f1f1;\n}\r\n    \r\n    /* Main content */\n.main[data-v-54833a28] {\r\n      margin-left: 200px; /* Same as the width of the sidenav */\r\n      font-size: 20px; /* Increased text to enable scrolling */\r\n      padding: 0px 10px;\n}\r\n    \r\n    /* Add an active class to the active dropdown button */\n.active[data-v-54833a28] {\r\n      background-color: green;\r\n      color: white;\n}\r\n    \r\n    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */\n.dropdown-container[data-v-54833a28] {\r\n      display: none;\r\n      background-color: #262626;\r\n      padding-left: 8px;\n}\r\n    \r\n    /* Optional: Style the caret down icon */\n.fa-caret-down[data-v-54833a28] {\r\n      float: right;\r\n      padding-right: 8px;\n}\n#sidebar[data-v-54833a28] {\r\n      min-width: 250px;\r\n      max-width: 250px;\r\n      min-height: 100vh;\n}\n.wrapper[data-v-54833a28] {\r\n    display: flex;\r\n    align-items: stretch;\n}\n#sidebar[data-v-54833a28] {\r\n    min-width: 250px;\r\n    max-width: 250px;\n}\n#sidebar.active[data-v-54833a28] {\r\n    margin-left: -250px;\n}\n#sidebar[data-v-54833a28] {\r\n  /* don't forget to add all the previously mentioned styles here too */\r\n  background: #1E90FF;\r\n  color: #fff;\r\n  transition: all 0.3s;\n}\n#sidebar .sidebar-header[data-v-54833a28] {\r\n  padding: 24px;\r\n  background: 1E90FF;\n}\n#sidebar ul.components[data-v-54833a28] {\r\n  padding: 20px 0;\r\n  border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54833a28] {\r\n  color: #fff;\r\n  padding: 10px;\n}\n#sidebar ul li a[data-v-54833a28] {\r\n  padding: 10px;\r\n  font-size: 1.1em;\r\n  display: block;\r\n  color: white;\n}\n#sidebar ul li a[data-v-54833a28]:hover {\r\n  color: #7386D5;\r\n  background: #fff;\n}\n#sidebar ul li.active > a[data-v-54833a28], a[aria-expanded=\"true\"][data-v-54833a28] {\r\n  color: #fff;\r\n  background: #1E90FF;\n}\nul ul a[data-v-54833a28] {\r\n  font-size: 0.9em !important;\r\n  padding-left: 30px !important;\r\n  background: #1E90FF;\r\n  color:white;\n}\r\n", ""]);
+exports.push([module.i, "\n.sidenav[data-v-54833a28] {\r\n      width: 200px;\r\n      top: 0;\r\n      left: 0;\r\n      background-color: #111;\r\n      overflow-x: hidden;\n}\r\n    \r\n    /* Style the sidenav links and the dropdown button */\n.sidenav a[data-v-54833a28], .dropdown-btn[data-v-54833a28] {\r\n      padding: 6px 8px 6px 16px;\r\n      text-decoration: none;\r\n      font-size: 18px;\r\n      font-family: \"Lucida Console\", Monaco, monospace;\r\n      color: #818181;\r\n      display: block;\r\n      border: none;\r\n      background: none;\r\n      width:100%;\r\n      text-align: left;\r\n      cursor: pointer;\r\n      outline: none;\n}\r\n    \r\n    /* On mouse-over */\n.sidenav a[data-v-54833a28]:hover, .dropdown-btn[data-v-54833a28]:hover {\r\n      color: #f1f1f1;\n}\r\n    \r\n    /* Main content */\n.main[data-v-54833a28] {\r\n      margin-left: 200px; /* Same as the width of the sidenav */\r\n      font-size: 20px; /* Increased text to enable scrolling */\r\n      font-family: \"Lucida Console\", Monaco, monospace;\r\n      padding: 0px 10px;\n}\r\n    \r\n    /* Add an active class to the active dropdown button */\n.active[data-v-54833a28] {\r\n      background-color: green;\r\n      color: white;\n}\r\n    \r\n    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */\n.dropdown-container[data-v-54833a28] {\r\n      display: none;\r\n      background-color: #262626;\r\n      padding-left: 8px;\n}\r\n    \r\n    /* Optional: Style the caret down icon */\n.fa-caret-down[data-v-54833a28] {\r\n      float: right;\r\n      padding-right: 8px;\n}\n#sidebar[data-v-54833a28] {\r\n      min-width: 250px;\r\n      max-width: 250px;\r\n      min-height: 100vh;\n}\n.wrapper[data-v-54833a28] {\r\n    display: flex;\r\n    align-items: stretch;\n}\n.h3[data-v-54833a28]{\r\n    font-family:\"Lucida Console\", Monaco, monospace ;\n}\n#sidebar[data-v-54833a28] {\r\n    min-width: 250px;\r\n    max-width: 250px;\n}\n#sidebar.active[data-v-54833a28] {\r\n    margin-left: -250px;\n}\n#sidebar[data-v-54833a28] {\r\n  /* don't forget to add all the previously mentioned styles here too */\r\n  background: #05386b;\r\n  color: #fff;\r\n  transition: all 0.3s;\n}\n#sidebar .sidebar-header[data-v-54833a28] {\r\n  padding: 24px;\r\n  background: 1E90FF;\n}\n#sidebar ul.components[data-v-54833a28] {\r\n  padding: 20px 0;\r\n  border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54833a28] {\r\n  color: #fff;\r\n  padding: 10px;\n}\n#sidebar ul li a[data-v-54833a28] {\r\n  padding: 10px;\r\n  font-size: 1.1em;\r\n  font-family: \"Lucida Console\", Monaco, monospace;\r\n  display: block;\r\n  color: white;\n}\n#sidebar ul li a[data-v-54833a28]:hover {\r\n  color: #7386D5;\r\n  background: #fff;\n}\n#sidebar ul li.active > a[data-v-54833a28], a[aria-expanded=\"true\"][data-v-54833a28] {\r\n  color: #fff;\r\n  background: #05386b;\n}\nul ul a[data-v-54833a28] {\r\n  font-size: 0.9em !important;\r\n  font-family: \"Lucida Console\", Monaco, monospace;\r\n  padding-left: 30px !important;\r\n  background: #05386b;\r\n  color:white;\n}\r\n", ""]);
 
 // exports
 
@@ -40377,32 +40364,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", {
+    staticStyle: {
+      "flex-grow": "1",
+      height: "900px",
+      border: "solid 1px black"
+    },
+    attrs: { id: "myDiagramDiv" }
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Canvas component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

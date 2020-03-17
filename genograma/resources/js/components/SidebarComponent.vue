@@ -93,7 +93,8 @@
     .sidenav a, .dropdown-btn {
       padding: 6px 8px 6px 16px;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 18px;
+      font-family: "Lucida Console", Monaco, monospace;
       color: #818181;
       display: block;
       border: none;
@@ -113,6 +114,7 @@
     .main {
       margin-left: 200px; /* Same as the width of the sidenav */
       font-size: 20px; /* Increased text to enable scrolling */
+      font-family: "Lucida Console", Monaco, monospace;
       padding: 0px 10px;
     }
     
@@ -144,6 +146,9 @@
     display: flex;
     align-items: stretch;
 }
+.h3{
+    font-family:"Lucida Console", Monaco, monospace ;
+}
 
 #sidebar {
     min-width: 250px;
@@ -156,7 +161,7 @@
 
 #sidebar {
   /* don't forget to add all the previously mentioned styles here too */
-  background: #1E90FF;
+  background: #05386b;
   color: #fff;
   transition: all 0.3s;
 }
@@ -179,6 +184,7 @@
 #sidebar ul li a {
   padding: 10px;
   font-size: 1.1em;
+  font-family: "Lucida Console", Monaco, monospace;
   display: block;
   color: white;
 }
@@ -189,12 +195,13 @@
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
   color: #fff;
-  background: #1E90FF;
+  background: #05386b;
 }
 ul ul a {
   font-size: 0.9em !important;
+  font-family: "Lucida Console", Monaco, monospace;
   padding-left: 30px !important;
-  background: #1E90FF;
+  background: #05386b;
   color:white;
 }
 </style>
