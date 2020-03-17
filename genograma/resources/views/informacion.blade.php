@@ -10,7 +10,6 @@
 
         <div class="row">
             <div class="col-sm-7 sm-margin-b-50">
-                <h3>Genograma</h3>
                 <div class="margin-b-30">
                     <p>El genograma es una técnica de evaluación y diagnóstico, para representar gráficamente las principales características e interrelaciones de un grupo familiar a lo largo del tiempo, recibiendo otros nombres como familiograma, árbol genealógico y árbol familiar.</p>
                 </div>

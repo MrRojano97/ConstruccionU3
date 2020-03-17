@@ -7,7 +7,7 @@
                 <div class="title text-center">
                     <h1 class="mb-10">Genograma</h1>
                     <p><b>Una herramienta para su familia, psicologo y psquiatra.</b></p>
-                    <img class="img-responsive" src="https://familiograma.info/wp-content/uploads/2019/09/como-crear-un-familiograma-paso-a-paso.png" alt="">
+                    <img class="img-responsive" src="https://www.genopro.com/genogram/SampleGenogramWithoutEmotionalRelationships.gif" alt="">
                     <p >Viene a representar una imagen de las relaciones familiares donde en un breve instante se puede ver la relación de una persona con su entorno. Es mucho más que un árbol genealógico tradicional, ya que en este se puede apreciar cómo es la relación del individuo con su entorno, teniendo en cuenta los factores sociales y familiares que afectan a la psicología de la persona en cuestión.</p>
                 </div>
             </div>
