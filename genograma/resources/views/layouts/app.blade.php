@@ -40,8 +40,11 @@
                             <a class="nav-link" href="/informacion">Informacion</a>
                         </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="/crearGenograma">crearGenograma</a>
+                            <a class="nav-link" href="/crearGenograma"> Dibujar</a>
                         </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/verGenogramas">Ver Genogramas</a>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

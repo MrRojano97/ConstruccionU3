@@ -46,3 +46,6 @@ Route::get('/informacion', function(){
 Route::get('/crearGenograma', function(){
     return view('crearGenograma');
 });
+Route::get('/verGenogramas', function(){
+    return view('verGenogramas');
+});
