@@ -58,10 +58,7 @@ figure,
 footer,
 header,
 hgroup,
-/*background global*/
-main{
-  background-color: #def2f1;
-}
+main,
 nav,
 section {
   display: block;
@@ -88,12 +85,8 @@ hr {
   overflow: visible;
 }
 
-h1{
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;;
-}
-h2{
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;;
-}
+h1,
+h2,
 h3,
 h4,
 h5,
@@ -103,11 +96,8 @@ h6 {
 }
 
 p {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 20px;
   margin-top: 0;
   margin-bottom: 1rem;
-  
 }
 
 abbr[title],
@@ -219,9 +209,7 @@ figure {
 }
 
 img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  vertical-align: middle;
   border-style: none;
 }
 
@@ -400,19 +388,15 @@ h6,
   font-weight: 500;
   line-height: 1.2;
 }
-/* titulo inicio genograma*/
-h1{
-  font-weight: bold;
-  font-size: 35px;
-}
+
+h1,
 .h1 {
   font-size: 2.25rem;
 }
 
 h2,
 .h2 {
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 1.8rem;
 }
 
 h3,
@@ -4871,9 +4855,7 @@ input[type=button].btn-block {
 }
 
 .navbar-light .navbar-brand {
-  color: #fff;
-  font-size: 20px;
-  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .navbar-light .navbar-brand:hover,
@@ -4881,11 +4863,8 @@ input[type=button].btn-block {
   color: rgba(0, 0, 0, 0.9);
 }
 
-/* letras secciones barra de navegacion*/
 .navbar-light .navbar-nav .nav-link {
-  font-weight: bold;
-  font-size: 16px;
-  color: #fff;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -7063,9 +7042,8 @@ button.bg-dark:focus {
   background-color: #1d2124 !important;
 }
 
-/*color barra de navegacion*/
 .bg-white {
-  background-color: #05386b !important;
+  background-color: #fff !important;
 }
 
 .bg-transparent {
