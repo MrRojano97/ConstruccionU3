@@ -1,71 +1,72 @@
+
+
 <template>
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Acciones </h3>
+            <h3>Acciones </h3> 
         </div>
         <ul class="list-unstyled components">
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="#">Hombre</a>
+                         
+                        <a>Hombre <i class="fa fa-square"></i> </a>
                     </li>
+                    
                     <li>
-                        <a href="#">Mujer</a>
-                    </li>
-                    <li>
-                        <a href="#">Elle</a>
+                        <a>Mujer <i class="fa fa-circle"></i> </a>
                     </li>
                 </ul>
                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu1">
                     <li>
-                        <a href="#">Madre</a>
+                        <a>Madre   <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Padre</a>
+                        <a href="#">Padre   <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Hermane</a>
+                        <a href="#">Hermane <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Tie</a>
+                        <a href="#">Tie     <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Sobrine</a>
+                        <a href="#">Sobrine <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Abuele</a>
+                        <a href="#">Abuele  <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">ETC</a>
+                        <a href="#">ETC     <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                 </ul>
                 <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu2">
                     <li>
-                        <a href="#">Casade</a>
+                        <a href="#">Casade  <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Amantes</a>
+                        <a href="#">Amantes <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Novies</a>
+                        <a href="#">Novies  <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Es complicado</a>
+                        <a href="#">Es complicado   <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">ETC</a>
+                        <a href="#">ETC <i class="fa fa-arrow-circle-right"></i>    </a>
                     </li>
                 </ul>
                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu3">
                     <li>
-                        <a href="#">Eliminar</a>
+                        <a href="#">Eliminar    <i class="fa fa-trash"></i>    </a>
                     </li>
                     <li>
-                        <a href="#">Editar</a>
+                        <a href="#">Editar      <i class="fa fa-edit"></i>    </a>
                     </li>
                     <li>
                         <a href="#">ETC</a>
@@ -80,6 +81,7 @@
         </ul>
 </nav>
 </template>
+
 <style scoped>
 .sidenav {
       width: 200px;
@@ -205,6 +207,8 @@ ul ul a {
   color:white;
 }
 </style>
+
+
 <script>
     export default {
         mounted() {
