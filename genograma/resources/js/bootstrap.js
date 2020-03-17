@@ -20,7 +20,7 @@ try {
  */
 
 window.axios = require('axios');
-
+window.swal = require('gojs');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
