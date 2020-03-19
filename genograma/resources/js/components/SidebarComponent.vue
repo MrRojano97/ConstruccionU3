@@ -9,11 +9,11 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <button @click="openForm()">Hombre <i class="fa fa-square"></i> </button>
+                            <a @click="openForm()"> Hombre <i class="fa fa-square"></i> </a>
                         </li>
 
                         <li>
-                            <a>Mujer <i class="fa fa-circle"></i> </a>
+                            <a> Mujer <i class="fa fa-circle"></i> </a>
                         </li>
                     </ul>
                     <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
