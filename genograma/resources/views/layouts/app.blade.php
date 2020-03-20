@@ -15,6 +15,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Ionicons -->
+    <script src="https://kit.fontawesome.com/your-code-number.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -40,8 +43,14 @@
                             <a class="nav-link" href="/informacion">Informacion</a>
                         </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="/crearGenograma">crearGenograma</a>
+                            <a class="nav-link" href="/crearGenograma"> Dibujar</a>
                         </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/verGenogramas">Ver Genogramas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leandro">Crear Genograma (leandro)</a>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
