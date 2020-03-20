@@ -40702,7 +40702,72 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [_vm._v("Mujer "), _c("i", { staticClass: "fa fa-circle" })]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Hijo adoptivo legal "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Hijo adoptivo temporal "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
               _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Género desconocido "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _vm._m(2),
               _vm._v(" "),
@@ -40714,15 +40779,7 @@ var render = function() {
               _vm._v(" "),
               _vm._m(6),
               _vm._v(" "),
-              _vm._m(7),
-              _vm._v(" "),
-              _vm._m(8),
-              _vm._v(" "),
-              _vm._m(9),
-              _vm._v(" "),
-              _vm._m(10),
-              _vm._v(" "),
-              _vm._m(11)
+              _vm._m(7)
             ]
           ),
           _vm._v(" "),
@@ -40739,7 +40796,7 @@ var render = function() {
             [_vm._v("Relaciones Familiares")]
           ),
           _vm._v(" "),
-          _vm._m(12),
+          _vm._m(8),
           _vm._v(" "),
           _c(
             "a",
@@ -40754,7 +40811,7 @@ var render = function() {
             [_vm._v("Relacion Emocionales")]
           ),
           _vm._v(" "),
-          _vm._m(13),
+          _vm._m(9),
           _vm._v(" "),
           _c(
             "a",
@@ -40769,10 +40826,10 @@ var render = function() {
             [_vm._v("Operaciones")]
           ),
           _vm._v(" "),
-          _vm._m(14)
+          _vm._m(10)
         ]),
         _vm._v(" "),
-        _vm._m(15)
+        _vm._m(11)
       ])
     ]),
     _vm._v(" "),
@@ -40781,7 +40838,7 @@ var render = function() {
         _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
           _c("h1", [_vm._v("Login")]),
           _vm._v(" "),
-          _vm._m(16),
+          _vm._m(12),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40810,7 +40867,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(17),
+          _vm._m(13),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40839,7 +40896,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(18),
+          _vm._m(14),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40868,7 +40925,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(19),
+          _vm._m(15),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40943,48 +41000,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", [_vm._v("Mujer "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [
-        _vm._v("Hijo adoptivo legal "),
-        _c("i", { staticClass: "fa fa-circle" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
       _c("a", [_vm._v("Mascota "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [
-        _vm._v("Género desconocido "),
-        _c("i", { staticClass: "fa fa-circle" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [
-        _vm._v("Hijo adoptivo temporal "),
-        _c("i", { staticClass: "fa fa-circle" })
-      ])
     ])
   },
   function() {

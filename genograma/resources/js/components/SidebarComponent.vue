@@ -12,20 +12,20 @@
                             <a @click="openForm()">Hombre <i class="fa fa-square"></i> </a>
                         </li>
                         <li>
-                            <a>Mujer <i class="fa fa-circle"></i> </a>
+                            <a @click="openForm()">Mujer <i class="fa fa-circle"></i> </a>
                         </li>
                         <li>
-                            <a>Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
+                            <a @click="openForm()">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a @click="openForm()">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
                         </li>
                         <li>
                             <a>Mascota <i class="fa fa-circle"></i> </a>
                         </li>
                         <li>
-                            <a>Género desconocido <i class="fa fa-circle"></i> </a>
-                        </li>
-                        <li>
-                            <a>Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
-                        </li>
+                            <a @click="openForm()">Género desconocido <i class="fa fa-circle"></i> </a>
+                        </li>                        
                         <li>
                             <a>Embarazo <i class="fa fa-circle"></i> </a>
                         </li>
