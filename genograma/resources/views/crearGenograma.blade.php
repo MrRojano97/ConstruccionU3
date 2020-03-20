@@ -10,11 +10,11 @@
     <meta name="description" content="Use HTML5 drag-and-drop to implement dragging HTML elements onto a GoJS Diagram to create new nodes." />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Copyright 1998-2020 by Northwoods Software Corporation. -->
-  </head>
+    </head>
 
   
 
-  <body onload="init()">
+  <body >
       <div id="sample">
           <div style="width: 100%; display: flex; justify-content: space-between">
             <sidebar-component></sidebar-component>
@@ -53,7 +53,7 @@
     float: left;
   }
 </style>
-<script id="code"> function init() {  
+<!--script id="code"> function init() {  
   var $ = go.GraphObject.make; 
 
     myDiagram =
@@ -67,7 +67,7 @@
         )
       });
     }
-</script>
+</script-->
 
 <!-- //   when the document is modified, add a "*" to the title and enable the "Save" button
 //   myDiagram.addDiagramListener("Modified", function(e) {
