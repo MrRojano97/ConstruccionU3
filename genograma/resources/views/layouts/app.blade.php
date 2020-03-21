@@ -12,6 +12,12 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="{{ asset('js/goSamples.js') }}"></script>  <!-- this is only for the GoJS Samples framework -->
+    <script src="{{ asset('../extensions/PolylineLinkingTool.js') }}"></script>
+    <script src="{{ asset('../release/go.js') }}"></script>
+
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -23,7 +29,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="overflow-x: hidden; !important ">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
