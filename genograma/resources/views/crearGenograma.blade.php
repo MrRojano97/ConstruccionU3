@@ -12,14 +12,14 @@
     <!-- Copyright 1998-2020 by Northwoods Software Corporation. -->
     </head>
 
-  
+
 
   <body >
       <div id="sample">
-          <div style="width: 100%; display: flex; justify-content: space-between">
+          <div>
             <sidebar-component></sidebar-component>
             <!--<div id="myPaletteDiv" style="width: 105px; margin-right: 2px; background-color: whitesmoke; border: solid 1px black"></div>-->
-            <canvas-component></canvas-component>
+            <!--canvas-component></canvas-component-->
           </div>
           <div>
 
@@ -53,11 +53,11 @@
     float: left;
   }
 </style>
-<!--script id="code"> function init() {  
-  var $ = go.GraphObject.make; 
+<!--script id="code"> function init() {
+  var $ = go.GraphObject.make;
 
     myDiagram =
-    $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV 
+    $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
       {
         grid: $(go.Panel, "Grid",
           $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
