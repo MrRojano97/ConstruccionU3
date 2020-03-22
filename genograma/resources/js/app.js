@@ -17,6 +17,10 @@ window.Vue = require('vue');
 Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
 Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
 
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -24,5 +28,8 @@ Vue.component('canvas-component', require('./components/CanvasComponent.vue').de
  */
 
 const app = new Vue({
+    beforeCreate: function(){
+        console.log(this.$myDiagram)
+    },
     el: '#app',
 });

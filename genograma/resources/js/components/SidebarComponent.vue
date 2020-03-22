@@ -30,7 +30,7 @@
                                         <a @click="openForm()">Género desconocido <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Embarazo <i class="fa fa-circle"></i> </a>
+                                        <a >Embarazo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
                                         <a>Aborto espontáneo <i class="fa fa-circle"></i> </a>
@@ -51,28 +51,28 @@
                                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu1">
                                     <li>
-                                        <a href="#">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('Matrimonio')">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Sep-Fact')">Separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Separacion legal     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Sep-Leg')">Separacion legal     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Divorcio     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Divorcio')">Divorcio     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Compromiso    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Engagement')">Compromiso    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Compromiso con convivencia     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Eng-Coh')">Compromiso con convivencia     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Compromiso y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Eng-Sep')">Compromiso y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Nulidad     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Nullity')">Nulidad     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Convivencia legal    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -263,13 +263,15 @@
                         <button onclick="save()">Save</button>
                         <button onclick="load()">Load</button>
                     </div>
-                  <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "go.GraphLinksModel",
-                    "nodeDataArray": [
-                        { "key": 1, "text": "Node 1", "fill": "blueviolet", "loc": "100 100" },
-                        { "key": 2, "text": "Node 2", "fill": "orange", "loc": "400 100" }
-                    ],
-                    "linkDataArray": [  ]
-                    }
+                  <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "GraphLinksModel",
+                "linkFromPortIdProperty": "fromPort",
+                "linkToPortIdProperty": "toPort",
+                "modelData": {"position":"-398.5 -307.9767441860465"},
+                "nodeDataArray": [ 
+                {"text":"Start", "figure":"Circle", "fill":"#00AD5F", "key":-1, "loc":"-300 -260"},
+                {"text":"End", "figure":"Circle", "fill":"#CE0620", "key":-5, "loc":"-110 -270"}
+                ],
+                "linkDataArray": [ {"points":[-262.6627906976744,-260,-252.66279069767438,-260,-202.81976744186045,-260,-202.81976744186045,-270,-152.97674418604652,-270,-142.97674418604652,-270], "from":-1, "to":-5, "toPort":"L"} ]}
                     </textarea>
             </div>
         </div>
@@ -279,72 +281,160 @@
 
 
 <script>
-      var $ = go.GraphObject.make;
+    var counter = 0;
+    var $ = go.GraphObject.make;
     export default {
         name: 'Diagram',
         mounted() {
-            var myDiagram =
-                $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
+            this.$myDiagram =  $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
+                {
+                    grid: $(go.Panel, "Grid",
+                    $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
+                    $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
+                    $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
+                    $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
+                    ),
+                    "draggingTool.dragsLink": true,
+                    "draggingTool.isGridSnapEnabled": true,
+                    "linkingTool.isUnconnectedLinkValid": true,
+                    "linkingTool.portGravity": 20,
+                    "relinkingTool.isUnconnectedLinkValid": true,
+                    "relinkingTool.portGravity": 20,
+                    "relinkingTool.fromHandleArchetype":
+                    $(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
+                    "relinkingTool.toHandleArchetype":
+                    $(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
+                    "linkReshapingTool.handleArchetype":
+                    $(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+                    "rotatingTool.handleAngle": 270,
+                    "rotatingTool.handleDistance": 30,
+                    "rotatingTool.snapAngleMultiple": 15,
+                    "rotatingTool.snapAngleEpsilon": 15,
+                    "undoManager.isEnabled": true
+                });
+                function makePort(name, spot, output, input) {
+                    // the port is basically just a small transparent square
+                    return $(go.Shape, "Circle",
                     {
-                        grid: $(go.Panel, "Grid",
-                        $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
-                        $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
-                        $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
-                        $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
-                        )
+                        fill: null,  // not seen, by default; set to a translucent gray by showSmallPorts, defined below
+                        stroke: null,
+                        desiredSize: new go.Size(7, 7),
+                        alignment: spot,  // align the port on the main Shape
+                        alignmentFocus: spot,  // just inside the Shape
+                        portId: name,  // declare this object to be a "port"
+                        fromSpot: spot, toSpot: spot,  // declare where links may connect at this port
+                        fromLinkable: output, toLinkable: input,  // declare whether the user may draw links to/from here
+                        cursor: "pointer"  // show a different cursor to indicate potential link point
                     });
-              function init() {
-      if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
-      var $ = go.GraphObject.make;
+                }
+                /*Template para relacion de Matrimonio*/
+                this.$myDiagram.linkTemplateMap.add("Matrimonio",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "black", strokeWidth: 2 }),
+                    )
+                );
+                /*Template para relacion de Separacion por Hecho*/
+                this.$myDiagram.linkTemplateMap.add("Sep-Fact",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "red", strokeWidth: 2 }),
+                    /*Forma del la punta de flecha */
+                    $(go.Shape,
+                        { toArrow: "OpenTriangleTop", stroke: "red", strokeWidth: 3, scale: 1.3 }),
+                    )
+                );
+                /*Template para relacion de Separacion Legal*/
+                this.$myDiagram.linkTemplateMap.add("Sep-Leg",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "red", strokeWidth: 2 }),
+                    $(go.Shape,
+                        { toArrow: "OpenTriangleBottom", stroke: "red", strokeWidth: 3, scale: 1.3 }),
+                    )
+                );
+                /*Template para relacion de Divorcio*/
+                this.$myDiagram.linkTemplateMap.add("Divorcio",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "red", strokeWidth: 2 }),
+                    $(go.Shape,
+                        { toArrow: "DoubleForwardSlash", stroke: "red", strokeWidth: 3, scale: 2 }),
+                    )
+                );
+                /*Template para relacion de Compromiso*/
+                this.$myDiagram.linkTemplateMap.add("Engagement",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "blue", strokeDashArray: [5,5], strokeWidth: 2 })
+                    )
+                );
+                /*Template para relacion de Comprometidos y Cohabitacion*/
+                this.$myDiagram.linkTemplateMap.add("Eng-Coh",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                    $(go.Shape,
+                        { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                    )
+                );
+                /*Template para relacion de Comprometidos pero Separados*/
+                this.$myDiagram.linkTemplateMap.add("Eng-Sep",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                    $(go.Shape,
+                        { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                    )
+                );
+                /*Template para relacion de Nulidad*/ 
+                this.$myDiagram.linkTemplateMap.add("Nullity",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "red",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                    $(go.Shape,
+                        { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
+                    )
+                );
+                            
 
-      myDiagram =
-        $(go.Diagram, "myDiagramDiv");
-
-      // install custom linking tool, defined in PolylineLinkingTool.js
-      var tool = new PolylineLinkingTool();
-      //tool.temporaryLink.routing = go.Link.Orthogonal;  // optional, but need to keep link template in sync, below
-      myDiagram.toolManager.linkingTool = tool;
-
-      myDiagram.nodeTemplate =
-        $(go.Node, "Spot",
-          { locationSpot: go.Spot.Center },
-          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Shape,
-            {
-              width: 100, height: 100, fill: "lightgray",
-              portId: "", cursor: "pointer",
-              fromLinkable: true,
-              fromLinkableSelfNode: true, fromLinkableDuplicates: true,  // optional
-              toLinkable: true,
-              toLinkableSelfNode: true, toLinkableDuplicates: true  // optional
-            },
-            new go.Binding("fill")),
-          $(go.Shape, { width: 70, height: 70, fill: "transparent", stroke: null }),
-          $(go.TextBlock,
-            new go.Binding("text")));
-
-      myDiagram.linkTemplate =
-        $(go.Link,
-          { reshapable: true, resegmentable: true },
-          //{ routing: go.Link.Orthogonal },  // optional, but need to keep LinkingTool.temporaryLink in sync, above
-          { adjusting: go.Link.Stretch },  // optional
-          new go.Binding("points", "points").makeTwoWay(),
-          $(go.Shape, { strokeWidth: 1.5 }),
-          $(go.Shape, { toArrow: "OpenTriangle" }));
-
-      load();  // load a simple diagram from the textarea
-    }
-
-    // save a model to and load a model from Json text, displayed below the Diagram
-    function save() {
-      var str = myDiagram.model.toJson();
-      document.getElementById("mySavedModel").value = str;
-    }
-    function load() {
-      var str = document.getElementById("mySavedModel").value;
-      myDiagram.model = go.Model.fromJson(str);
-      myDiagram.model.undoManager.isEnabled = true;
-    }
+                // save a model to and load a model from Json text, displayed below the Diagram
+                function save() {
+                var str = this.$myDiagram.model.toJson();
+                document.getElementById("mySavedModel").value = str;
+                }
+                function load() {
+                var str = document.getElementById("mySavedModel").value;
+                this.$myDiagram.model = go.Model.fromJson(str);
+                this.$myDiagram.model.undoManager.isEnabled = true;
+                }
+                load();
 
         },
         data (){
@@ -380,7 +470,19 @@
                 this.apellido = "";
                 this.edad = "";
                 this.enero = "";
-            }
+            },
+            relFamiliar(relacion){
+                /*Crear nodo base para relacion*/
+                this.$myDiagram.startTransaction("make new node");
+                this.$myDiagram.model.addNodeData({ key: counter });
+                this.$myDiagram.commitTransaction("make new node");     
+                /* Crear relacion con formato especificado en 'relacion' */
+                this.$myDiagram.startTransaction("make new link");
+                this.$myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
+                this.$myDiagram.commitTransaction("make new link");
+                counter++;
+
+            } 
         }
     }
 </script>
