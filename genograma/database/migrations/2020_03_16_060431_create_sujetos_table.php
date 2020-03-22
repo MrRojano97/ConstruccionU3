@@ -19,6 +19,7 @@ class CreateSujetosTable extends Migration
             $table->string('apellido');
             $table->string('genero');
             $table->integer('edad');
+            $table->json('informacion')->default('(JSON_ARRAY())');
             $table->timestamps();
         });
     }
