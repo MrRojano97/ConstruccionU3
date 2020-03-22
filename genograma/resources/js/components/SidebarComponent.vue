@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <template>
     <div class="conteiner">
         <div class="row justify-content-md-center">
@@ -116,25 +115,28 @@
                                 <ul class="collapse list-unstyled" id="homeSubmenu2">
 
                                     <li>
-                                        <a v-on:click="relaciones" href="#">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('indiferencia')">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('armonia')">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Hostilidad <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('hostilidad')">Hostilidad <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('violencia')">Violencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('abuso')">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('manipulacion')">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Distante y violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('distante')">Distante <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('amistad')">Amistad <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Abuso físico <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -268,7 +270,7 @@
                 "linkFromPortIdProperty": "fromPort",
                 "linkToPortIdProperty": "toPort",
                 "modelData": {"position":"-398.5 -307.9767441860465"},
-                "nodeDataArray": [ 
+                "nodeDataArray": [
                 {"text":"Start", "figure":"Circle", "fill":"#00AD5F", "key":-1, "loc":"-300 -260"},
                 {"text":"End", "figure":"Circle", "fill":"#CE0620", "key":-5, "loc":"-110 -270"}
                 ],
@@ -411,7 +413,7 @@
                         { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                     )
                 );
-                /*Template para relacion de Nulidad*/ 
+                /*Template para relacion de Nulidad*/
                 this.$myDiagram.linkTemplateMap.add("Nullity",
                     $(go.Link,
                     { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
@@ -423,8 +425,114 @@
                         { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
                     )
                 );
-                            
-
+                 /*Template para relacion de indiferencia*/
+                this.$myDiagram.linkTemplateMap.add("indiferencia",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "black", strokeDashArray: [5,5], strokeWidth: 2 })
+                    )
+                );
+                /*Template para relacion de armonia*/
+                this.$myDiagram.linkTemplateMap.add("armonia",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "green", strokeWidth: 2 }),
+                    )
+                );
+                /*Template para relacion de hostil*/
+                this.$myDiagram.linkTemplateMap.add("hostilidad",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "red", strokeWidth: 2 }),
+                     $(go.Shape,  // the arrowhead
+                        { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                    $(go.Shape,  // the arrowhead
+                        {fromArrow: "Diamond", stroke: "red", fill:"white",  strokeWidth: 3 }),
+                    )
+                );
+                /*Template para relacion de violencia*/
+                this.$myDiagram.linkTemplateMap.add("violencia",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "red", strokeWidth: 3 }),
+                    $(go.Shape,  // the arrowhead
+                        { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                    $(go.Shape,  // the arrowhead
+                        {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
+                    )
+                );
+                /*Template para relacion de abuso*/
+                this.$myDiagram.linkTemplateMap.add("abuso",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "blue", strokeWidth: 2 }),
+                    $(go.Shape,  // the arrowhead
+                        { toArrow: "Standard", stroke: "blue", fill:null }),
+                     $(go.Shape,  // the arrowhead
+                        {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
+                    )
+                );
+                /*Template para relacion de manipulacion*/
+                this.$myDiagram.linkTemplateMap.add("manipulacion",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        new go.Binding("fromArrow", "fromArrow"),
+                        { stroke: "red",  strokeWidth: 2 }),
+                    $(go.Shape,  // the arrowhead
+                        {fromArrow: "x", stroke: "red", fill:null,strokeWidth: 3 }),
+                     $(go.Shape,  // the arrowhead
+                        { toArrow: "OpenTriangle", stroke: "red", fill:null,strokeWidth: 3 })
+                    )
+                );
+                /*Template para relacion de distante*/
+                this.$myDiagram.linkTemplateMap.add("distante",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "black",strokeDashArray: [5,5], strokeWidth: 4 }),
+                    )
+                );
+                /*Template para relacion de amistad*/
+                this.$myDiagram.linkTemplateMap.add("amistad",
+                    $(go.Link,
+                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "green", strokeWidth: 2 }),
+                    $(go.Shape,  // the arrowhead
+                        {fromArrow: "BackwardHalfTriangleTop", stroke: "green", strokeWidth: 3 }),
+                     $(go.Shape,  // the arrowhead
+                        { toArrow: "HalfTriangleBottom", stroke: "green", strokeWidth: 3 }),
+                    )
+                );
                 // save a model to and load a model from Json text, displayed below the Diagram
                 function save() {
                 var str = this.$myDiagram.model.toJson();
@@ -476,16 +584,14 @@
                 /*Crear nodo base para relacion*/
                 this.$myDiagram.startTransaction("make new node");
                 this.$myDiagram.model.addNodeData({ key: counter });
-                this.$myDiagram.commitTransaction("make new node");     
+                this.$myDiagram.commitTransaction("make new node");
                 /* Crear relacion con formato especificado en 'relacion' */
                 this.$myDiagram.startTransaction("make new link");
                 this.$myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
                 this.$myDiagram.commitTransaction("make new link");
                 counter++;
 
-            } 
+            }
         }
     }
 </script>
-=======
->>>>>>> Stashed changes
