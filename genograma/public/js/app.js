@@ -1947,12 +1947,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 var $ = go.GraphObject.make; // This works because we have overridden the /extensionsTS/tsconfig.json file
-// in the options to the loader: 'ts-loader', in the webpack.config.js  
+// in the options to the loader: 'ts-loader', in the webpack.config.js
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Diagram',
   mounted: function mounted() {
-    var myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV 
+    var myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
     {
       grid: $(go.Panel, "Grid", $(go.Shape, "LineH", {
         stroke: "lightgray",
@@ -1984,6 +1984,8 @@ var $ = go.GraphObject.make; // This works because we have overridden the /exten
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< Updated upstream
+=======
 //
 //
 //
@@ -2099,6 +2101,173 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> Stashed changes
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+<<<<<<< Updated upstream
 //
 //
 //
@@ -2561,6 +2730,9 @@ var $ = go.GraphObject.make;
     }
   }
 });
+=======
+
+>>>>>>> Stashed changes
 
 /***/ }),
 
@@ -40152,7 +40324,11 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
+<<<<<<< Updated upstream
                               return _vm.openForm()
+=======
+                              return _vm.addHombre()
+>>>>>>> Stashed changes
                             }
                           }
                         },
@@ -40169,7 +40345,11 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
+<<<<<<< Updated upstream
                               return _vm.openForm()
+=======
+                              return _vm.addMujer()
+>>>>>>> Stashed changes
                             }
                           }
                         },
@@ -40186,7 +40366,11 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
+<<<<<<< Updated upstream
                               return _vm.openForm()
+=======
+                              return _vm.addHijoAdoptivo()
+>>>>>>> Stashed changes
                             }
                           }
                         },
@@ -40203,7 +40387,11 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
+<<<<<<< Updated upstream
                               return _vm.openForm()
+=======
+                              return _vm.addHijoAdoptivoTemporal()
+>>>>>>> Stashed changes
                             }
                           }
                         },
@@ -40214,7 +40402,26 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+<<<<<<< Updated upstream
                     _vm._m(1),
+=======
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addMascota()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Mascota "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+>>>>>>> Stashed changes
                     _vm._v(" "),
                     _c("li", [
                       _c(
@@ -40222,7 +40429,11 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
+<<<<<<< Updated upstream
                               return _vm.openForm()
+=======
+                              return _vm.addGeneroDesconocido()
+>>>>>>> Stashed changes
                             }
                           }
                         },
@@ -40233,6 +40444,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+<<<<<<< Updated upstream
                     _vm._m(2),
                     _vm._v(" "),
                     _vm._m(3),
@@ -40244,6 +40456,109 @@ var render = function() {
                     _vm._m(6),
                     _vm._v(" "),
                     _vm._m(7)
+=======
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addEmbarazo()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Embarazo "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addAbortoEspontaneo()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Aborto espontáneo "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addAborto()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Aborto "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addMuerte()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Muerte "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addMellizos()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Mellizos "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addGemelosIdenticos()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Gemelos idénticos "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ])
+>>>>>>> Stashed changes
                   ]
                 ),
                 _vm._v(" "),
@@ -40411,6 +40726,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+<<<<<<< Updated upstream
                     _vm._m(8),
                     _vm._v(" "),
                     _vm._m(9),
@@ -40434,6 +40750,31 @@ var render = function() {
                     _vm._m(18),
                     _vm._v(" "),
                     _vm._m(19)
+=======
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _vm._m(11),
+                    _vm._v(" "),
+                    _vm._m(12)
+>>>>>>> Stashed changes
                   ]
                 ),
                 _vm._v(" "),
@@ -40468,6 +40809,23 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+<<<<<<< Updated upstream
+=======
+                    _vm._m(13),
+                    _vm._v(" "),
+                    _vm._m(14),
+                    _vm._v(" "),
+                    _vm._m(15),
+                    _vm._v(" "),
+                    _vm._m(16),
+                    _vm._v(" "),
+                    _vm._m(17),
+                    _vm._v(" "),
+                    _vm._m(18),
+                    _vm._v(" "),
+                    _vm._m(19),
+                    _vm._v(" "),
+>>>>>>> Stashed changes
                     _vm._m(20),
                     _vm._v(" "),
                     _vm._m(21),
@@ -40516,6 +40874,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(43),
                     _vm._v(" "),
+<<<<<<< Updated upstream
                     _vm._m(44),
                     _vm._v(" "),
                     _vm._m(45),
@@ -40531,6 +40890,9 @@ var render = function() {
                     _vm._m(50),
                     _vm._v(" "),
                     _vm._m(51)
+=======
+                    _vm._m(44)
+>>>>>>> Stashed changes
                   ]
                 ),
                 _vm._v(" "),
@@ -40547,10 +40909,17 @@ var render = function() {
                   [_vm._v("Operaciones")]
                 ),
                 _vm._v(" "),
+<<<<<<< Updated upstream
                 _vm._m(52)
               ]),
               _vm._v(" "),
               _vm._m(53)
+=======
+                _vm._m(45)
+              ]),
+              _vm._v(" "),
+              _vm._m(46)
+>>>>>>> Stashed changes
             ])
           ]),
           _vm._v(" "),
@@ -40562,7 +40931,11 @@ var render = function() {
                 [
                   _c("h1", [_vm._v("Login")]),
                   _vm._v(" "),
+<<<<<<< Updated upstream
                   _vm._m(54),
+=======
+                  _vm._m(47),
+>>>>>>> Stashed changes
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -40591,7 +40964,11 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+<<<<<<< Updated upstream
                   _vm._m(55),
+=======
+                  _vm._m(48),
+>>>>>>> Stashed changes
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -40620,7 +40997,11 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+<<<<<<< Updated upstream
                   _vm._m(56),
+=======
+                  _vm._m(49),
+>>>>>>> Stashed changes
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -40649,7 +41030,11 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+<<<<<<< Updated upstream
                   _vm._m(57),
+=======
+                  _vm._m(50),
+>>>>>>> Stashed changes
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -40712,7 +41097,49 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+<<<<<<< Updated upstream
       _vm._m(58)
+=======
+      _c("div", { staticClass: "col-9", attrs: { onload: "init()" } }, [
+        _c("div", {
+          staticStyle: {
+            "flex-grow": "1",
+            border: "solid 1px black",
+            height: "630px"
+          },
+          attrs: { id: "myDiagramDiv" }
+        }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "buttons" } }, [
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.addImagen()
+                }
+              }
+            },
+            [_vm._v("Save")]
+          ),
+          _vm._v(" "),
+          _c("button", { attrs: { onclick: "load()" } }, [_vm._v("Load")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "textarea",
+          {
+            staticStyle: { width: "100%", height: "300px" },
+            attrs: { id: "mySavedModel" }
+          },
+          [
+            _vm._v(
+              '{ "class": "go.GraphLinksModel",\n                "nodeDataArray": [\n                    { "key": 1, "text": "Node 1", "fill": "blueviolet", "loc": "100 100" },\n                    { "key": 2, "text": "Node 2", "fill": "orange", "loc": "400 100" }\n                ],\n                "linkDataArray": [  ]\n                }\n                '
+            )
+          ]
+        )
+      ])
+>>>>>>> Stashed changes
     ])
   ])
 }
@@ -40723,68 +41150,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "sidebar-header" }, [
       _c("h3", [_vm._v("Acciones ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [_vm._v("Mascota "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [_vm._v("Embarazo "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [
-        _vm._v("Aborto espontáneo "),
-        _c("i", { staticClass: "fa fa-circle" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [_vm._v("Aborto "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [_vm._v("Muerte "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [_vm._v("Mellizos "), _c("i", { staticClass: "fa fa-circle" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", [
-        _vm._v("Gemelos idénticos "),
-        _c("i", { staticClass: "fa fa-circle" })
-      ])
     ])
   },
   function() {
@@ -40870,6 +41235,88 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("a", { attrs: { href: "#" } }, [
+<<<<<<< Updated upstream
+        _vm._v("Convivencia legal    "),
+=======
+        _vm._v("Convivencia no sentimental y separacion    "),
+>>>>>>> Stashed changes
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+<<<<<<< Updated upstream
+        _vm._v("Convivencia legal con separacion por hecho     "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia legal con separacion legal    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Relacion comprometida    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia y separacion    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia no sentimental    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
         _vm._v("Convivencia no sentimental y separacion    "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -40881,6 +41328,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("a", { attrs: { href: "#" } }, [
+=======
+>>>>>>> Stashed changes
         _vm._v("Relación esporádica    "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -53555,8 +54004,11 @@ Vue.component('sidebar-component', __webpack_require__(/*! ./components/SidebarC
 Vue.component('canvas-component', __webpack_require__(/*! ./components/CanvasComponent.vue */ "./resources/js/components/CanvasComponent.vue")["default"]); //
 
 Vue.prototype.$myDiagram = 'myDiagram';
+<<<<<<< Updated upstream
 Vue.prototype.$node = 'nodeDataArray';
 Vue.prototype.$link = 'linkDataArray';
+=======
+>>>>>>> Stashed changes
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53566,8 +54018,11 @@ Vue.prototype.$link = 'linkDataArray';
 var app = new Vue({
   beforeCreate: function beforeCreate() {
     console.log(this.$myDiagram);
+<<<<<<< Updated upstream
     console.log(this.$nodeDataArray);
     console.log(this.$linkDataArray);
+=======
+>>>>>>> Stashed changes
   },
   el: '#app'
 });
@@ -53647,7 +54102,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -53667,7 +54122,7 @@ component.options.__file = "resources/js/components/CanvasComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CanvasComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CanvasComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -53716,7 +54171,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -53736,7 +54191,11 @@ component.options.__file = "resources/js/components/SidebarComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=script&lang=js&");
+<<<<<<< Updated upstream
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+=======
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+>>>>>>> Stashed changes
 
 /***/ }),
 

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <template>
     <div class="conteiner">
         <div class="row justify-content-md-center">
@@ -486,3 +487,5 @@
         }
     }
 </script>
+=======
+>>>>>>> Stashed changes
