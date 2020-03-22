@@ -40836,7 +40836,7 @@ var render = function() {
     _c("div", [
       _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
         _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
-          _c("h1", [_vm._v("Login")]),
+          _c("h1", [_vm._v("Ingresar Datos")]),
           _vm._v(" "),
           _vm._m(12),
           _vm._v(" "),
@@ -40851,9 +40851,9 @@ var render = function() {
             ],
             attrs: {
               type: "text",
-              placeholder: "ingrese nombre",
-              name: "email",
-              id: "email",
+              placeholder: "Ingrese nombre",
+              name: "nombre",
+              id: "nombre",
               required: ""
             },
             domProps: { value: _vm.nombre },
@@ -41484,7 +41484,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "email" } }, [
+    return _c("label", { attrs: { for: "nombre" } }, [
       _c("b", [_vm._v("Nombre")])
     ])
   },
@@ -41500,7 +41500,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("edad")])])
+    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("Edad")])])
   },
   function() {
     var _vm = this
