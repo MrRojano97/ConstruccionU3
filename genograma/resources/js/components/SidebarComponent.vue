@@ -12,40 +12,40 @@
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="openForm()">Hombre <i class="fa fa-square"></i> </a>
+                                        <a @click="addHombre()">Hombre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm()">Mujer <i class="fa fa-circle"></i> </a>
+                                        <a @click="addMujer()">Mujer <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm()">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
+                                        <a @click="addHijoAdoptivo()">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm()">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
+                                        <a @click="addHijoAdoptivoTemporal()">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Mascota <i class="fa fa-circle"></i> </a>
+                                        <a @click="addMascota()">Mascota <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm()">Género desconocido <i class="fa fa-circle"></i> </a>
+                                        <a @click="addGeneroDesconocido()">Género desconocido <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a@click="addImagen()">Embarazo <i class="fa fa-circle"></i> </a>
+                                        <a@click="addEmbarazo()">Embarazo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Aborto espontáneo <i class="fa fa-circle"></i> </a>
+                                        <a@click="addAbortoEspontaneo()">Aborto espontáneo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Aborto <i class="fa fa-circle"></i> </a>
+                                        <a@click="addAborto()">Aborto <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Muerte <i class="fa fa-circle"></i> </a>
+                                        <a@click="addMuerte()">Muerte <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Mellizos <i class="fa fa-circle"></i> </a>
+                                        <a@click="addMellizos()">Mellizos <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Gemelos idénticos <i class="fa fa-circle"></i> </a>
+                                        <a@click="addGemelosIdenticos()">Gemelos idénticos <i class="fa fa-circle"></i> </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
@@ -260,7 +260,7 @@
             <div class="col-9" onload="init()">
                 <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
                     <div id="buttons">
-                        <button onclick="save()">Save</button>
+                        <button @click="addImagen()">Save</button>
                         <button onclick="load()">Load</button>
                     </div>
                   <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "go.GraphLinksModel",
@@ -280,10 +280,13 @@
 
 <script>
     var $ = go.GraphObject.make;
+    var myDiagram;
+
     export default {
+        
         name: 'Diagram',
-        mounted() {
-            var myDiagram =
+        mounted(){
+            this.myDiagram =
                 $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
                     {
                         grid: $(go.Panel, "Grid",
@@ -294,26 +297,10 @@
                         )
                     });
                 
-                myDiagram.add(
-                 $(go.Part,
-                    $(go.Picture, "imagenes/test.png")
-                ));
-
-            // save a model to and load a model from Json text, displayed below the Diagram
-            function save()
-            {
-                var str = myDiagram.model.toJson();
-                document.getElementById("mySavedModel").value = str;
-            }
-            function load()
-            {
-                var str = document.getElementById("mySavedModel").value;
-                myDiagram.model = go.Model.fromJson(str);
-                myDiagram.model.undoManager.isEnabled = true;
-            }
+                
 
             },
-            data (){
+            data(){
                 return {
                     nombre : "",
                     apellido : "",
@@ -325,9 +312,58 @@
                 relaciones(){
                     alert('al presionar llega aqui');
                 },
-                addImagen()
+                addHombre()
                 {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                },
+                addMujer()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/mujer.png")));
+                },
+                addHijoAdoptivo()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                },
+                addHijoAdoptivoTemporal()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                },
+                addMascota()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/mascota.png")));
+                },
+                addGeneroDesconocido()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/genero_desconocido.png")));
+                },
+                addEmbarazo()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/embarazo.png")));
+                },
+                addAbortoEspontaneo()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/aborto_espontaneo.png")));
+                },
+                addAborto()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/aborto.png")));
+                },
+                addMuerte()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/muerte.png")));
+                },
+                addMellizos()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                },
+                addGemelosIdenticos()
+                {
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                },
+                
 
+                guardartest()
+                {
 
                 },
                 openForm() {
@@ -353,3 +389,4 @@
         }
     }
 </script>
+
