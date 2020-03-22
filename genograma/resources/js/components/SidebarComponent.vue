@@ -51,28 +51,28 @@
                                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu1">
                                     <li>
-                                        <a href="#">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('Matrimonio')">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Sep-Fact')">Separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Separacion legal     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Sep-Leg')">Separacion legal     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Divorcio     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Divorcio')">Divorcio     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Compromiso    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Engagement')">Compromiso    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Compromiso con convivencia     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Eng-Coh')">Compromiso con convivencia     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Compromiso y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Eng-Sep')">Compromiso y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Nulidad     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Nullity')">Nulidad     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Convivencia legal    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -115,25 +115,28 @@
                                 <ul class="collapse list-unstyled" id="homeSubmenu2">
 
                                     <li>
-                                        <a v-on:click="relaciones" href="#">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('indiferencia')">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('armonia')">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Hostilidad <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('hostilidad')">Hostilidad <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('violencia')">Violencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('abuso')">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('manipulacion')">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Distante y violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('distante')">Distante <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('amistad')">Amistad <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Abuso físico <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -263,13 +266,15 @@
                         <button @click="addImagen()">Save</button>
                         <button onclick="load()">Load</button>
                     </div>
-                  <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "go.GraphLinksModel",
-                    "nodeDataArray": [
-                        { "key": 1, "text": "Node 1", "fill": "blueviolet", "loc": "100 100" },
-                        { "key": 2, "text": "Node 2", "fill": "orange", "loc": "400 100" }
-                    ],
-                    "linkDataArray": [  ]
-                    }
+                  <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "GraphLinksModel",
+                "linkFromPortIdProperty": "fromPort",
+                "linkToPortIdProperty": "toPort",
+                "modelData": {"position":"-398.5 -307.9767441860465"},
+                "nodeDataArray": [
+                {"text":"Start", "figure":"Circle", "fill":"#00AD5F", "key":-1, "loc":"-300 -260"},
+                {"text":"End", "figure":"Circle", "fill":"#CE0620", "key":-5, "loc":"-110 -270"}
+                ],
+                "linkDataArray": [ {"points":[-262.6627906976744,-260,-252.66279069767438,-260,-202.81976744186045,-260,-202.81976744186045,-270,-152.97674418604652,-270,-142.97674418604652,-270], "from":-1, "to":-5, "toPort":"L"} ]}
                     </textarea>
             </div>
         </div>
@@ -279,113 +284,103 @@
 
 
 <script>
+    var counter = 0;
     var $ = go.GraphObject.make;
-    var myDiagram;
-
     export default {
         
         name: 'Diagram',
-        mounted(){
-            this.myDiagram =
-                $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
+        mounted() {
+            this.$myDiagram =  $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
+                {
+                    grid: $(go.Panel, "Grid",
+                    $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
+                    $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
+                    $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
+                    $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
+                    ),
+                    "draggingTool.dragsLink": true,
+                    "draggingTool.isGridSnapEnabled": true,
+                    "linkingTool.isUnconnectedLinkValid": true,
+                    "linkingTool.portGravity": 20,
+                    "relinkingTool.isUnconnectedLinkValid": true,
+                    "relinkingTool.portGravity": 20,
+                    "relinkingTool.fromHandleArchetype":
+                    $(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
+                    "relinkingTool.toHandleArchetype":
+                    $(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
+                    "linkReshapingTool.handleArchetype":
+                    $(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+                    "rotatingTool.handleAngle": 270,
+                    "rotatingTool.handleDistance": 30,
+                    "rotatingTool.snapAngleMultiple": 15,
+                    "rotatingTool.snapAngleEpsilon": 15,
+                    "undoManager.isEnabled": true
+                });
+                function makePort(name, spot, output, input) {
+                    // the port is basically just a small transparent square
+                    return $(go.Shape, "Circle",
                     {
-                        grid: $(go.Panel, "Grid",
-                        $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
-                        $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
-                        $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
-                        $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
-                        )
+                        fill: null,  // not seen, by default; set to a translucent gray by showSmallPorts, defined below
+                        stroke: null,
+                        desiredSize: new go.Size(7, 7),
+                        alignment: spot,  // align the port on the main Shape
+                        alignmentFocus: spot,  // just inside the Shape
+                        portId: name,  // declare this object to be a "port"
+                        fromSpot: spot, toSpot: spot,  // declare where links may connect at this port
+                        fromLinkable: output, toLinkable: input,  // declare whether the user may draw links to/from here
+                        cursor: "pointer"  // show a different cursor to indicate potential link point
                     });
-                
-                
+              function init() {
+      if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+      var $ = go.GraphObject.make;
+
+        },
+        data (){
+            return {
+                nombre : "",
+                apellido : "",
+                genero : "",
+                edad : ""
+            }
+        },
+        methods: {
+            relaciones(){
+                alert('al presionar llega aqui');
+
 
             },
-            data(){
-                return {
-                    nombre : "",
-                    apellido : "",
-                    genero : "",
-                    edad : ""
-                }
+            openForm() {
+                document.getElementById("myForm").style.display = "block";
             },
-            methods: {
-                relaciones(){
-                    alert('al presionar llega aqui');
-                },
-                addHombre()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
-                },
-                addMujer()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/mujer.png")));
-                },
-                addHijoAdoptivo()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
-                },
-                addHijoAdoptivoTemporal()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
-                },
-                addMascota()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/mascota.png")));
-                },
-                addGeneroDesconocido()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/genero_desconocido.png")));
-                },
-                addEmbarazo()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/embarazo.png")));
-                },
-                addAbortoEspontaneo()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/aborto_espontaneo.png")));
-                },
-                addAborto()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/aborto.png")));
-                },
-                addMuerte()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/muerte.png")));
-                },
-                addMellizos()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
-                },
-                addGemelosIdenticos()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
-                },
-                
-
-                guardartest()
-                {
-
-                },
-                openForm() {
-                    document.getElementById("myForm").style.display = "block";
-                },
-                closeForm() {
-                    document.getElementById("myForm").style.display = "none";
-                },
-                saveData() {
-                    var sujeto = {
-                        nombre : this.nombre,
-                        apellido : this.apellido,
-                        edad : this.edad,
-                        genero : this.genero
-                    }
-                    console.log("NUEVO SUJETO PARA GUARDAR:");
-                    console.log(sujeto);
-                    this.nombre = "";
-                    this.apellido = "";
-                    this.edad = "";
-                    this.enero = "";
+            closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            },
+            saveData() {
+                var sujeto = {
+                    nombre : this.nombre,
+                    apellido : this.apellido,
+                    edad : this.edad,
+                    genero : this.genero
                 }
+                console.log("NUEVO SUJETO PARA GUARDAR:");
+                console.log(sujeto);
+                this.nombre = "";
+                this.apellido = "";
+                this.edad = "";
+                this.enero = "";
+            },
+            relFamiliar(relacion){
+                /*Crear nodo base para relacion*/
+                this.$myDiagram.startTransaction("make new node");
+                this.$myDiagram.model.addNodeData({ key: counter });
+                this.$myDiagram.commitTransaction("make new node");
+                /* Crear relacion con formato especificado en 'relacion' */
+                this.$myDiagram.startTransaction("make new link");
+                this.$myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
+                this.$myDiagram.commitTransaction("make new link");
+                counter++;
+
+            }
         }
     }
 </script>
