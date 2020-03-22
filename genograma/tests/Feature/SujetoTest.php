@@ -77,6 +77,7 @@ class SujetoTest extends TestCase
             'apellido'=>'test apellido',
             'genero'=>'test genero',
             'edad'=>'test edad',
+            'informacion'=>'(JSON_ARRAY())22'
         ]);
 
         //$response->assertOK();//confirme que no hay ningun error
