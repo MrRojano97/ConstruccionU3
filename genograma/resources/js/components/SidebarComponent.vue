@@ -30,7 +30,7 @@
                                         <a @click="openForm()">Género desconocido <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a>Embarazo <i class="fa fa-circle"></i> </a>
+                                        <a@click="addImagen()">Embarazo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
                                         <a>Aborto espontáneo <i class="fa fa-circle"></i> </a>
@@ -279,7 +279,7 @@
 
 
 <script>
-      var $ = go.GraphObject.make;
+    var $ = go.GraphObject.make;
     export default {
         name: 'Diagram',
         mounted() {
@@ -293,94 +293,63 @@
                         $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
                         )
                     });
-              function init() {
-      if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
-      var $ = go.GraphObject.make;
+                
+                myDiagram.add(
+                 $(go.Part,
+                    $(go.Picture, "imagenes/test.png")
+                ));
 
-      myDiagram =
-        $(go.Diagram, "myDiagramDiv");
-
-      // install custom linking tool, defined in PolylineLinkingTool.js
-      var tool = new PolylineLinkingTool();
-      //tool.temporaryLink.routing = go.Link.Orthogonal;  // optional, but need to keep link template in sync, below
-      myDiagram.toolManager.linkingTool = tool;
-
-      myDiagram.nodeTemplate =
-        $(go.Node, "Spot",
-          { locationSpot: go.Spot.Center },
-          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Shape,
+            // save a model to and load a model from Json text, displayed below the Diagram
+            function save()
             {
-              width: 100, height: 100, fill: "lightgray",
-              portId: "", cursor: "pointer",
-              fromLinkable: true,
-              fromLinkableSelfNode: true, fromLinkableDuplicates: true,  // optional
-              toLinkable: true,
-              toLinkableSelfNode: true, toLinkableDuplicates: true  // optional
-            },
-            new go.Binding("fill")),
-          $(go.Shape, { width: 70, height: 70, fill: "transparent", stroke: null }),
-          $(go.TextBlock,
-            new go.Binding("text")));
-
-      myDiagram.linkTemplate =
-        $(go.Link,
-          { reshapable: true, resegmentable: true },
-          //{ routing: go.Link.Orthogonal },  // optional, but need to keep LinkingTool.temporaryLink in sync, above
-          { adjusting: go.Link.Stretch },  // optional
-          new go.Binding("points", "points").makeTwoWay(),
-          $(go.Shape, { strokeWidth: 1.5 }),
-          $(go.Shape, { toArrow: "OpenTriangle" }));
-
-      load();  // load a simple diagram from the textarea
-    }
-
-    // save a model to and load a model from Json text, displayed below the Diagram
-    function save() {
-      var str = myDiagram.model.toJson();
-      document.getElementById("mySavedModel").value = str;
-    }
-    function load() {
-      var str = document.getElementById("mySavedModel").value;
-      myDiagram.model = go.Model.fromJson(str);
-      myDiagram.model.undoManager.isEnabled = true;
-    }
-
-        },
-        data (){
-            return {
-                nombre : "",
-                apellido : "",
-                genero : "",
-                edad : ""
+                var str = myDiagram.model.toJson();
+                document.getElementById("mySavedModel").value = str;
             }
-        },
-        methods: {
-            relaciones(){
-                alert('al presionar llega aqui');
+            function load()
+            {
+                var str = document.getElementById("mySavedModel").value;
+                myDiagram.model = go.Model.fromJson(str);
+                myDiagram.model.undoManager.isEnabled = true;
+            }
 
-
             },
-            openForm() {
-                document.getElementById("myForm").style.display = "block";
-            },
-            closeForm() {
-                document.getElementById("myForm").style.display = "none";
-            },
-            saveData() {
-                var sujeto = {
-                    nombre : this.nombre,
-                    apellido : this.apellido,
-                    edad : this.edad,
-                    genero : this.genero
+            data (){
+                return {
+                    nombre : "",
+                    apellido : "",
+                    genero : "",
+                    edad : ""
                 }
-                console.log("NUEVO SUJETO PARA GUARDAR:");
-                console.log(sujeto);
-                this.nombre = "";
-                this.apellido = "";
-                this.edad = "";
-                this.enero = "";
-            }
+            },
+            methods: {
+                relaciones(){
+                    alert('al presionar llega aqui');
+                },
+                addImagen()
+                {
+
+
+                },
+                openForm() {
+                    document.getElementById("myForm").style.display = "block";
+                },
+                closeForm() {
+                    document.getElementById("myForm").style.display = "none";
+                },
+                saveData() {
+                    var sujeto = {
+                        nombre : this.nombre,
+                        apellido : this.apellido,
+                        edad : this.edad,
+                        genero : this.genero
+                    }
+                    console.log("NUEVO SUJETO PARA GUARDAR:");
+                    console.log(sujeto);
+                    this.nombre = "";
+                    this.apellido = "";
+                    this.edad = "";
+                    this.enero = "";
+                }
         }
     }
 </script>
