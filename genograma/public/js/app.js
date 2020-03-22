@@ -1984,7 +1984,6 @@ var $ = go.GraphObject.make; // This works because we have overridden the /exten
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CanvasComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CanvasComponent.vue */ "./resources/js/components/CanvasComponent.vue");
 //
 //
 //
@@ -2267,172 +2266,252 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var counter = 0;
+var $ = go.GraphObject.make;
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Diagram',
+  mounted: function mounted() {
+    this.$myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
+    {
+      grid: $(go.Panel, "Grid", $(go.Shape, "LineH", {
+        stroke: "lightgray",
+        strokeWidth: 0.5
+      }), $(go.Shape, "LineH", {
+        stroke: "gray",
+        strokeWidth: 0.5,
+        interval: 10
+      }), $(go.Shape, "LineV", {
+        stroke: "lightgray",
+        strokeWidth: 0.5
+      }), $(go.Shape, "LineV", {
+        stroke: "gray",
+        strokeWidth: 0.5,
+        interval: 10
+      })),
+      "draggingTool.dragsLink": true,
+      "draggingTool.isGridSnapEnabled": true,
+      "linkingTool.isUnconnectedLinkValid": true,
+      "linkingTool.portGravity": 20,
+      "relinkingTool.isUnconnectedLinkValid": true,
+      "relinkingTool.portGravity": 20,
+      "relinkingTool.fromHandleArchetype": $(go.Shape, "Diamond", {
+        segmentIndex: 0,
+        cursor: "pointer",
+        desiredSize: new go.Size(8, 8),
+        fill: "tomato",
+        stroke: "darkred"
+      }),
+      "relinkingTool.toHandleArchetype": $(go.Shape, "Diamond", {
+        segmentIndex: -1,
+        cursor: "pointer",
+        desiredSize: new go.Size(8, 8),
+        fill: "darkred",
+        stroke: "tomato"
+      }),
+      "linkReshapingTool.handleArchetype": $(go.Shape, "Diamond", {
+        desiredSize: new go.Size(7, 7),
+        fill: "lightblue",
+        stroke: "deepskyblue"
+      }),
+      "rotatingTool.handleAngle": 270,
+      "rotatingTool.handleDistance": 30,
+      "rotatingTool.snapAngleMultiple": 15,
+      "rotatingTool.snapAngleEpsilon": 15,
+      "undoManager.isEnabled": true
+    });
+
+    function makePort(name, spot, output, input) {
+      // the port is basically just a small transparent square
+      return $(go.Shape, "Circle", {
+        fill: null,
+        // not seen, by default; set to a translucent gray by showSmallPorts, defined below
+        stroke: null,
+        desiredSize: new go.Size(7, 7),
+        alignment: spot,
+        // align the port on the main Shape
+        alignmentFocus: spot,
+        // just inside the Shape
+        portId: name,
+        // declare this object to be a "port"
+        fromSpot: spot,
+        toSpot: spot,
+        // declare where links may connect at this port
+        fromLinkable: output,
+        toLinkable: input,
+        // declare whether the user may draw links to/from here
+        cursor: "pointer" // show a different cursor to indicate potential link point
+
+      });
+    }
+
+    this.$myDiagram.linkTemplateMap.add("Matrimonio", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "black",
+      strokeWidth: 2
+    })));
+    this.$myDiagram.linkTemplateMap.add("Sep-Fact", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "red",
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleTop",
+      stroke: "red",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    this.$myDiagram.linkTemplateMap.add("Sep-Leg", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "red",
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleBottom",
+      stroke: "red",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    this.$myDiagram.linkTemplateMap.add("Divorcio", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "red",
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "DoubleForwardSlash",
+      stroke: "red",
+      strokeWidth: 3,
+      scale: 2
+    })));
+    this.$myDiagram.linkTemplateMap.add("Engagement", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 5],
+      strokeWidth: 2
+    })));
+    this.$myDiagram.linkTemplateMap.add("Eng-Coh", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 5],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    this.$myDiagram.linkTemplateMap.add("Eng-Sep", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 5],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleTop",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    this.$myDiagram.linkTemplateMap.add("Nullity", $(go.Link, {
+      isLayoutPositioned: false,
+      isTreeLink: false,
+      curviness: -50
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "red",
+      strokeDashArray: [5, 5],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "TripleForwardSlash",
+      stroke: "red",
+      strokeWidth: 3,
+      scale: 1.3
+    }))); // save a model to and load a model from Json text, displayed below the Diagram
+
+    function save() {
+      var str = this.$myDiagram.model.toJson();
+      document.getElementById("mySavedModel").value = str;
+    }
+
+    function load() {
+      var str = document.getElementById("mySavedModel").value;
+      this.$myDiagram.model = go.Model.fromJson(str);
+      this.$myDiagram.model.undoManager.isEnabled = true;
+    }
+
+    load();
+  },
   data: function data() {
     return {
       nombre: "",
@@ -2442,6 +2521,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    relaciones: function relaciones() {
+      alert('al presionar llega aqui');
+    },
     openForm: function openForm() {
       document.getElementById("myForm").style.display = "block";
     },
@@ -2461,6 +2543,21 @@ __webpack_require__.r(__webpack_exports__);
       this.apellido = "";
       this.edad = "";
       this.enero = "";
+    },
+    relFamiliar: function relFamiliar(relacion) {
+      this.$myDiagram.startTransaction("make new node");
+      this.$myDiagram.model.addNodeData({
+        key: counter
+      });
+      this.$myDiagram.commitTransaction("make new node");
+      this.$myDiagram.startTransaction("make new link");
+      this.$myDiagram.model.addLinkData({
+        from: counter,
+        to: counter,
+        category: relacion
+      });
+      this.$myDiagram.commitTransaction("make new link");
+      counter++;
     }
   }
 });
@@ -6994,112 +7091,6 @@ __webpack_require__.r(__webpack_exports__);
 
 })));
 //# sourceMappingURL=bootstrap.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.sidenav[data-v-54833a28] {\n    width: 200px;\n    top: 0;\n    left: 0;\n    background-color: #111;\n    overflow-x: hidden;\n}\n\n/* Style the sidenav links and the dropdown button */\n.sidenav a[data-v-54833a28], .dropdown-btn[data-v-54833a28] {\n    padding: 6px 8px 6px 16px;\n    text-decoration: none;\n    font-size: 18px;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    color: #818181;\n    display: block;\n    border: none;\n    background: none;\n    width:100%;\n    text-align: left;\n    cursor: pointer;\n    outline: none;\n}\n\n/* On mouse-over */\n.sidenav a[data-v-54833a28]:hover, .dropdown-btn[data-v-54833a28]:hover {\n    color: #f1f1f1;\n}\n\n/* Main content */\n.main[data-v-54833a28] {\n    margin-left: 200px; /* Same as the width of the sidenav */\n    font-size: 20px; /* Increased text to enable scrolling */\n    font-family: \"Lucida Console\", Monaco, monospace;\n    padding: 0px 10px;\n}\n\n/* Add an active class to the active dropdown button */\n.active[data-v-54833a28] {\n    background-color: green;\n    color: white;\n}\n\n/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */\n.dropdown-container[data-v-54833a28] {\n    display: none;\n    background-color: #262626;\n    padding-left: 8px;\n}\n\n/* Optional: Style the caret down icon */\n.fa-caret-down[data-v-54833a28] {\n    float: right;\n    padding-right: 8px;\n}\n#sidebar[data-v-54833a28] {\n    min-width: 250px;\n    max-width: 250px;\n    min-height: 100vh;\n}\n.wrapper[data-v-54833a28] {\n    display: flex;\n    align-items: stretch;\n}\n.h3[data-v-54833a28]{\n    font-family:\"Lucida Console\", Monaco, monospace ;\n}\n#sidebar[data-v-54833a28] {\n    min-width: 250px;\n    max-width: 250px;\n}\n#sidebar.active[data-v-54833a28] {\n    margin-left: -250px;\n}\n#sidebar[data-v-54833a28] {\n    /* don't forget to add all the previously mentioned styles here too */\n    background: #05386b;\n    color: #fff;\n    transition: all 0.3s;\n}\n#sidebar .sidebar-header[data-v-54833a28] {\n    padding: 24px;\n    background: 1E90FF;\n}\n#sidebar ul.components[data-v-54833a28] {\n    padding: 20px 0;\n    border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54833a28] {\n    color: #fff;\n    padding: 10px;\n}\n#sidebar ul li a[data-v-54833a28] {\n    padding: 10px;\n    font-size: 1.1em;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    display: block;\n    color: white;\n}\n#sidebar ul li a[data-v-54833a28]:hover {\n    color: #7386D5;\n    background: #fff;\n}\n#sidebar ul li.active > a[data-v-54833a28], a[aria-expanded=\"true\"][data-v-54833a28] {\n    color: #fff;\n    background: #05386b;\n}\nul ul a[data-v-54833a28] {\n    font-size: 0.9em !important;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    padding-left: 30px !important;\n    background: #05386b;\n    color:white;\n}\n{box-sizing: border-box;}\n.open-button[data-v-54833a28] {\n    background-color: #555;\n    color: white;\n    padding: 16px 20px;\n    border: none;\n    cursor: pointer;\n    opacity: 0.8;\n    position: fixed;\n    bottom: 23px;\n    right: 28px;\n    width: 280px;\n}\n.form-popup[data-v-54833a28] {\n    display: none;\n    position: fixed;\n    bottom: 0;\n    right: 15px;\n    border: 3px solid #f1f1f1;\n    z-index: 9;\n}\n.form-container[data-v-54833a28] {\n    max-width: 300px;\n    padding: 10px;\n    background-color: white;\n}\n.form-container input[type=text][data-v-54833a28], .form-container input[type=password][data-v-54833a28] {\n    width: 100%;\n    padding: 15px;\n    margin: 5px 0 22px 0;\n    border: none;\n    background: #f1f1f1;\n}\n.form-container input[type=text][data-v-54833a28]:focus, .form-container input[type=password][data-v-54833a28]:focus {\n    background-color: #ddd;\n    outline: none;\n}\n.form-container .btn[data-v-54833a28] {\n    background-color: #4CAF50;\n    color: white;\n    padding: 16px 20px;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    margin-bottom:10px;\n    opacity: 0.8;\n}\n.form-container .cancel[data-v-54833a28] {\n    background-color: red;\n}\n.form-container .btn[data-v-54833a28]:hover, .open-button[data-v-54833a28]:hover {\n    opacity: 1;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/lib/css-base.js":
-/*!*************************************************!*\
-  !*** ./node_modules/css-loader/lib/css-base.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
 
 
 /***/ }),
@@ -40005,545 +39996,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/addStyles.js":
-/*!****************************************************!*\
-  !*** ./node_modules/style-loader/lib/addStyles.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/urls.js":
-/*!***********************************************!*\
-  !*** ./node_modules/style-loader/lib/urls.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/timers-browserify/main.js":
 /*!************************************************!*\
   !*** ./node_modules/timers-browserify/main.js ***!
@@ -40650,10 +40102,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28& ***!
+  \*******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -40665,327 +40117,602 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "side-div" }, [
-    _c("nav", { attrs: { id: "sidebar" } }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("ul", { staticClass: "list-unstyled components" }, [
-        _c("li", { staticClass: "active" }, [
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-toggle",
-              attrs: {
-                href: "#homeSubmenu",
-                "data-toggle": "collapse",
-                "aria-expanded": "false"
-              }
-            },
-            [_vm._v("Nueva Persona")]
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "collapse list-unstyled",
-              attrs: { id: "homeSubmenu" }
-            },
-            [
-              _c("li", [
+  return _c("div", { staticClass: "conteiner" }, [
+    _c("div", { staticClass: "row justify-content-md-center" }, [
+      _c("div", { staticClass: "col-3" }, [
+        _c("div", { staticClass: "side-div" }, [
+          _c("nav", { attrs: { id: "sidebar" } }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-unstyled components" }, [
+              _c("li", { staticClass: "active" }, [
                 _c(
                   "a",
                   {
-                    on: {
-                      click: function($event) {
-                        return _vm.openForm()
-                      }
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
                     }
                   },
-                  [_vm._v("Hombre "), _c("i", { staticClass: "fa fa-square" })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
+                  [_vm._v("Nueva Persona")]
+                ),
+                _vm._v(" "),
                 _c(
-                  "a",
+                  "ul",
                   {
-                    on: {
-                      click: function($event) {
-                        return _vm.openForm()
-                      }
-                    }
-                  },
-                  [_vm._v("Mujer "), _c("i", { staticClass: "fa fa-circle" })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    on: {
-                      click: function($event) {
-                        return _vm.openForm()
-                      }
-                    }
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu" }
                   },
                   [
-                    _vm._v("Hijo adoptivo legal "),
-                    _c("i", { staticClass: "fa fa-circle" })
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hombre "),
+                          _c("i", { staticClass: "fa fa-square" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Mujer "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hijo adoptivo legal "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hijo adoptivo temporal "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Género desconocido "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _vm._m(7)
                   ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
+                ),
+                _vm._v(" "),
                 _c(
                   "a",
                   {
-                    on: {
-                      click: function($event) {
-                        return _vm.openForm()
-                      }
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu1",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
                     }
                   },
+                  [_vm._v("Relaciones Familiares")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu1" }
+                  },
                   [
-                    _vm._v("Hijo adoptivo temporal "),
-                    _c("i", { staticClass: "fa fa-circle" })
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Matrimonio")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Matrimonio     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Sep-Fact")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Separacion por hecho     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Sep-Leg")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Separacion legal     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Divorcio")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Divorcio     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Engagement")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Compromiso    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Eng-Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Compromiso con convivencia     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Eng-Sep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Compromiso y separacion    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Nullity")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Nulidad     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _vm._m(11),
+                    _vm._v(" "),
+                    _vm._m(12),
+                    _vm._v(" "),
+                    _vm._m(13),
+                    _vm._v(" "),
+                    _vm._m(14),
+                    _vm._v(" "),
+                    _vm._m(15),
+                    _vm._v(" "),
+                    _vm._m(16),
+                    _vm._v(" "),
+                    _vm._m(17),
+                    _vm._v(" "),
+                    _vm._m(18),
+                    _vm._v(" "),
+                    _vm._m(19)
                   ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("li", [
+                ),
+                _vm._v(" "),
                 _c(
                   "a",
                   {
-                    on: {
-                      click: function($event) {
-                        return _vm.openForm()
-                      }
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu2",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
                     }
                   },
+                  [_vm._v("Relacion Emocionales")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu2" }
+                  },
                   [
-                    _vm._v("Género desconocido "),
-                    _c("i", { staticClass: "fa fa-circle" })
+                    _c("li", [
+                      _c(
+                        "a",
+                        { attrs: { href: "#" }, on: { click: _vm.relaciones } },
+                        [
+                          _vm._v("Indiferencia "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(20),
+                    _vm._v(" "),
+                    _vm._m(21),
+                    _vm._v(" "),
+                    _vm._m(22),
+                    _vm._v(" "),
+                    _vm._m(23),
+                    _vm._v(" "),
+                    _vm._m(24),
+                    _vm._v(" "),
+                    _vm._m(25),
+                    _vm._v(" "),
+                    _vm._m(26),
+                    _vm._v(" "),
+                    _vm._m(27),
+                    _vm._v(" "),
+                    _vm._m(28),
+                    _vm._v(" "),
+                    _vm._m(29),
+                    _vm._v(" "),
+                    _vm._m(30),
+                    _vm._v(" "),
+                    _vm._m(31),
+                    _vm._v(" "),
+                    _vm._m(32),
+                    _vm._v(" "),
+                    _vm._m(33),
+                    _vm._v(" "),
+                    _vm._m(34),
+                    _vm._v(" "),
+                    _vm._m(35),
+                    _vm._v(" "),
+                    _vm._m(36),
+                    _vm._v(" "),
+                    _vm._m(37),
+                    _vm._v(" "),
+                    _vm._m(38),
+                    _vm._v(" "),
+                    _vm._m(39),
+                    _vm._v(" "),
+                    _vm._m(40),
+                    _vm._v(" "),
+                    _vm._m(41),
+                    _vm._v(" "),
+                    _vm._m(42),
+                    _vm._v(" "),
+                    _vm._m(43),
+                    _vm._v(" "),
+                    _vm._m(44),
+                    _vm._v(" "),
+                    _vm._m(45),
+                    _vm._v(" "),
+                    _vm._m(46),
+                    _vm._v(" "),
+                    _vm._m(47),
+                    _vm._v(" "),
+                    _vm._m(48),
+                    _vm._v(" "),
+                    _vm._m(49),
+                    _vm._v(" "),
+                    _vm._m(50),
+                    _vm._v(" "),
+                    _vm._m(51)
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu3",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Operaciones")]
+                ),
+                _vm._v(" "),
+                _vm._m(52)
               ]),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5),
-              _vm._v(" "),
-              _vm._m(6),
-              _vm._v(" "),
-              _vm._m(7)
-            ]
-          ),
+              _vm._m(53)
+            ])
+          ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-toggle",
-              attrs: {
-                href: "#homeSubmenu1",
-                "data-toggle": "collapse",
-                "aria-expanded": "false"
-              }
-            },
-            [_vm._v("Relaciones Familiares")]
-          ),
-          _vm._v(" "),
-          _vm._m(8),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-toggle",
-              attrs: {
-                href: "#homeSubmenu2",
-                "data-toggle": "collapse",
-                "aria-expanded": "false"
-              }
-            },
-            [_vm._v("Relacion Emocionales")]
-          ),
-          _vm._v(" "),
-          _vm._m(9),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-toggle",
-              attrs: {
-                href: "#homeSubmenu3",
-                "data-toggle": "collapse",
-                "aria-expanded": "false"
-              }
-            },
-            [_vm._v("Operaciones")]
-          ),
-          _vm._v(" "),
-          _vm._m(10)
-        ]),
-        _vm._v(" "),
-        _vm._m(11)
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
-        _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
-          _c("h1", [_vm._v("Login")]),
-          _vm._v(" "),
-          _vm._m(12),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.nombre,
-                expression: "nombre"
-              }
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "ingrese nombre",
-              name: "email",
-              id: "email",
-              required: ""
-            },
-            domProps: { value: _vm.nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.nombre = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(13),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.apellido,
-                expression: "apellido"
-              }
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "Ingrese apellido",
-              name: "psw",
-              id: "psw",
-              required: ""
-            },
-            domProps: { value: _vm.apellido },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.apellido = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(14),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.edad,
-                expression: "edad"
-              }
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "Ingrese edad",
-              name: "edad",
-              id: "edad",
-              required: ""
-            },
-            domProps: { value: _vm.edad },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.edad = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(15),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.genero,
-                expression: "genero"
-              }
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "Ingrese género",
-              name: "genero",
-              id: "genero",
-              required: ""
-            },
-            domProps: { value: _vm.genero },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.genero = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn",
-              attrs: { type: "submit" },
-              on: {
-                click: function($event) {
-                  return _vm.saveData()
-                }
-              }
-            },
-            [_vm._v("Guardar")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn cancel",
-              attrs: { type: "submit" },
-              on: {
-                click: function($event) {
-                  return _vm.closeForm()
-                }
-              }
-            },
-            [_vm._v("Cancelar")]
-          )
+          _c("div", [
+            _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
+              _c(
+                "form",
+                { staticClass: "form-container", attrs: { action: "#" } },
+                [
+                  _c("h1", [_vm._v("Login")]),
+                  _vm._v(" "),
+                  _vm._m(54),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.nombre,
+                        expression: "nombre"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "ingrese nombre",
+                      name: "email",
+                      id: "email",
+                      required: ""
+                    },
+                    domProps: { value: _vm.nombre },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.nombre = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(55),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.apellido,
+                        expression: "apellido"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese apellido",
+                      name: "psw",
+                      id: "psw",
+                      required: ""
+                    },
+                    domProps: { value: _vm.apellido },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.apellido = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(56),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.edad,
+                        expression: "edad"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese edad",
+                      name: "edad",
+                      id: "edad",
+                      required: ""
+                    },
+                    domProps: { value: _vm.edad },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.edad = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(57),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.genero,
+                        expression: "genero"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese género",
+                      name: "genero",
+                      id: "genero",
+                      required: ""
+                    },
+                    domProps: { value: _vm.genero },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.genero = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.saveData()
+                        }
+                      }
+                    },
+                    [_vm._v("Guardar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn cancel",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeForm()
+                        }
+                      }
+                    },
+                    [_vm._v("Cancelar")]
+                  )
+                ]
+              )
+            ])
+          ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm._m(58)
     ])
   ])
 }
@@ -41064,392 +40791,485 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu1" } },
-      [
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Matrimonio     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Separacion por hecho     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Separacion legal     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Divorcio     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Compromiso    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Compromiso con convivencia     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Compromiso y separacion    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Nulidad     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia legal    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia legal con separacion por hecho     "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia legal con separacion legal    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Relacion comprometida    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia y separacion    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia no sentimental    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Convivencia no sentimental y separacion    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Relación esporádica    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Relación casual    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Relación casual y separacion   "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Amorío    "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ])
-      ]
-    )
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia legal    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu2" } },
-      [
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Indiferencia "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("armonía "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Hostilidad "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Violencia "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Abuso "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Manipulación "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Distante y violencia "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Abuso físico "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Control "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Cortada "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Mejores amigos "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Hostilidad cercana "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Violencia cercana "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Abuso emocional "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Celos "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Cortada y reparada "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Amor "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Fundida Hostil "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Fundida violencia "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Abuso sexual "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Admirador "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Conflicto "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Enamorados "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Fundida/fusionada "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Enfocada "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Negligencia "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Limerencia "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Enfocada "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Conexión emocional "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Desconfianza "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Enfocada negativamente "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Desconocidos "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Normal "),
-            _c("i", { staticClass: "fa fa-arrow-circle-right" })
-          ])
-        ])
-      ]
-    )
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia legal con separacion por hecho     "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia legal con separacion legal    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Relacion comprometida    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia y separacion    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia no sentimental    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Convivencia no sentimental y separacion    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Relación esporádica    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Relación casual    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Relación casual y separacion   "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Amorío    "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("armonía "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Hostilidad "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Violencia "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Abuso "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Manipulación "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Distante y violencia "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Abuso físico "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Control "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Cortada "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Mejores amigos "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Hostilidad cercana "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Violencia cercana "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Abuso emocional "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Celos "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Cortada y reparada "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Amor "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Fundida Hostil "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Fundida violencia "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Abuso sexual "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Admirador "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Conflicto "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Enamorados "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Fundida/fusionada "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Enfocada "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Negligencia "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Limerencia "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Enfocada "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Conexión emocional "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Desconfianza "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Enfocada negativamente "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Desconocidos "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Normal "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -41511,6 +41331,40 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "genero" } }, [
       _c("b", [_vm._v("Genero")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-9", attrs: { onload: "init()" } }, [
+      _c("div", {
+        staticStyle: {
+          "flex-grow": "1",
+          border: "solid 1px black",
+          height: "630px"
+        },
+        attrs: { id: "myDiagramDiv" }
+      }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "buttons" } }, [
+        _c("button", { attrs: { onclick: "save()" } }, [_vm._v("Save")]),
+        _vm._v(" "),
+        _c("button", { attrs: { onclick: "load()" } }, [_vm._v("Load")])
+      ]),
+      _vm._v(" "),
+      _c(
+        "textarea",
+        {
+          staticStyle: { width: "100%", height: "300px" },
+          attrs: { id: "mySavedModel" }
+        },
+        [
+          _vm._v(
+            '{ "class": "GraphLinksModel",\n            "linkFromPortIdProperty": "fromPort",\n            "linkToPortIdProperty": "toPort",\n            "modelData": {"position":"-398.5 -307.9767441860465"},\n            "nodeDataArray": [ \n            {"text":"Start", "figure":"Circle", "fill":"#00AD5F", "key":-1, "loc":"-300 -260"},\n            {"text":"End", "figure":"Circle", "fill":"#CE0620", "key":-5, "loc":"-110 -270"}\n            ],\n            "linkDataArray": [ {"points":[-262.6627906976744,-260,-252.66279069767438,-260,-202.81976744186045,-260,-202.81976744186045,-270,-152.97674418604652,-270,-142.97674418604652,-270], "from":-1, "to":-5, "toPort":"L"} ]}\n                '
+          )
+        ]
+      )
     ])
   }
 ]
@@ -53698,7 +53552,11 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('sidebar-component', __webpack_require__(/*! ./components/SidebarComponent.vue */ "./resources/js/components/SidebarComponent.vue")["default"]);
-Vue.component('canvas-component', __webpack_require__(/*! ./components/CanvasComponent.vue */ "./resources/js/components/CanvasComponent.vue")["default"]);
+Vue.component('canvas-component', __webpack_require__(/*! ./components/CanvasComponent.vue */ "./resources/js/components/CanvasComponent.vue")["default"]); //
+
+Vue.prototype.$myDiagram = 'myDiagram';
+Vue.prototype.$node = 'nodeDataArray';
+Vue.prototype.$link = 'linkDataArray';
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53706,6 +53564,11 @@ Vue.component('canvas-component', __webpack_require__(/*! ./components/CanvasCom
  */
 
 var app = new Vue({
+  beforeCreate: function beforeCreate() {
+    console.log(this.$myDiagram);
+    console.log(this.$nodeDataArray);
+    console.log(this.$linkDataArray);
+  },
   el: '#app'
 });
 
@@ -53835,11 +53698,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SidebarComponent_vue_vue_type_template_id_54833a28_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true& */ "./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true&");
+/* harmony import */ var _SidebarComponent_vue_vue_type_template_id_54833a28___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SidebarComponent.vue?vue&type=template&id=54833a28& */ "./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&");
 /* harmony import */ var _SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SidebarComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/SidebarComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& */ "./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -53847,13 +53708,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SidebarComponent_vue_vue_type_template_id_54833a28_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SidebarComponent_vue_vue_type_template_id_54833a28_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SidebarComponent_vue_vue_type_template_id_54833a28___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SidebarComponent_vue_vue_type_template_id_54833a28___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "54833a28",
+  null,
   null
   
 )
@@ -53879,35 +53740,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&":
-/*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& ***!
-  \***************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28& ***!
+  \*************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_template_id_54833a28_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_template_id_54833a28_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_template_id_54833a28___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=template&id=54833a28& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=template&id=54833a28&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_template_id_54833a28___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_template_id_54833a28_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_template_id_54833a28___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
