@@ -10,6 +10,8 @@
     <meta name="description" content="Use HTML5 drag-and-drop to implement dragging HTML elements onto a GoJS Diagram to create new nodes." />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Copyright 1998-2020 by Northwoods Software Corporation. -->
+
+
     </head>
 
 

@@ -1,6 +1,6 @@
 <template>
     <div class="conteiner">
-        <div class="row">
+        <div class="row justify-content-md-center">
             <div class="col-3">
                 <div class="side-div">
                     <nav id="sidebar">
@@ -115,7 +115,7 @@
                                 <ul class="collapse list-unstyled" id="homeSubmenu2">
 
                                     <li>
-                                        <a href="#">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a v-on:click="relaciones" href="#">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -257,8 +257,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-9">
-                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:900px"></div>
+            <div class="col-9" onload="init()">
+                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
+                    <div id="buttons">
+                        <button onclick="save()">Save</button>
+                        <button onclick="load()">Load</button>
+                    </div>
+                  <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "go.GraphLinksModel",
+                    "nodeDataArray": [
+                        { "key": 1, "text": "Node 1", "fill": "blueviolet", "loc": "100 100" },
+                        { "key": 2, "text": "Node 2", "fill": "orange", "loc": "400 100" }
+                    ],
+                    "linkDataArray": [  ]
+                    }
+                    </textarea>
             </div>
         </div>
     </div>
@@ -281,6 +293,59 @@
                         $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
                         )
                     });
+              function init() {
+      if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+      var $ = go.GraphObject.make;
+
+      myDiagram =
+        $(go.Diagram, "myDiagramDiv");
+
+      // install custom linking tool, defined in PolylineLinkingTool.js
+      var tool = new PolylineLinkingTool();
+      //tool.temporaryLink.routing = go.Link.Orthogonal;  // optional, but need to keep link template in sync, below
+      myDiagram.toolManager.linkingTool = tool;
+
+      myDiagram.nodeTemplate =
+        $(go.Node, "Spot",
+          { locationSpot: go.Spot.Center },
+          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+          $(go.Shape,
+            {
+              width: 100, height: 100, fill: "lightgray",
+              portId: "", cursor: "pointer",
+              fromLinkable: true,
+              fromLinkableSelfNode: true, fromLinkableDuplicates: true,  // optional
+              toLinkable: true,
+              toLinkableSelfNode: true, toLinkableDuplicates: true  // optional
+            },
+            new go.Binding("fill")),
+          $(go.Shape, { width: 70, height: 70, fill: "transparent", stroke: null }),
+          $(go.TextBlock,
+            new go.Binding("text")));
+
+      myDiagram.linkTemplate =
+        $(go.Link,
+          { reshapable: true, resegmentable: true },
+          //{ routing: go.Link.Orthogonal },  // optional, but need to keep LinkingTool.temporaryLink in sync, above
+          { adjusting: go.Link.Stretch },  // optional
+          new go.Binding("points", "points").makeTwoWay(),
+          $(go.Shape, { strokeWidth: 1.5 }),
+          $(go.Shape, { toArrow: "OpenTriangle" }));
+
+      load();  // load a simple diagram from the textarea
+    }
+
+    // save a model to and load a model from Json text, displayed below the Diagram
+    function save() {
+      var str = myDiagram.model.toJson();
+      document.getElementById("mySavedModel").value = str;
+    }
+    function load() {
+      var str = document.getElementById("mySavedModel").value;
+      myDiagram.model = go.Model.fromJson(str);
+      myDiagram.model.undoManager.isEnabled = true;
+    }
+
         },
         data (){
             return {
@@ -291,6 +356,11 @@
             }
         },
         methods: {
+            relaciones(){
+                alert('al presionar llega aqui');
+
+
+            },
             openForm() {
                 document.getElementById("myForm").style.display = "block";
             },
