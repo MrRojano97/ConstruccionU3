@@ -1916,9 +1916,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {// Acá debería ir declarado el mapa (o json) que representa el diagrama
+    };
+  },
+  methods: {
+    guardarDiagrama: function guardarDiagrama() {
+      console.log("guardando diagrama!"); //TODO: implementar aquí llamado a ruta para guardar el diagrama
+    }
   }
 });
 
@@ -2140,9 +2176,276 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      nombre: "",
+      apellido: "",
+      genero: "",
+      edad: ""
+    };
+  },
+  methods: {
+    openForm: function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    },
+    closeForm: function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    },
+    saveData: function saveData() {
+      var sujeto = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad,
+        genero: this.genero
+      };
+      console.log("NUEVO SUJETO PARA GUARDAR:");
+      console.log(sujeto);
+      this.nombre = "";
+      this.apellido = "";
+      this.edad = "";
+      this.enero = "";
+    }
   }
 });
 
@@ -6691,7 +6994,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n/* Aca va le stilo del componente */\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n/* Aca va le stilo del componente */\n.myDivDiagram[data-v-6df28c6a]{\n    z-index: -1;\n}\n.button-container[data-v-6df28c6a]{\n    position: absolute;\n    left: 5%;\n    bottom: 10%;\n}\n.button[data-v-6df28c6a]{\n    height: 40px;\n    width: 100px;\n    color: white;\n    border: none;\n    box-shadow: 1px 1px 2px 3px #0f1110;\n    background-color: #05386b;\n    border-radius: 5px;\n}\n.myDiagramDiv[data-v-6df28c6a]{\n    flex-grow: 1;\n    height: 100%;\n    border: solid 1px black;\n}\n\n", ""]);
 
 // exports
 
@@ -6710,7 +7013,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.sidenav[data-v-54833a28] {\r\n      width: 200px;\r\n      top: 0;\r\n      left: 0;\r\n      background-color: #111;\r\n      overflow-x: hidden;\n}\r\n    \r\n    /* Style the sidenav links and the dropdown button */\n.sidenav a[data-v-54833a28], .dropdown-btn[data-v-54833a28] {\r\n      padding: 6px 8px 6px 16px;\r\n      text-decoration: none;\r\n      font-size: 18px;\r\n      font-family: \"Lucida Console\", Monaco, monospace;\r\n      color: #818181;\r\n      display: block;\r\n      border: none;\r\n      background: none;\r\n      width:100%;\r\n      text-align: left;\r\n      cursor: pointer;\r\n      outline: none;\n}\r\n    \r\n    /* On mouse-over */\n.sidenav a[data-v-54833a28]:hover, .dropdown-btn[data-v-54833a28]:hover {\r\n      color: #f1f1f1;\n}\r\n    \r\n    /* Main content */\n.main[data-v-54833a28] {\r\n      margin-left: 200px; /* Same as the width of the sidenav */\r\n      font-size: 20px; /* Increased text to enable scrolling */\r\n      font-family: \"Lucida Console\", Monaco, monospace;\r\n      padding: 0px 10px;\n}\r\n    \r\n    /* Add an active class to the active dropdown button */\n.active[data-v-54833a28] {\r\n      background-color: green;\r\n      color: white;\n}\r\n    \r\n    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */\n.dropdown-container[data-v-54833a28] {\r\n      display: none;\r\n      background-color: #262626;\r\n      padding-left: 8px;\n}\r\n    \r\n    /* Optional: Style the caret down icon */\n.fa-caret-down[data-v-54833a28] {\r\n      float: right;\r\n      padding-right: 8px;\n}\n#sidebar[data-v-54833a28] {\r\n      min-width: 250px;\r\n      max-width: 250px;\r\n      min-height: 100vh;\n}\n.wrapper[data-v-54833a28] {\r\n    display: flex;\r\n    align-items: stretch;\n}\n.h3[data-v-54833a28]{\r\n    font-family:\"Lucida Console\", Monaco, monospace ;\n}\n#sidebar[data-v-54833a28] {\r\n    min-width: 250px;\r\n    max-width: 250px;\n}\n#sidebar.active[data-v-54833a28] {\r\n    margin-left: -250px;\n}\n#sidebar[data-v-54833a28] {\r\n  /* don't forget to add all the previously mentioned styles here too */\r\n  background: #05386b;\r\n  color: #fff;\r\n  transition: all 0.3s;\n}\n#sidebar .sidebar-header[data-v-54833a28] {\r\n  padding: 24px;\r\n  background: 1E90FF;\n}\n#sidebar ul.components[data-v-54833a28] {\r\n  padding: 20px 0;\r\n  border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54833a28] {\r\n  color: #fff;\r\n  padding: 10px;\n}\n#sidebar ul li a[data-v-54833a28] {\r\n  padding: 10px;\r\n  font-size: 1.1em;\r\n  font-family: \"Lucida Console\", Monaco, monospace;\r\n  display: block;\r\n  color: white;\n}\n#sidebar ul li a[data-v-54833a28]:hover {\r\n  color: #7386D5;\r\n  background: #fff;\n}\n#sidebar ul li.active > a[data-v-54833a28], a[aria-expanded=\"true\"][data-v-54833a28] {\r\n  color: #fff;\r\n  background: #05386b;\n}\nul ul a[data-v-54833a28] {\r\n  font-size: 0.9em !important;\r\n  font-family: \"Lucida Console\", Monaco, monospace;\r\n  padding-left: 30px !important;\r\n  background: #05386b;\r\n  color:white;\n}\r\n", ""]);
+exports.push([module.i, "\n.sidenav[data-v-54833a28] {\n    width: 200px;\n    top: 0;\n    left: 0;\n    background-color: #111;\n    overflow-x: hidden;\n}\n\n/* Style the sidenav links and the dropdown button */\n.sidenav a[data-v-54833a28], .dropdown-btn[data-v-54833a28] {\n    padding: 6px 8px 6px 16px;\n    text-decoration: none;\n    font-size: 18px;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    color: #818181;\n    display: block;\n    border: none;\n    background: none;\n    width:100%;\n    text-align: left;\n    cursor: pointer;\n    outline: none;\n}\n\n/* On mouse-over */\n.sidenav a[data-v-54833a28]:hover, .dropdown-btn[data-v-54833a28]:hover {\n    color: #f1f1f1;\n}\n\n/* Main content */\n.main[data-v-54833a28] {\n    margin-left: 200px; /* Same as the width of the sidenav */\n    font-size: 20px; /* Increased text to enable scrolling */\n    font-family: \"Lucida Console\", Monaco, monospace;\n    padding: 0px 10px;\n}\n\n/* Add an active class to the active dropdown button */\n.active[data-v-54833a28] {\n    background-color: green;\n    color: white;\n}\n\n/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */\n.dropdown-container[data-v-54833a28] {\n    display: none;\n    background-color: #262626;\n    padding-left: 8px;\n}\n\n/* Optional: Style the caret down icon */\n.fa-caret-down[data-v-54833a28] {\n    float: right;\n    padding-right: 8px;\n}\n#sidebar[data-v-54833a28] {\n    min-width: 250px;\n    max-width: 250px;\n    min-height: 85vh;\n}\n.wrapper[data-v-54833a28] {\n    display: flex;\n    align-items: stretch;\n}\n.h3[data-v-54833a28]{\n    font-family:\"Lucida Console\", Monaco, monospace ;\n}\n#sidebar[data-v-54833a28] {\n    min-width: 250px;\n    max-width: 250px;\n}\n#sidebar.active[data-v-54833a28] {\n    margin-left: -250px;\n}\n#sidebar[data-v-54833a28] {\n    /* don't forget to add all the previously mentioned styles here too */\n    background: #05386b;\n    color: #fff;\n    transition: all 0.3s;\n}\n#sidebar .sidebar-header[data-v-54833a28] {\n    padding: 24px;\n    background: 1E90FF;\n}\n#sidebar ul.components[data-v-54833a28] {\n    padding: 20px 0;\n    border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54833a28] {\n    color: #fff;\n    padding: 10px;\n}\n#sidebar ul li a[data-v-54833a28] {\n    padding: 10px;\n    font-size: 1.1em;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    display: block;\n    color: white;\n}\n#sidebar ul li a[data-v-54833a28]:hover {\n    color: #7386D5;\n    background: #fff;\n}\n#sidebar ul li.active > a[data-v-54833a28], a[aria-expanded=\"true\"][data-v-54833a28] {\n    color: #fff;\n    background: #05386b;\n}\nul ul a[data-v-54833a28] {\n    font-size: 0.9em !important;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    padding-left: 30px !important;\n    background: #05386b;\n    color:white;\n}\n{box-sizing: border-box;}\n.open-button[data-v-54833a28] {\n    background-color: #555;\n    color: white;\n    padding: 16px 20px;\n    border: none;\n    cursor: pointer;\n    opacity: 0.8;\n    position: fixed;\n    bottom: 23px;\n    right: 28px;\n    width: 280px;\n}\n.form-popup[data-v-54833a28] {\n    display: none;\n    position: fixed;\n    bottom: 0;\n    right: 15px;\n    border: 3px solid #f1f1f1;\n    z-index: 9;\n}\n.form-container[data-v-54833a28] {\n    max-width: 300px;\n    padding: 10px;\n    background-color: white;\n}\n.form-container input[type=text][data-v-54833a28], .form-container input[type=password][data-v-54833a28] {\n    width: 100%;\n    padding: 15px;\n    margin: 5px 0 22px 0;\n    border: none;\n    background: #f1f1f1;\n}\n.form-container input[type=text][data-v-54833a28]:focus, .form-container input[type=password][data-v-54833a28]:focus {\n    background-color: #ddd;\n    outline: none;\n}\n.form-container .btn[data-v-54833a28] {\n    background-color: #4CAF50;\n    color: white;\n    padding: 16px 20px;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    margin-bottom:10px;\n    opacity: 0.8;\n}\n.form-container .cancel[data-v-54833a28] {\n    background-color: red;\n}\n.form-container .btn[data-v-54833a28]:hover, .open-button[data-v-54833a28]:hover {\n    opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -40364,14 +40667,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    staticStyle: {
-      "flex-grow": "1",
-      height: "900px",
-      border: "solid 1px black"
-    },
-    attrs: { id: "myDiagramDiv" }
-  })
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "myDiagramDiv", attrs: { id: "myDiagramDiv" } }),
+    _vm._v(" "),
+    _c("div", { staticClass: "button-container" }, [
+      _c(
+        "button",
+        {
+          staticClass: "button",
+          on: {
+            click: function($event) {
+              return _vm.guardarDiagrama()
+            }
+          }
+        },
+        [_vm._v("Guardar")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40395,17 +40708,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("nav", { attrs: { id: "sidebar" } }, [
-      _c("div", { staticClass: "sidebar-header" }, [
-        _c("h3", [_vm._v("Acciones ")])
-      ]),
+  return _c("div", { staticClass: "side-div" }, [
+    _c("nav", { attrs: { id: "sidebar" } }, [
+      _vm._m(0),
       _vm._v(" "),
       _c("ul", { staticClass: "list-unstyled components" }, [
         _c("li", { staticClass: "active" }, [
@@ -40429,11 +40734,98 @@ var staticRenderFns = [
               attrs: { id: "homeSubmenu" }
             },
             [
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Hombre")])]),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [_vm._v("Hombre "), _c("i", { staticClass: "fa fa-square" })]
+                )
+              ]),
               _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Mujer")])]),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [_vm._v("Mujer "), _c("i", { staticClass: "fa fa-circle" })]
+                )
+              ]),
               _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Elle")])])
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Hijo adoptivo legal "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Hijo adoptivo temporal "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Género desconocido "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _vm._m(7)
             ]
           ),
           _vm._v(" "),
@@ -40450,32 +40842,7 @@ var staticRenderFns = [
             [_vm._v("Relaciones Familiares")]
           ),
           _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "collapse list-unstyled",
-              attrs: { id: "homeSubmenu1" }
-            },
-            [
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Madre")])]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Padre")])]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Hermane")])
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Tie")])]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Sobrine")])
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Abuele")])]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ETC")])])
-            ]
-          ),
+          _vm._m(8),
           _vm._v(" "),
           _c(
             "a",
@@ -40490,28 +40857,7 @@ var staticRenderFns = [
             [_vm._v("Relacion Emocionales")]
           ),
           _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "collapse list-unstyled",
-              attrs: { id: "homeSubmenu2" }
-            },
-            [
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Casade")])]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Amantes")])
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Novies")])]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Es complicado")])
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ETC")])])
-            ]
-          ),
+          _vm._m(9),
           _vm._v(" "),
           _c(
             "a",
@@ -40526,26 +40872,688 @@ var staticRenderFns = [
             [_vm._v("Operaciones")]
           ),
           _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "collapse list-unstyled",
-              attrs: { id: "homeSubmenu3" }
-            },
-            [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Eliminar")])
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Editar")])]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ETC")])])
-            ]
-          )
+          _vm._m(10)
         ]),
         _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Accion")])])
+        _vm._m(11)
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
+        _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
+          _c("h1", [_vm._v("Ingresar Datos")]),
+          _vm._v(" "),
+          _vm._m(12),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.nombre,
+                expression: "nombre"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese nombre",
+              name: "nombre",
+              id: "nombre",
+              required: ""
+            },
+            domProps: { value: _vm.nombre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.nombre = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(13),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.apellido,
+                expression: "apellido"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese apellido",
+              name: "psw",
+              id: "psw",
+              required: ""
+            },
+            domProps: { value: _vm.apellido },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.apellido = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(14),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.edad,
+                expression: "edad"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese edad",
+              name: "edad",
+              id: "edad",
+              required: ""
+            },
+            domProps: { value: _vm.edad },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.edad = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(15),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.genero,
+                expression: "genero"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese género",
+              name: "genero",
+              id: "genero",
+              required: ""
+            },
+            domProps: { value: _vm.genero },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.genero = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.saveData()
+                }
+              }
+            },
+            [_vm._v("Guardar")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn cancel",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.closeForm()
+                }
+              }
+            },
+            [_vm._v("Cancelar")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sidebar-header" }, [
+      _c("h3", [_vm._v("Acciones ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Mascota "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Embarazo "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [
+        _vm._v("Aborto espontáneo "),
+        _c("i", { staticClass: "fa fa-circle" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Aborto "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Muerte "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Mellizos "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [
+        _vm._v("Gemelos idénticos "),
+        _c("i", { staticClass: "fa fa-circle" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu1" } },
+      [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Matrimonio     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Separacion por hecho     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Separacion legal     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Divorcio     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Compromiso    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Compromiso con convivencia     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Compromiso y separacion    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Nulidad     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia legal    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia legal con separacion por hecho     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia legal con separacion legal    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relacion comprometida    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia y separacion    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia no sentimental    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia no sentimental y separacion    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relación esporádica    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relación casual    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relación casual y separacion   "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Amorío    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu2" } },
+      [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Indiferencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("armonía "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Hostilidad "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Violencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Manipulación "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Distante y violencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso físico "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Control "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Cortada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Mejores amigos "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Hostilidad cercana "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Violencia cercana "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso emocional "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Celos "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Cortada y reparada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Amor "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Fundida Hostil "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Fundida violencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso sexual "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Admirador "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Conflicto "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enamorados "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Fundida/fusionada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enfocada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Negligencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Limerencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enfocada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Conexión emocional "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Desconfianza "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enfocada negativamente "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Desconocidos "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Normal "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu3" } },
+      [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Eliminar    "),
+            _c("i", { staticClass: "fa fa-trash" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Editar      "),
+            _c("i", { staticClass: "fa fa-edit" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ETC")])])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Accion")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "nombre" } }, [
+      _c("b", [_vm._v("Nombre")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "psw" } }, [
+      _c("b", [_vm._v("Apellido")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("Edad")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "genero" } }, [
+      _c("b", [_vm._v("Genero")])
     ])
   }
 ]
@@ -52984,8 +53992,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
