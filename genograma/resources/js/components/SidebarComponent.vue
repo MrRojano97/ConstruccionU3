@@ -30,7 +30,7 @@
                                         <a @click="addGeneroDesconocido()">Género desconocido <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a >Embarazo <i class="fa fa-circle"></i> </a>
+                                        <a @click="addEmbarazo()">Embarazo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
                                         <a@click="addAbortoEspontaneo()">Aborto espontáneo <i class="fa fa-circle"></i> </a>
@@ -520,11 +520,11 @@
                 },
                 addHijoAdoptivo()
                 {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hijo_adoptado.png")));
                 },
                 addHijoAdoptivoTemporal()
                 {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hijo_adoptivo_temporal.png")));
                 },
                 addMascota()
                 {
@@ -532,11 +532,11 @@
                 },
                 addGeneroDesconocido()
                 {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/genero_desconocido.png")));
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/genero_indefinido.png")));
                 },
                 addEmbarazo()
                 {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/embarazo.png")));
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/embarazada.png")));
                 },
                 addAbortoEspontaneo()
                 {
@@ -552,11 +552,11 @@
                 },
                 addMellizos()
                 {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/gemelos.png")));
                 },
                 addGemelosIdenticos()
                 {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
+                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/gemelos_identicos.png")));
                 },
                 linktest()
                 {  
