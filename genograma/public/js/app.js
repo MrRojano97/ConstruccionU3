@@ -1916,6 +1916,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -6958,7 +6974,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n/* Aca va le stilo del componente */\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n/* Aca va le stilo del componente */\n.button[data-v-6df28c6a]{\n    position: fixed;\n    right: 10%;\n    top: 10%;\n}\n.myDiagramDiv[data-v-6df28c6a]{\n    flex-grow: 1;\n    height: 90%;\n    border: solid 1px black;\n}\n\n", ""]);
 
 // exports
 
@@ -40631,16 +40647,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    staticStyle: {
-      "flex-grow": "1",
-      height: "900px",
-      border: "solid 1px black"
-    },
-    attrs: { id: "myDiagramDiv" }
-  })
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "myDiagramDiv", attrs: { id: "myDiagramDiv" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "button" }, [_c("button", [_vm._v("TEST")])])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -40836,7 +40856,7 @@ var render = function() {
     _c("div", [
       _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
         _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
-          _c("h1", [_vm._v("Login")]),
+          _c("h1", [_vm._v("Ingresar Datos")]),
           _vm._v(" "),
           _vm._m(12),
           _vm._v(" "),
@@ -40851,9 +40871,9 @@ var render = function() {
             ],
             attrs: {
               type: "text",
-              placeholder: "ingrese nombre",
-              name: "email",
-              id: "email",
+              placeholder: "Ingrese nombre",
+              name: "nombre",
+              id: "nombre",
               required: ""
             },
             domProps: { value: _vm.nombre },
@@ -41484,7 +41504,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "email" } }, [
+    return _c("label", { attrs: { for: "nombre" } }, [
       _c("b", [_vm._v("Nombre")])
     ])
   },
@@ -41500,7 +41520,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("edad")])])
+    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("Edad")])])
   },
   function() {
     var _vm = this

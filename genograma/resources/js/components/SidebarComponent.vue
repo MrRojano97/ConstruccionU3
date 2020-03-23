@@ -235,15 +235,15 @@
 
             <div class="form-popup" id="myForm">
                 <form action="#" class="form-container">
-                    <h1>Login</h1>
+                    <h1>Ingresar Datos</h1>
 
-                    <label for="email"><b>Nombre</b></label>
-                    <input v-model="nombre" type="text" placeholder="ingrese nombre" name="email" id="email" required>
+                    <label for="nombre"><b>Nombre</b></label>
+                    <input v-model="nombre" type="text" placeholder="Ingrese nombre" name="nombre" id="nombre" required>
 
                     <label for="psw"><b>Apellido</b></label>
                     <input v-model="apellido" type="text" placeholder="Ingrese apellido" name="psw" id="psw" required>
 
-                    <label for="edad"><b>edad</b></label>
+                    <label for="edad"><b>Edad</b></label>
                     <input v-model="edad" type="text" placeholder="Ingrese edad" name="edad" id="edad" required>
 
                     <label for="genero"><b>Genero</b></label>
