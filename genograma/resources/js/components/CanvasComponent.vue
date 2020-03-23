@@ -1,9 +1,6 @@
 <template>
     <div class="container">
         <div class="myDiagramDiv" id="myDiagramDiv"></div>
-        <div class="button">
-            <button>TEST</button>
-        </div>
     </div>
 </template>
 
