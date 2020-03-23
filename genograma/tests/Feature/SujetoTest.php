@@ -109,4 +109,25 @@ class SujetoTest extends TestCase
 
         $response->assertRedirect('/rutaSujeto');
     }
+
+     /** @test */
+     public function testActualizarJson(){
+        $this->withoutExceptionHandling();// desactivamos las excepciones
+        $post=factory(Sujeto::class)->create();//tengo datos par mis pruebas
+        $nombre=$post->nombre;
+
+        $response= $this->put('/rutaSujeto/'.$post->id,[
+            'archivoJson'=>'hola'
+        ]);
+
+        $this->assertCount(1,Sujeto::all());//confirma si por lo menos hay un post en la tabla post
+            
+        $post = $post->fresh();
+
+        $this->assertEquals($post->archivoJson,'hola');
+        $this->assertEquals($post->nombre, $nombre);//para verificar que los datos guardados previamente no 
+        //se modificaron
+
+        $response->assertRedirect('/rutaSujeto/'.$post->id);
+    }
 }
