@@ -15,7 +15,19 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
-Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
+Vue.component('canvas-component', require('./components/CanvasComponent.vue').default);
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -24,5 +36,8 @@ Vue.component('canvas-component', require('./components/CanvasComponent.vue').de
  */
 
 const app = new Vue({
+    beforeCreate: function(){
+        console.log(this.$myDiagram)
+    },
     el: '#app',
 });
