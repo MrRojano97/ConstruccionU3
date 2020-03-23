@@ -16,6 +16,7 @@ window.Vue = require('vue');
 
 Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
 Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
+Vue.component('modal-component', require('./components/ModalComponent.vue').default); 
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
