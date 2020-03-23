@@ -9,53 +9,206 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <button @click="openForm()">Hombre <i class="fa fa-square"></i> </button>
+                            <a @click="openForm()">Hombre <i class="fa fa-square"></i> </a>
                         </li>
-
                         <li>
-                            <a>Mujer <i class="fa fa-circle"></i> </a>
+                            <a @click="openForm()">Mujer <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a @click="openForm()">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a @click="openForm()">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a>Mascota <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a @click="openForm()">Género desconocido <i class="fa fa-circle"></i> </a>
+                        </li>                        
+                        <li>
+                            <a>Embarazo <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a>Aborto espontáneo <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a>Aborto <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a>Muerte <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a>Mellizos <i class="fa fa-circle"></i> </a>
+                        </li>
+                        <li>
+                            <a>Gemelos idénticos <i class="fa fa-circle"></i> </a>
                         </li>
                     </ul>
                     <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu1">
+                    <ul class="collapse list-unstyled" id="homeSubmenu1">                        
                         <li>
-                            <a>Madre   <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Padre   <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Hermane <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Separacion legal     <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Tie     <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Divorcio     <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Sobrine <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Compromiso    <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Abuele  <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Compromiso con convivencia     <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">ETC     <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Compromiso y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Nulidad     <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia legal    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia legal con separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia legal con separacion legal    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia no sentimental    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                     </ul>
                     <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu2">
+                        
                         <li>
-                            <a href="#">Casade  <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Amantes <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Novies  <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Hostilidad <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">Es complicado   <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Violencia <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                         <li>
-                            <a href="#">ETC <i class="fa fa-arrow-circle-right"></i>    </a>
+                            <a href="#">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Distante y violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Abuso físico <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Control <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Cortada <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Mejores amigos <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Hostilidad cercana <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Violencia cercana <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Abuso emocional <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Celos <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Cortada y reparada <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Admirador <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Conflicto <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Fundida/fusionada <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Limerencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Conexión emocional <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Desconfianza <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Enfocada negativamente <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Desconocidos <i class="fa fa-arrow-circle-right"></i>    </a>
+                        </li>
+                        <li>
+                            <a href="#">Normal <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
                     </ul>
                     <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
@@ -82,15 +235,15 @@
 
             <div class="form-popup" id="myForm">
                 <form action="#" class="form-container">
-                    <h1>Login</h1>
+                    <h1>Ingresar Datos</h1>
 
-                    <label for="email"><b>Nombre</b></label>
-                    <input v-model="nombre" type="text" placeholder="ingrese nombre" name="email" id="email" required>
+                    <label for="nombre"><b>Nombre</b></label>
+                    <input v-model="nombre" type="text" placeholder="Ingrese nombre" name="nombre" id="nombre" required>
 
                     <label for="psw"><b>Apellido</b></label>
                     <input v-model="apellido" type="text" placeholder="Ingrese apellido" name="psw" id="psw" required>
 
-                    <label for="edad"><b>edad</b></label>
+                    <label for="edad"><b>Edad</b></label>
                     <input v-model="edad" type="text" placeholder="Ingrese edad" name="edad" id="edad" required>
 
                     <label for="genero"><b>Genero</b></label>

@@ -2243,6 +2243,159 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -40557,7 +40710,7 @@ var render = function() {
             [
               _c("li", [
                 _c(
-                  "button",
+                  "a",
                   {
                     on: {
                       click: function($event) {
@@ -40569,7 +40722,84 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(1)
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [_vm._v("Mujer "), _c("i", { staticClass: "fa fa-circle" })]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Hijo adoptivo legal "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Hijo adoptivo temporal "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.openForm()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("Género desconocido "),
+                    _c("i", { staticClass: "fa fa-circle" })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _vm._m(7)
             ]
           ),
           _vm._v(" "),
@@ -40586,7 +40816,7 @@ var render = function() {
             [_vm._v("Relaciones Familiares")]
           ),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(8),
           _vm._v(" "),
           _c(
             "a",
@@ -40601,7 +40831,7 @@ var render = function() {
             [_vm._v("Relacion Emocionales")]
           ),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(9),
           _vm._v(" "),
           _c(
             "a",
@@ -40616,19 +40846,19 @@ var render = function() {
             [_vm._v("Operaciones")]
           ),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(10)
         ]),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(11)
       ])
     ]),
     _vm._v(" "),
     _c("div", [
       _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
         _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
-          _c("h1", [_vm._v("Login")]),
+          _c("h1", [_vm._v("Ingresar Datos")]),
           _vm._v(" "),
-          _vm._m(6),
+          _vm._m(12),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40641,9 +40871,9 @@ var render = function() {
             ],
             attrs: {
               type: "text",
-              placeholder: "ingrese nombre",
-              name: "email",
-              id: "email",
+              placeholder: "Ingrese nombre",
+              name: "nombre",
+              id: "nombre",
               required: ""
             },
             domProps: { value: _vm.nombre },
@@ -40657,7 +40887,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(7),
+          _vm._m(13),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40686,7 +40916,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(8),
+          _vm._m(14),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40715,7 +40945,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(9),
+          _vm._m(15),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -40790,7 +41020,61 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", [_vm._v("Mujer "), _c("i", { staticClass: "fa fa-circle" })])
+      _c("a", [_vm._v("Mascota "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Embarazo "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [
+        _vm._v("Aborto espontáneo "),
+        _c("i", { staticClass: "fa fa-circle" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Aborto "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Muerte "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [_vm._v("Mellizos "), _c("i", { staticClass: "fa fa-circle" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", [
+        _vm._v("Gemelos idénticos "),
+        _c("i", { staticClass: "fa fa-circle" })
+      ])
     ])
   },
   function() {
@@ -40802,50 +41086,141 @@ var staticRenderFns = [
       { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu1" } },
       [
         _c("li", [
-          _c("a", [
-            _vm._v("Madre   "),
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Matrimonio     "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Padre   "),
+            _vm._v("Separacion por hecho     "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Hermane "),
+            _vm._v("Separacion legal     "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Tie     "),
+            _vm._v("Divorcio     "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Sobrine "),
+            _vm._v("Compromiso    "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Abuele  "),
+            _vm._v("Compromiso con convivencia     "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("ETC     "),
+            _vm._v("Compromiso y separacion    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Nulidad     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia legal    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia legal con separacion por hecho     "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia legal con separacion legal    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relacion comprometida    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia y separacion    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia no sentimental    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Convivencia no sentimental y separacion    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relación esporádica    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relación casual    "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Relación casual y separacion   "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Amorío    "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ])
@@ -40862,35 +41237,231 @@ var staticRenderFns = [
       [
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Casade  "),
+            _vm._v("Indiferencia "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Amantes "),
+            _vm._v("armonía "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Novies  "),
+            _vm._v("Hostilidad "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Es complicado   "),
+            _vm._v("Violencia "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ]),
         _vm._v(" "),
         _c("li", [
           _c("a", { attrs: { href: "#" } }, [
-            _vm._v("ETC "),
+            _vm._v("Abuso "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Manipulación "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Distante y violencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso físico "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Control "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Cortada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Mejores amigos "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Hostilidad cercana "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Violencia cercana "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso emocional "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Celos "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Cortada y reparada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Amor "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Fundida Hostil "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Fundida violencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Abuso sexual "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Admirador "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Conflicto "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enamorados "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Fundida/fusionada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enfocada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Negligencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Limerencia "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enfocada "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Conexión emocional "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Desconfianza "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Enfocada negativamente "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Desconocidos "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _vm._v("Normal "),
             _c("i", { staticClass: "fa fa-arrow-circle-right" })
           ])
         ])
@@ -40933,7 +41504,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "email" } }, [
+    return _c("label", { attrs: { for: "nombre" } }, [
       _c("b", [_vm._v("Nombre")])
     ])
   },
@@ -40949,7 +41520,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("edad")])])
+    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("Edad")])])
   },
   function() {
     var _vm = this
@@ -53395,8 +53966,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
