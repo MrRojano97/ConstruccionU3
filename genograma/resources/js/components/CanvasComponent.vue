@@ -1,9 +1,12 @@
 <template>
     <div class="container">
         <div class="myDiagramDiv" id="myDiagramDiv"></div>
+<<<<<<< HEAD
         <div class="button-container">
             <button class="button" @click="guardarDiagrama()">Guardar</button>
         </div>
+=======
+>>>>>>> Ruben
     </div>
 </template>
 
