@@ -33,7 +33,8 @@ class SujetoController extends Controller
             ['nombre'=>'',
             'apellido'=>'',
             'genero'=>'',
-            'edad'=>'']
+            'edad'=>'',
+            'archivoJson'=>'']
         );
         $post->update($data);
         return redirect('/rutaSujeto/'.$post->id);
