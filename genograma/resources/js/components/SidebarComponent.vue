@@ -25,7 +25,7 @@
                         </li>
                         <li>
                             <a @click="openForm()">Género desconocido <i class="fa fa-circle"></i> </a>
-                        </li>                        
+                        </li>
                         <li>
                             <a>Embarazo <i class="fa fa-circle"></i> </a>
                         </li>
@@ -46,7 +46,7 @@
                         </li>
                     </ul>
                     <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu1">                        
+                    <ul class="collapse list-unstyled" id="homeSubmenu1">
                         <li>
                             <a href="#">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
@@ -110,7 +110,7 @@
                     </ul>
                     <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu2">
-                        
+
                         <li>
                             <a href="#">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
                         </li>
@@ -317,7 +317,7 @@
     #sidebar {
         min-width: 250px;
         max-width: 250px;
-        min-height: 100vh;
+        min-height: 85vh;
     }
     .wrapper {
         display: flex;
