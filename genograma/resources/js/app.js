@@ -18,6 +18,18 @@ Vue.component('sidebar-component', require('./components/SidebarComponent.vue').
 Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
 Vue.component('modal-component', require('./components/ModalComponent.vue').default); 
 
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -25,5 +37,8 @@ Vue.component('modal-component', require('./components/ModalComponent.vue').defa
  */
 
 const app = new Vue({
+    beforeCreate: function(){
+        console.log(this.$myDiagram)
+    },
     el: '#app',
 });
