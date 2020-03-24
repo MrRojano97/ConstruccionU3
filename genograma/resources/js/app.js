@@ -16,6 +16,19 @@ window.Vue = require('vue');
 
 Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
 Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
+Vue.component('modal-component', require('./components/ModalComponent.vue').default); 
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -24,5 +37,8 @@ Vue.component('canvas-component', require('./components/CanvasComponent.vue').de
  */
 
 const app = new Vue({
+    beforeCreate: function(){
+        console.log(this.$myDiagram)
+    },
     el: '#app',
 });
