@@ -220,7 +220,7 @@
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu3">
                                      <li>
-                                        <a href="#">Guardar      <i class="fa fa-edit"></i>    </a>
+                                        <a @click="guardarDiagrama()">Guardar      <i class="fa fa-edit"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Eliminar    <i class="fa fa-trash"></i>    </a>
@@ -948,7 +948,8 @@
                     counter++;
                 },
                 guardarDiagrama(){
-                    document.getElementById("mySavedModel").value = this.myDiagram.model.toJson();
+                    //El this.myDiagram.model.toJson() te transforma el diagrama a Json
+                    //document.getElementById("mySavedModel").value = this.myDiagram.model.toJson();
                     //pasarselo al brayan
                 }
             }
