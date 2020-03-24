@@ -13,7 +13,8 @@ class SujetoController extends Controller
             ['nombre'=>'',
             'apellido'=>'',
             'genero'=>'',
-            'edad'=>'']
+            'edad'=>'',
+            'archivoJson'=>'']
         );
         $post=Sujeto::create($data);
         return redirect('/rutaSujeto/'.$post->id);
