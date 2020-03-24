@@ -2359,9 +2359,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var counter = 0;
 var $ = go.GraphObject.make;
 var myDiagram;
@@ -2392,14 +2389,488 @@ var myDiagram;
         stroke: "gray",
         strokeWidth: 0.5,
         interval: 10
-      }))
+      })),
+      "draggingTool.dragsLink": true,
+      "draggingTool.isGridSnapEnabled": true,
+      "linkingTool.isUnconnectedLinkValid": true,
+      "linkingTool.portGravity": 20,
+      "relinkingTool.isUnconnectedLinkValid": true,
+      "relinkingTool.portGravity": 20,
+      "relinkingTool.fromHandleArchetype": $(go.Shape, "Diamond", {
+        segmentIndex: 0,
+        cursor: "pointer",
+        desiredSize: new go.Size(8, 8),
+        fill: "tomato",
+        stroke: "darkred"
+      }),
+      "relinkingTool.toHandleArchetype": $(go.Shape, "Diamond", {
+        segmentIndex: -1,
+        cursor: "pointer",
+        desiredSize: new go.Size(8, 8),
+        fill: "darkred",
+        stroke: "tomato"
+      }),
+      "linkReshapingTool.handleArchetype": $(go.Shape, "Diamond", {
+        desiredSize: new go.Size(7, 7),
+        fill: "lightblue",
+        stroke: "deepskyblue"
+      }),
+      "rotatingTool.handleAngle": 270,
+      "rotatingTool.handleDistance": 30,
+      "rotatingTool.snapAngleMultiple": 15,
+      "rotatingTool.snapAngleEpsilon": 15,
+      "undoManager.isEnabled": true
     });
+
+    function makePort(name, spot, output, input) {
+      // the port is basically just a small transparent square
+      return $(go.Shape, "Circle", {
+        fromLinkable: output,
+        toLinkable: input,
+        fill: null,
+        // not seen, by default; set to a translucent gray by showSmallPorts, defined below
+        stroke: null,
+        desiredSize: new go.Size(7, 7),
+        alignment: spot,
+        // align the port on the main Shape
+        alignmentFocus: spot,
+        // just inside the Shape
+        portId: name,
+        // declare this object to be a "port"
+        fromSpot: spot,
+        toSpot: spot,
+        // declare where links may connect at this port
+        cursor: "pointer" // show a different cursor to indicate potential link point
+
+      });
+    }
+
+    var nodeSelectionAdornmentTemplate = $(go.Adornment, "Auto", $(go.Shape, {
+      fill: null,
+      stroke: "deepskyblue",
+      strokeWidth: 1.5,
+      strokeDashArray: [4, 2]
+    }), $(go.Placeholder));
+    var nodeResizeAdornmentTemplate = $(go.Adornment, "Spot", {
+      locationSpot: go.Spot.Right
+    }, $(go.Placeholder), $(go.Shape, {
+      alignment: go.Spot.TopLeft,
+      cursor: "nw-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.Top,
+      cursor: "n-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.TopRight,
+      cursor: "ne-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.Left,
+      cursor: "w-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.Right,
+      cursor: "e-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.BottomLeft,
+      cursor: "se-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.Bottom,
+      cursor: "s-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      alignment: go.Spot.BottomRight,
+      cursor: "sw-resize",
+      desiredSize: new go.Size(6, 6),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }));
+    var nodeRotateAdornmentTemplate = $(go.Adornment, {
+      locationSpot: go.Spot.Center,
+      locationObjectName: "CIRCLE"
+    }, $(go.Shape, "Circle", {
+      name: "CIRCLE",
+      cursor: "pointer",
+      desiredSize: new go.Size(7, 7),
+      fill: "lightblue",
+      stroke: "deepskyblue"
+    }), $(go.Shape, {
+      geometryString: "M3.5 7 L3.5 30",
+      isGeometryPositioned: true,
+      stroke: "deepskyblue",
+      strokeWidth: 1.5,
+      strokeDashArray: [4, 2]
+    }));
+    this.myDiagram.nodeTemplateMap.add("Hombre", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/hombre.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Mujer", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/mujer.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("AdopLegal", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/hijo_adoptado.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("AdopTemporal", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/hijo_adoptivo_temporal.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Mascota", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/mascota.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Desconocido", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/genero_indefinido.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Embarazo", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/embarazada.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Espontaneo", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/aborto_espontaneo.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Aborto", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/aborto.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Muerte", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/muerte.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Mellizos", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/gemelos.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+    this.myDiagram.nodeTemplateMap.add("Identicos", $(go.Node, "Spot", {
+      locationSpot: go.Spot.Center
+    }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
+      selectable: true,
+      selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+    }, {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      resizeAdornmentTemplate: nodeResizeAdornmentTemplate
+    }, {
+      rotatable: true,
+      rotateAdornmentTemplate: nodeRotateAdornmentTemplate
+    }, new go.Binding("angle").makeTwoWay(), // the main object is a Panel that surrounds a TextBlock with a Shape
+    $(go.Picture, "imagenes/gemelos_identicos.png"), $(go.TextBlock, {
+      margin: new go.Margin(3, 0, 0, 0),
+      maxSize: new go.Size(100, 30),
+      isMultiline: false
+    }, new go.Binding("text")), // four small named ports, one on each side:
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+      // handle mouse enter/leave events to show/hide the ports
+      mouseEnter: function mouseEnter(e, node) {
+        showSmallPorts(node, true);
+      },
+      mouseLeave: function mouseLeave(e, node) {
+        showSmallPorts(node, false);
+      }
+    }));
+
+    function showSmallPorts(node, show) {
+      node.ports.each(function (port) {
+        if (port.portId !== "") {
+          // don't change the default port, which is the big shape
+          port.fill = show ? "rgba(0,0,0,.3)" : null;
+        }
+      });
+    }
+
+    var linkSelectionAdornmentTemplate = $(go.Adornment, "Link", $(go.Shape, // isPanelMain declares that this Shape shares the Link.geometry
+    {
+      isPanelMain: true,
+      fill: null,
+      stroke: "deepskyblue",
+      strokeWidth: 0
+    }) // use selection object's strokeWidth
+    );
+    var headSelectionAdornmentTemplate = $(go.Adornment, "Arrowhead", $(go.Shape, {
+      isPanelMain: true,
+      fill: null,
+      stroke: "deepskyblue",
+      strokeWidth: 0
+    }));
     /*Template para relacion de Matrimonio*/
 
     this.myDiagram.linkTemplateMap.add("Matrimonio", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2409,16 +2880,15 @@ var myDiagram;
       curve: go.Link.JumpOver
     },
     /*Forma del Link */
-    $(go.Shape, {
+    new go.Binding("points").makeTwoWay(), $(go.Shape, {
       stroke: "black",
       strokeWidth: 2
     })));
     /*Template para relacion de Separacion por Hecho*/
 
     this.myDiagram.linkTemplateMap.add("Sep-Fact", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2442,9 +2912,8 @@ var myDiagram;
     /*Template para relacion de Separacion Legal*/
 
     this.myDiagram.linkTemplateMap.add("Sep-Leg", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2464,9 +2933,8 @@ var myDiagram;
     /*Template para relacion de Divorcio*/
 
     this.myDiagram.linkTemplateMap.add("Divorcio", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2486,9 +2954,8 @@ var myDiagram;
     /*Template para relacion de Compromiso*/
 
     this.myDiagram.linkTemplateMap.add("Engagement", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2504,9 +2971,8 @@ var myDiagram;
     /*Template para relacion de Comprometidos y Cohabitacion*/
 
     this.myDiagram.linkTemplateMap.add("Eng-Coh", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2527,9 +2993,8 @@ var myDiagram;
     /*Template para relacion de Comprometidos pero Separados*/
 
     this.myDiagram.linkTemplateMap.add("Eng-Sep", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2550,9 +3015,8 @@ var myDiagram;
     /*Template para relacion de Nulidad*/
 
     this.myDiagram.linkTemplateMap.add("Nullity", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2573,9 +3037,8 @@ var myDiagram;
     /*Template para relacion de indiferencia*/
 
     this.myDiagram.linkTemplateMap.add("indiferencia", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2591,9 +3054,8 @@ var myDiagram;
     /*Template para relacion de armonia*/
 
     this.myDiagram.linkTemplateMap.add("armonia", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2610,9 +3072,8 @@ var myDiagram;
     /*Template para relacion de hostil*/
 
     this.myDiagram.linkTemplateMap.add("hostilidad", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2641,9 +3102,8 @@ var myDiagram;
     /*Template para relacion de violencia*/
 
     this.myDiagram.linkTemplateMap.add("violencia", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2672,9 +3132,8 @@ var myDiagram;
     /*Template para relacion de abuso*/
 
     this.myDiagram.linkTemplateMap.add("abuso", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2702,9 +3161,8 @@ var myDiagram;
     /*Template para relacion de manipulacion*/
 
     this.myDiagram.linkTemplateMap.add("manipulacion", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2733,9 +3191,8 @@ var myDiagram;
     /*Template para relacion de distante*/
 
     this.myDiagram.linkTemplateMap.add("distante", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2753,9 +3210,8 @@ var myDiagram;
     /*Template para relacion de amistad*/
 
     this.myDiagram.linkTemplateMap.add("amistad", $(go.Link, {
-      isLayoutPositioned: false,
-      isTreeLink: false,
-      curviness: -50
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
     }, {
       relinkableFrom: true,
       relinkableTo: true,
@@ -2784,42 +3240,6 @@ var myDiagram;
     relaciones: function relaciones() {
       alert('al presionar llega aqui');
     },
-    addHombre: function addHombre() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/hombre.png")));
-    },
-    addMujer: function addMujer() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/mujer.png")));
-    },
-    addHijoAdoptivo: function addHijoAdoptivo() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/hijo_adoptado.png")));
-    },
-    addHijoAdoptivoTemporal: function addHijoAdoptivoTemporal() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/hijo_adoptivo_temporal.png")));
-    },
-    addMascota: function addMascota() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/mascota.png")));
-    },
-    addGeneroDesconocido: function addGeneroDesconocido() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/genero_indefinido.png")));
-    },
-    addEmbarazo: function addEmbarazo() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/embarazada.png")));
-    },
-    addAbortoEspontaneo: function addAbortoEspontaneo() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/aborto_espontaneo.png")));
-    },
-    addAborto: function addAborto() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/aborto.png")));
-    },
-    addMuerte: function addMuerte() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/muerte.png")));
-    },
-    addMellizos: function addMellizos() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/gemelos.png")));
-    },
-    addGemelosIdenticos: function addGemelosIdenticos() {
-      this.myDiagram.add($(go.Part, $(go.Picture, "imagenes/gemelos_identicos.png")));
-    },
     linktest: function linktest() {},
     guardartest: function guardartest() {},
     openForm: function openForm() {
@@ -2832,15 +3252,21 @@ var myDiagram;
       var sujeto = {
         nombre: this.nombre,
         apellido: this.apellido,
-        edad: this.edad,
-        genero: this.genero
+        edad: this.edad
       };
       console.log("NUEVO SUJETO PARA GUARDAR:");
       console.log(sujeto);
       this.nombre = "";
       this.apellido = "";
       this.edad = "";
-      this.enero = "";
+    },
+    addSujeto: function addSujeto(sujeto) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: "sujeto",
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
     },
     relFamiliar: function relFamiliar(relacion) {
       /*Crear nodo base para relacion*/
@@ -2859,6 +3285,17 @@ var myDiagram;
       });
       this.myDiagram.commitTransaction("make new link");
       counter++;
+    },
+    guardarDiagrama: function guardarDiagrama() {
+      var sujeto = {
+        nombre: 'test3',
+        apellido: 'testeo3',
+        genero: 'M',
+        edad: '2',
+        archivoJson: this.myDiagram.model.toJson()
+      };
+      var nuevoSujeto = sujeto;
+      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
     }
   }
 });
@@ -41216,7 +41653,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addHombre()
+                              _vm.openForm(), _vm.addSujeto("Hombre")
                             }
                           }
                         },
@@ -41233,7 +41670,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addMujer()
+                              _vm.openForm(), _vm.addSujeto("Mujer")
                             }
                           }
                         },
@@ -41250,7 +41687,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addHijoAdoptivo()
+                              _vm.openForm(), _vm.addSujeto("AdopLegal")
                             }
                           }
                         },
@@ -41267,7 +41704,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addHijoAdoptivoTemporal()
+                              _vm.openForm(), _vm.addSujeto("AdopTemporal")
                             }
                           }
                         },
@@ -41284,7 +41721,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addMascota()
+                              return _vm.addSujeto("Mascota")
                             }
                           }
                         },
@@ -41301,7 +41738,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addGeneroDesconocido()
+                              _vm.openForm(), _vm.addSujeto("Desconocido")
                             }
                           }
                         },
@@ -41318,7 +41755,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addEmbarazo()
+                              return _vm.addSujeto("Embarazo")
                             }
                           }
                         },
@@ -41335,7 +41772,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addAbortoEspontaneo()
+                              return _vm.addSujeto("Espontaneo")
                             }
                           }
                         },
@@ -41352,7 +41789,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addAborto()
+                              return _vm.addSujeto("Aborto")
                             }
                           }
                         },
@@ -41369,12 +41806,12 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addMuerte()
+                              return _vm.addSujeto("Muerte")
                             }
                           }
                         },
                         [
-                          _vm._v("Muerte "),
+                          _vm._v(" Muerte  "),
                           _c("i", { staticClass: "fa fa-circle" })
                         ]
                       )
@@ -41386,12 +41823,12 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addMellizos()
+                              return _vm.addSujeto("Mellizos")
                             }
                           }
                         },
                         [
-                          _vm._v("Mellizos "),
+                          _vm._v(" Mellizos "),
                           _c("i", { staticClass: "fa fa-circle" })
                         ]
                       )
@@ -41403,7 +41840,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              return _vm.addGemelosIdenticos()
+                              return _vm.addSujeto("Identicos")
                             }
                           }
                         },
@@ -41837,10 +42274,40 @@ var render = function() {
                   [_vm._v("Operaciones")]
                 ),
                 _vm._v(" "),
-                _vm._m(39)
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu3" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Guardar      "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(39),
+                    _vm._v(" "),
+                    _vm._m(40),
+                    _vm._v(" "),
+                    _vm._m(41)
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _vm._m(40)
+              _vm._m(42)
             ])
           ]),
           _vm._v(" "),
@@ -41852,7 +42319,7 @@ var render = function() {
                 [
                   _c("h1", [_vm._v("Ingresar Datos")]),
                   _vm._v(" "),
-                  _vm._m(41),
+                  _vm._m(43),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -41881,7 +42348,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(42),
+                  _vm._m(44),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -41910,7 +42377,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(43),
+                  _vm._m(45),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -41939,35 +42406,6 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(44),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.genero,
-                        expression: "genero"
-                      }
-                    ],
-                    attrs: {
-                      type: "text",
-                      placeholder: "Ingrese género",
-                      name: "genero",
-                      id: "genero",
-                      required: ""
-                    },
-                    domProps: { value: _vm.genero },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.genero = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -41975,7 +42413,7 @@ var render = function() {
                       attrs: { type: "submit" },
                       on: {
                         click: function($event) {
-                          return _vm.saveData()
+                          _vm.saveData(), _vm.closeForm()
                         }
                       }
                     },
@@ -42002,7 +42440,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(45)
+      _vm._m(46)
     ])
   ])
 }
@@ -42437,34 +42875,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      { staticClass: "collapse list-unstyled", attrs: { id: "homeSubmenu3" } },
-      [
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Guardar      "),
-            _c("i", { staticClass: "fa fa-edit" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Eliminar    "),
-            _c("i", { staticClass: "fa fa-trash" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [
-            _vm._v("Editar      "),
-            _c("i", { staticClass: "fa fa-edit" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [_c("a", [_vm._v("ETC")])])
-      ]
-    )
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Eliminar    "),
+        _c("i", { staticClass: "fa fa-trash" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Editar      "),
+        _c("i", { staticClass: "fa fa-edit" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", [_vm._v("ETC")])])
   },
   function() {
     var _vm = this
@@ -42493,14 +42926,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("Edad")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "genero" } }, [
-      _c("b", [_vm._v("Genero")])
-    ])
   },
   function() {
     var _vm = this

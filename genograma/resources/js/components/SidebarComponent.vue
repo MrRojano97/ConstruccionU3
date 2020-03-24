@@ -318,6 +318,7 @@
                 // the port is basically just a small transparent square
                 return $(go.Shape, "Circle",
                 {
+                    fromLinkable: output, toLinkable: input,
                     fill: null,  // not seen, by default; set to a translucent gray by showSmallPorts, defined below
                     stroke: null,
                     desiredSize: new go.Size(7, 7),
@@ -948,9 +949,17 @@
                     counter++;
                 },
                 guardarDiagrama(){
-                    //El this.myDiagram.model.toJson() te transforma el diagrama a Json
-                    //document.getElementById("mySavedModel").value = this.myDiagram.model.toJson();
-                    //pasarselo al brayan
+                    var sujeto = {
+                        nombre: 'test3',
+                        apellido: 'testeo3', 
+                        genero: 'M', 
+                        edad: '2', 
+                        archivoJson: this.myDiagram.model.toJson()
+                    } 
+                    const nuevoSujeto = sujeto;
+                    axios.post('/rutaSujeto', nuevoSujeto)
+                        .then((res) =>{
+                        })
                 }
             }
         }
@@ -958,4 +967,5 @@
 </script>
 
 
+  
   
