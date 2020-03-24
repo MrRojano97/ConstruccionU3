@@ -12,22 +12,22 @@
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="openForm(),addSujeto('Hombre')">Hombre <i class="fa fa-square"></i> </a>
+                                        <a @click="openForm('Hombre')">Hombre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm(),addSujeto('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm(),addSujeto('AdopLegal')">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm('AdopLegal')">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm(),addSujeto('AdopTemporal')">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm('AdopTemporal')">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
                                         <a @click="addSujeto('Mascota')">Mascota <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="openForm(),addSujeto('Desconocido')">Género desconocido <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm('Desconocido')">Género desconocido <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
                                         <a @click="addSujeto('Embarazo')">Embarazo <i class="fa fa-circle"></i> </a>
@@ -242,7 +242,7 @@
                         <!--            <button class="open-button" v-on:click="openForm">Editar</button>-->
                         <div class="form-popup" id="myForm">
                             <form action="#" class="form-container">
-                                <h1>Ingresar Datos</h1>
+                                <h1>Ingresar Datos de {{Sujeto}}</h1>
 
                                 <label for="nombre"><b>Nombre</b></label>
                                 <input v-model="nombre" type="text" placeholder="Ingrese nombre" name="nombre" id="nombre" required>
@@ -253,7 +253,7 @@
                                 <label for="edad"><b>Edad</b></label>
                                 <input v-model="edad" type="text" placeholder="Ingrese edad" name="edad" id="edad" required>
 
-                                <button @click="saveData(), closeForm()" type="submit" class="btn">Guardar</button>
+                                <button @click="saveData(Sujeto), closeForm()" type="submit" class="btn">Guardar</button>
                                 <button type="submit" class="btn cancel" @click="closeForm()">Cancelar</button>
                             </form>
                         </div>
@@ -282,7 +282,8 @@
                 nombre : "",
                 apellido : "",
                 genero : "",
-                edad : ""
+                edad : "",
+                Sujeto: ""
             }
         },
         mounted() {
@@ -318,6 +319,7 @@
                 // the port is basically just a small transparent square
                 return $(go.Shape, "Circle",
                 {
+                    fromLinkable: output, toLinkable: input,
                     fill: null,  // not seen, by default; set to a translucent gray by showSmallPorts, defined below
                     stroke: null,
                     desiredSize: new go.Size(7, 7),
@@ -912,24 +914,35 @@
                 {
 
                 },
-                openForm() {
+                openForm(Sujeto) {
+                    this.Sujeto = Sujeto;
                     document.getElementById("myForm").style.display = "block";
                 },
                 closeForm() {
                     document.getElementById("myForm").style.display = "none";
                 },
-                saveData() {
+               saveData(Sujeto) {
                     var sujeto = {
                         nombre : this.nombre,
                         apellido : this.apellido,
                         edad : this.edad,
                     }
-
+                    this.addSujeto2(Sujeto,this.nombre,this.edad);
+                    /*
                     console.log("NUEVO SUJETO PARA GUARDAR:");
                     console.log(sujeto);
+                    */
                     this.nombre = "";
                     this.apellido = "";
                     this.edad = "";
+
+                    
+                    
+                },
+                addSujeto2(sujeto,nombre,edad){
+                    this.myDiagram.startTransaction("make new node");
+                    this.myDiagram.model.addNodeData({ text: nombre+", "+edad, category : sujeto});
+                    this.myDiagram.commitTransaction("make new node");
                 },
                 addSujeto(sujeto){
                     this.myDiagram.startTransaction("make new node");
@@ -948,9 +961,17 @@
                     counter++;
                 },
                 guardarDiagrama(){
-                    //El this.myDiagram.model.toJson() te transforma el diagrama a Json
-                    //document.getElementById("mySavedModel").value = this.myDiagram.model.toJson();
-                    //pasarselo al brayan
+                    var sujeto = {
+                        nombre: 'test3',
+                        apellido: 'testeo3', 
+                        genero: 'M', 
+                        edad: '2', 
+                        archivoJson: this.myDiagram.model.toJson()
+                    } 
+                    const nuevoSujeto = sujeto;
+                    axios.post('/rutaSujeto', nuevoSujeto)
+                        .then((res) =>{
+                        })
                 }
             }
         }
@@ -958,4 +979,5 @@
 </script>
 
 
+  
   
