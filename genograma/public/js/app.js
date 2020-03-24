@@ -1946,6 +1946,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {// Acá debería ir declarado el mapa (o json) que representa el diagrama
+    };
+  },
+  methods: {
+    guardarDiagrama: function guardarDiagrama() {
+      console.log("guardando diagrama!"); //TODO: implementar aquí llamado a ruta para guardar el diagrama
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SidebarComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var $ = go.GraphObject.make; // This works because we have overridden the /extensionsTS/tsconfig.json file
 // in the options to the loader: 'ts-loader', in the webpack.config.js  
 
@@ -7280,6 +7333,131 @@ var myDiagram;
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CanvasComponent.vue?vue&type=style&index=0&id=6df28c6a&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CanvasComponent.vue?vue&type=style&index=0&id=6df28c6a&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n/* Aca va le stilo del componente */\n.myDivDiagram[data-v-6df28c6a]{\n    z-index: -1;\n}\n.button-container[data-v-6df28c6a]{\n    position: absolute;\n    left: 5%;\n    bottom: 10%;\n}\n.button[data-v-6df28c6a]{\n    height: 40px;\n    width: 100px;\n    color: white;\n    border: none;\n    box-shadow: 1px 1px 2px 3px #0f1110;\n    background-color: #05386b;\n    border-radius: 5px;\n}\n.myDiagramDiv[data-v-6df28c6a]{\n    flex-grow: 1;\n    height: 100%;\n    border: solid 1px black;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.sidenav[data-v-54833a28] {\n    width: 200px;\n    top: 0;\n    left: 0;\n    background-color: #111;\n    overflow-x: hidden;\n}\n\n/* Style the sidenav links and the dropdown button */\n.sidenav a[data-v-54833a28], .dropdown-btn[data-v-54833a28] {\n    padding: 6px 8px 6px 16px;\n    text-decoration: none;\n    font-size: 18px;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    color: #818181;\n    display: block;\n    border: none;\n    background: none;\n    width:100%;\n    text-align: left;\n    cursor: pointer;\n    outline: none;\n}\n\n/* On mouse-over */\n.sidenav a[data-v-54833a28]:hover, .dropdown-btn[data-v-54833a28]:hover {\n    color: #f1f1f1;\n}\n\n/* Main content */\n.main[data-v-54833a28] {\n    margin-left: 200px; /* Same as the width of the sidenav */\n    font-size: 20px; /* Increased text to enable scrolling */\n    font-family: \"Lucida Console\", Monaco, monospace;\n    padding: 0px 10px;\n}\n\n/* Add an active class to the active dropdown button */\n.active[data-v-54833a28] {\n    background-color: green;\n    color: white;\n}\n\n/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */\n.dropdown-container[data-v-54833a28] {\n    display: none;\n    background-color: #262626;\n    padding-left: 8px;\n}\n\n/* Optional: Style the caret down icon */\n.fa-caret-down[data-v-54833a28] {\n    float: right;\n    padding-right: 8px;\n}\n#sidebar[data-v-54833a28] {\n    min-width: 250px;\n    max-width: 250px;\n    min-height: 85vh;\n}\n.wrapper[data-v-54833a28] {\n    display: flex;\n    align-items: stretch;\n}\n.h3[data-v-54833a28]{\n    font-family:\"Lucida Console\", Monaco, monospace ;\n}\n#sidebar[data-v-54833a28] {\n    min-width: 250px;\n    max-width: 250px;\n}\n#sidebar.active[data-v-54833a28] {\n    margin-left: -250px;\n}\n#sidebar[data-v-54833a28] {\n    /* don't forget to add all the previously mentioned styles here too */\n    background: #05386b;\n    color: #fff;\n    transition: all 0.3s;\n}\n#sidebar .sidebar-header[data-v-54833a28] {\n    padding: 24px;\n    background: 1E90FF;\n}\n#sidebar ul.components[data-v-54833a28] {\n    padding: 20px 0;\n    border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54833a28] {\n    color: #fff;\n    padding: 10px;\n}\n#sidebar ul li a[data-v-54833a28] {\n    padding: 10px;\n    font-size: 1.1em;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    display: block;\n    color: white;\n}\n#sidebar ul li a[data-v-54833a28]:hover {\n    color: #7386D5;\n    background: #fff;\n}\n#sidebar ul li.active > a[data-v-54833a28], a[aria-expanded=\"true\"][data-v-54833a28] {\n    color: #fff;\n    background: #05386b;\n}\nul ul a[data-v-54833a28] {\n    font-size: 0.9em !important;\n    font-family: \"Lucida Console\", Monaco, monospace;\n    padding-left: 30px !important;\n    background: #05386b;\n    color:white;\n}\n{box-sizing: border-box;}\n.open-button[data-v-54833a28] {\n    background-color: #555;\n    color: white;\n    padding: 16px 20px;\n    border: none;\n    cursor: pointer;\n    opacity: 0.8;\n    position: fixed;\n    bottom: 23px;\n    right: 28px;\n    width: 280px;\n}\n.form-popup[data-v-54833a28] {\n    display: none;\n    position: fixed;\n    bottom: 0;\n    right: 15px;\n    border: 3px solid #f1f1f1;\n    z-index: 9;\n}\n.form-container[data-v-54833a28] {\n    max-width: 300px;\n    padding: 10px;\n    background-color: white;\n}\n.form-container input[type=text][data-v-54833a28], .form-container input[type=password][data-v-54833a28] {\n    width: 100%;\n    padding: 15px;\n    margin: 5px 0 22px 0;\n    border: none;\n    background: #f1f1f1;\n}\n.form-container input[type=text][data-v-54833a28]:focus, .form-container input[type=password][data-v-54833a28]:focus {\n    background-color: #ddd;\n    outline: none;\n}\n.form-container .btn[data-v-54833a28] {\n    background-color: #4CAF50;\n    color: white;\n    padding: 16px 20px;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    margin-bottom:10px;\n    opacity: 0.8;\n}\n.form-container .cancel[data-v-54833a28] {\n    background-color: red;\n}\n.form-container .btn[data-v-54833a28]:hover, .open-button[data-v-54833a28]:hover {\n    opacity: 1;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
 
 
 /***/ }),
@@ -40283,6 +40461,24 @@ var render = function() {
     },
     attrs: { id: "myDiagramDiv" }
   })
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "myDiagramDiv", attrs: { id: "myDiagramDiv" } }),
+    _vm._v(" "),
+    _c("div", { staticClass: "button-container" }, [
+      _c(
+        "button",
+        {
+          staticClass: "button",
+          on: {
+            click: function($event) {
+              return _vm.guardarDiagrama()
+            }
+          }
+        },
+        [_vm._v("Guardar")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41124,6 +41320,204 @@ var render = function() {
               )
             ])
           ])
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-toggle",
+              attrs: {
+                href: "#homeSubmenu1",
+                "data-toggle": "collapse",
+                "aria-expanded": "false"
+              }
+            },
+            [_vm._v("Relaciones Familiares")]
+          ),
+          _vm._v(" "),
+          _vm._m(8),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-toggle",
+              attrs: {
+                href: "#homeSubmenu2",
+                "data-toggle": "collapse",
+                "aria-expanded": "false"
+              }
+            },
+            [_vm._v("Relacion Emocionales")]
+          ),
+          _vm._v(" "),
+          _vm._m(9),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-toggle",
+              attrs: {
+                href: "#homeSubmenu3",
+                "data-toggle": "collapse",
+                "aria-expanded": "false"
+              }
+            },
+            [_vm._v("Operaciones")]
+          ),
+          _vm._v(" "),
+          _vm._m(10)
+        ]),
+        _vm._v(" "),
+        _vm._m(11)
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
+        _c("form", { staticClass: "form-container", attrs: { action: "#" } }, [
+          _c("h1", [_vm._v("Ingresar Datos")]),
+          _vm._v(" "),
+          _vm._m(12),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.nombre,
+                expression: "nombre"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese nombre",
+              name: "nombre",
+              id: "nombre",
+              required: ""
+            },
+            domProps: { value: _vm.nombre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.nombre = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(13),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.apellido,
+                expression: "apellido"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese apellido",
+              name: "psw",
+              id: "psw",
+              required: ""
+            },
+            domProps: { value: _vm.apellido },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.apellido = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(14),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.edad,
+                expression: "edad"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese edad",
+              name: "edad",
+              id: "edad",
+              required: ""
+            },
+            domProps: { value: _vm.edad },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.edad = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(15),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.genero,
+                expression: "genero"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Ingrese género",
+              name: "genero",
+              id: "genero",
+              required: ""
+            },
+            domProps: { value: _vm.genero },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.genero = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.saveData()
+                }
+              }
+            },
+            [_vm._v("Guardar")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn cancel",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.closeForm()
+                }
+              }
+            },
+            [_vm._v("Cancelar")]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -41594,7 +41988,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "email" } }, [
+    return _c("label", { attrs: { for: "nombre" } }, [
       _c("b", [_vm._v("Nombre")])
     ])
   },
@@ -41610,7 +42004,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("edad")])])
+    return _c("label", { attrs: { for: "edad" } }, [_c("b", [_vm._v("Edad")])])
   },
   function() {
     var _vm = this
@@ -54044,8 +54438,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -243,15 +243,22 @@
 
                                 <label for="email"><b>Nombre</b></label>
                                 <input v-model="nombre" type="text" placeholder="ingrese nombre" name="email" id="email" required>
+            <div class="form-popup" id="myForm">
+                <form action="#" class="form-container">
+                    <h1>Ingresar Datos</h1>
 
                                 <label for="psw"><b>Apellido</b></label>
                                 <input v-model="apellido" type="text" placeholder="Ingrese apellido" name="psw" id="psw" required>
+                    <label for="nombre"><b>Nombre</b></label>
+                    <input v-model="nombre" type="text" placeholder="Ingrese nombre" name="nombre" id="nombre" required>
 
                                 <label for="edad"><b>edad</b></label>
                                 <input v-model="edad" type="text" placeholder="Ingrese edad" name="edad" id="edad" required>
 
                                 <label for="genero"><b>Genero</b></label>
                                 <input v-model="genero" type="text" placeholder="Ingrese género" name="genero" id="genero" required>
+                    <label for="edad"><b>Edad</b></label>
+                    <input v-model="edad" type="text" placeholder="Ingrese edad" name="edad" id="edad" required>
 
                                 <button @click="saveData()" type="submit" class="btn">Guardar</button>
                                 <button type="submit" class="btn cancel" @click="closeForm()">Cancelar</button>
@@ -591,6 +598,14 @@
                     this.myDiagram.commitTransaction("make new link");
                     counter++;
                 }
+
+                console.log("NUEVO SUJETO PARA GUARDAR:");
+                console.log(sujeto);
+                this.nombre = "";
+                this.apellido = "";
+                this.edad = "";
+                this.enero = "";
+            }
         }
     }
 </script>

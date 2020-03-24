@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -45,7 +45,7 @@
                             <a class="nav-link" href="/informacion">Informacion</a>
                         </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="/crearGenograma"> Dibujar</a>
+                            <a class="nav-link" href="/crearGenograma" > Dibujar</a>
                         </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/verGenogramas">Ver Genogramas</a>
