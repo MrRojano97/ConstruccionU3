@@ -382,7 +382,7 @@
         color:white;
     }
 
-    {box-sizing: border-box;}
+    /*{box-sizing: border-box;}*/
 
     .open-button {
         background-color: #555;
@@ -476,7 +476,7 @@
                 this.apellido = "";
                 this.edad = "";
                 this.enero = "";
-            }
+            } 
         }
     }
 </script>
