@@ -16,6 +16,15 @@ window.Vue = require('vue');
 
 Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
 Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
+Vue.component('modal-component', require('./components/ModalComponent.vue').default); 
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
+
+
+//
+Vue.prototype.$myDiagram = 'myDiagram';
 
 
 //
