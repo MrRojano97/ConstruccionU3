@@ -12,40 +12,40 @@
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="addHombre()">Hombre <i class="fa fa-square"></i> </a>
+                                        <a @click="openForm(),addSujeto('Hombre')">Hombre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="addMujer()">Mujer <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm(),addSujeto('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="addHijoAdoptivo()">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm(),addSujeto('AdopLegal')">Hijo adoptivo legal <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="addHijoAdoptivoTemporal()">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm(),addSujeto('AdopTemporal')">Hijo adoptivo temporal <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="addMascota()">Mascota <i class="fa fa-circle"></i> </a>
+                                        <a @click="addSujeto('Mascota')">Mascota <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="addGeneroDesconocido()">Género desconocido <i class="fa fa-circle"></i> </a>
+                                        <a @click="openForm(),addSujeto('Desconocido')">Género desconocido <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a @click="addEmbarazo()">Embarazo <i class="fa fa-circle"></i> </a>
+                                        <a @click="addSujeto('Embarazo')">Embarazo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a@click="addAbortoEspontaneo()">Aborto espontáneo <i class="fa fa-circle"></i> </a>
+                                        <a @click="addSujeto('Espontaneo')">Aborto espontáneo <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a@click="addAborto()">Aborto <i class="fa fa-circle"></i> </a>
+                                        <a @click="addSujeto('Aborto')">Aborto <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a@click="addMuerte()">Muerte <i class="fa fa-circle"></i> </a>
+                                        <a @click="addSujeto('Muerte')"> Muerte  <i class="fa fa-circle"></i>    </a>
                                     </li>
                                     <li>
-                                        <a@click="addMellizos()">Mellizos <i class="fa fa-circle"></i> </a>
+                                        <a @click="addSujeto('Mellizos')"> Mellizos <i class="fa fa-circle"></i> </a>
                                     </li>
                                     <li>
-                                        <a@click="addGemelosIdenticos()">Gemelos idénticos <i class="fa fa-circle"></i> </a>
+                                        <a  @click="addSujeto('Identicos')">Gemelos idénticos <i class="fa fa-circle"></i> </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
@@ -219,6 +219,9 @@
                                 </ul>
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu3">
+                                     <li>
+                                        <a @click="guardarDiagrama()">Guardar      <i class="fa fa-edit"></i>    </a>
+                                    </li>
                                     <li>
                                         <a href="#">Eliminar    <i class="fa fa-trash"></i>    </a>
                                     </li>
@@ -239,21 +242,18 @@
                         <!--            <button class="open-button" v-on:click="openForm">Editar</button>-->
                         <div class="form-popup" id="myForm">
                             <form action="#" class="form-container">
-                                <h1>Login</h1>
+                                <h1>Ingresar Datos</h1>
 
-                                <label for="email"><b>Nombre</b></label>
-                                <input v-model="nombre" type="text" placeholder="ingrese nombre" name="email" id="email" required>
+                                <label for="nombre"><b>Nombre</b></label>
+                                <input v-model="nombre" type="text" placeholder="Ingrese nombre" name="nombre" id="nombre" required>
 
                                 <label for="psw"><b>Apellido</b></label>
                                 <input v-model="apellido" type="text" placeholder="Ingrese apellido" name="psw" id="psw" required>
 
-                                <label for="edad"><b>edad</b></label>
+                                <label for="edad"><b>Edad</b></label>
                                 <input v-model="edad" type="text" placeholder="Ingrese edad" name="edad" id="edad" required>
 
-                                <label for="genero"><b>Genero</b></label>
-                                <input v-model="genero" type="text" placeholder="Ingrese género" name="genero" id="genero" required>
-
-                                <button @click="saveData()" type="submit" class="btn">Guardar</button>
+                                <button @click="saveData(), closeForm()" type="submit" class="btn">Guardar</button>
                                 <button type="submit" class="btn cancel" @click="closeForm()">Cancelar</button>
                             </form>
                         </div>
@@ -276,291 +276,636 @@
     var $ = go.GraphObject.make;
     var myDiagram;
     export default {
-        
         name: 'Diagram',
+        data (){
+            return {
+                nombre : "",
+                apellido : "",
+                genero : "",
+                edad : ""
+            }
+        },
         mounted() {
 
-                this.myDiagram =  $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
-                {
-                    grid: $(go.Panel, "Grid",
-                    $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
-                    $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
-                    $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
-                    $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
-                    )
-                });
+            this.myDiagram =  $(go.Diagram, "myDiagramDiv",  // nombre que se utiliza para referenciar desde el DIV
+            {
+                grid: $(go.Panel, "Grid",
+                $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
+                $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
+                $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
+                $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
+                ),
+                "draggingTool.dragsLink": true,
+                "draggingTool.isGridSnapEnabled": true,
+                "linkingTool.isUnconnectedLinkValid": true,
+                "linkingTool.portGravity": 20,
+                "relinkingTool.isUnconnectedLinkValid": true,
+                "relinkingTool.portGravity": 20,
+                "relinkingTool.fromHandleArchetype":
+                $(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
+                "relinkingTool.toHandleArchetype":
+                $(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
+                "linkReshapingTool.handleArchetype":
+                $(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+                "rotatingTool.handleAngle": 270,
+                "rotatingTool.handleDistance": 30,
+                "rotatingTool.snapAngleMultiple": 15,
+                "rotatingTool.snapAngleEpsilon": 15,
+                "undoManager.isEnabled": true
+            });
 
-                /*Template para relacion de Matrimonio*/
-                this.myDiagram.linkTemplateMap.add("Matrimonio",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "black", strokeWidth: 2 }),
-                    )
+                function makePort(name, spot, output, input) {
+                // the port is basically just a small transparent square
+                return $(go.Shape, "Circle",
+                {
+                    fill: null,  // not seen, by default; set to a translucent gray by showSmallPorts, defined below
+                    stroke: null,
+                    desiredSize: new go.Size(7, 7),
+                    alignment: spot,  // align the port on the main Shape
+                    alignmentFocus: spot,  // just inside the Shape
+                    portId: name,  // declare this object to be a "port"
+                    fromSpot: spot, toSpot: spot,  // declare where links may connect at this port
+                    cursor: "pointer"  // show a different cursor to indicate potential link point
+                });
+            }
+
+            var nodeSelectionAdornmentTemplate =
+                $(go.Adornment, "Auto",
+                $(go.Shape, { fill: null, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] }),
+                $(go.Placeholder)
                 );
-                /*Template para relacion de Separacion por Hecho*/
-                this.myDiagram.linkTemplateMap.add("Sep-Fact",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "red", strokeWidth: 2 }),
-                    /*Forma del la punta de flecha */
-                    $(go.Shape,
-                        { toArrow: "OpenTriangleTop", stroke: "red", strokeWidth: 3, scale: 1.3 }),
-                    )
+
+            var nodeResizeAdornmentTemplate =
+                $(go.Adornment, "Spot",
+                { locationSpot: go.Spot.Right },
+                $(go.Placeholder),
+                $(go.Shape, { alignment: go.Spot.TopLeft, cursor: "nw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+                $(go.Shape, { alignment: go.Spot.Top, cursor: "n-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+                $(go.Shape, { alignment: go.Spot.TopRight, cursor: "ne-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+
+                $(go.Shape, { alignment: go.Spot.Left, cursor: "w-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+                $(go.Shape, { alignment: go.Spot.Right, cursor: "e-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+
+                $(go.Shape, { alignment: go.Spot.BottomLeft, cursor: "se-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+                $(go.Shape, { alignment: go.Spot.Bottom, cursor: "s-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+                $(go.Shape, { alignment: go.Spot.BottomRight, cursor: "sw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" })
                 );
-                /*Template para relacion de Separacion Legal*/
-                this.myDiagram.linkTemplateMap.add("Sep-Leg",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "red", strokeWidth: 2 }),
-                    $(go.Shape,
-                        { toArrow: "OpenTriangleBottom", stroke: "red", strokeWidth: 3, scale: 1.3 }),
-                    )
+
+            var nodeRotateAdornmentTemplate =
+                $(go.Adornment,
+                { locationSpot: go.Spot.Center, locationObjectName: "CIRCLE" },
+                $(go.Shape, "Circle", { name: "CIRCLE", cursor: "pointer", desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+                $(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
                 );
-                /*Template para relacion de Divorcio*/
-                this.myDiagram.linkTemplateMap.add("Divorcio",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "red", strokeWidth: 2 }),
-                    $(go.Shape,
-                        { toArrow: "DoubleForwardSlash", stroke: "red", strokeWidth: 3, scale: 2 }),
-                    )
+
+            this.myDiagram.nodeTemplateMap.add( "Hombre",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/hombre.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+
+            this.myDiagram.nodeTemplateMap.add( "Mujer",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/mujer.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "AdopLegal",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/hijo_adoptado.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "AdopTemporal",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/hijo_adoptivo_temporal.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Mascota",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/mascota.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Desconocido",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/genero_indefinido.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Embarazo",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/embarazada.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Espontaneo",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/aborto_espontaneo.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Aborto",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/aborto.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Muerte",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/muerte.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Mellizos",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/gemelos.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+            this.myDiagram.nodeTemplateMap.add( "Identicos",
+                $(go.Node, "Spot",
+                { locationSpot: go.Spot.Center },
+                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
+                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
+                new go.Binding("angle").makeTwoWay(),
+                // the main object is a Panel that surrounds a TextBlock with a Shape
+                $(go.Picture, "imagenes/gemelos_identicos.png"
+                ),
+                $(go.TextBlock,
+                    { margin: new go.Margin(3, 0, 0, 0),
+                    maxSize: new go.Size(100, 30),
+                    isMultiline: false },
+                    new go.Binding("text")),
+                // four small named ports, one on each side:
+                makePort("T", go.Spot.Top, true, true),
+                makePort("L", go.Spot.Left, true, true),
+                makePort("R", go.Spot.Right, true, true),
+                makePort("B", go.Spot.Bottom, true, true),
+                { // handle mouse enter/leave events to show/hide the ports
+                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                }
+            ));
+
+            function showSmallPorts(node, show) {
+                node.ports.each(function(port) {
+                if (port.portId !== "") {  // don't change the default port, which is the big shape
+                    port.fill = show ? "rgba(0,0,0,.3)" : null;
+                }
+                });
+            }
+
+            var linkSelectionAdornmentTemplate =
+                $(go.Adornment, "Link",
+                $(go.Shape,
+                    // isPanelMain declares that this Shape shares the Link.geometry
+                    { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })  // use selection object's strokeWidth
                 );
-                /*Template para relacion de Compromiso*/
-                this.myDiagram.linkTemplateMap.add("Engagement",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "blue", strokeDashArray: [5,5], strokeWidth: 2 })
-                    )
-                );
-                /*Template para relacion de Comprometidos y Cohabitacion*/
-                this.myDiagram.linkTemplateMap.add("Eng-Coh",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
-                    $(go.Shape,
-                        { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
-                    )
-                );
-                /*Template para relacion de Comprometidos pero Separados*/
-                this.myDiagram.linkTemplateMap.add("Eng-Sep",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
-                    $(go.Shape,
-                        { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
-                    )
-                );
-                /*Template para relacion de Nulidad*/
-                this.myDiagram.linkTemplateMap.add("Nullity",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "red",  strokeDashArray: [5,5],strokeWidth: 2 }),
-                    $(go.Shape,
-                        { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
-                    )
-                );
-                 /*Template para relacion de indiferencia*/
-                this.myDiagram.linkTemplateMap.add("indiferencia",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    $(go.Shape,
-                        { stroke: "black", strokeDashArray: [5,5], strokeWidth: 2 })
-                    )
-                );
-                /*Template para relacion de armonia*/
-                this.myDiagram.linkTemplateMap.add("armonia",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "green", strokeWidth: 2 }),
-                    )
-                );
-                /*Template para relacion de hostil*/
-                this.myDiagram.linkTemplateMap.add("hostilidad",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "red", strokeWidth: 2 }),
-                     $(go.Shape,  // the arrowhead
-                        { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+
+            var headSelectionAdornmentTemplate = 
+                $(go.Adornment, "Arrowhead",
+                $(go.Shape,
+                { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 }) 
+            );
+
+            /*Template para relacion de Matrimonio*/
+            this.myDiagram.linkTemplateMap.add("Matrimonio",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true, reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                new go.Binding("points").makeTwoWay(),      
+                $(go.Shape,
+                    { stroke: "black", strokeWidth: 2 }),
+                ),
+            );
+            /*Template para relacion de Separacion por Hecho*/
+            this.myDiagram.linkTemplateMap.add("Sep-Fact",
+                $(go.Link,
+                    { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "red", strokeWidth: 2 }),
+                /*Forma del la punta de flecha */
+                $(go.Shape,
+                    { toArrow: "OpenTriangleTop", stroke: "red", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+            /*Template para relacion de Separacion Legal*/
+            this.myDiagram.linkTemplateMap.add("Sep-Leg",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "red", strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "OpenTriangleBottom", stroke: "red", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+            /*Template para relacion de Divorcio*/
+            this.myDiagram.linkTemplateMap.add("Divorcio",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "red", strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "DoubleForwardSlash", stroke: "red", strokeWidth: 3, scale: 2 }),
+                )
+            );
+            /*Template para relacion de Compromiso*/
+            this.myDiagram.linkTemplateMap.add("Engagement",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue", strokeDashArray: [5,5], strokeWidth: 2 })
+                )
+            );
+            /*Template para relacion de Comprometidos y Cohabitacion*/
+            this.myDiagram.linkTemplateMap.add("Eng-Coh",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+            /*Template para relacion de Comprometidos pero Separados*/
+            this.myDiagram.linkTemplateMap.add("Eng-Sep",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+            /*Template para relacion de Nulidad*/
+            this.myDiagram.linkTemplateMap.add("Nullity",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "red",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+                /*Template para relacion de indiferencia*/
+            this.myDiagram.linkTemplateMap.add("indiferencia",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "black", strokeDashArray: [5,5], strokeWidth: 2 })
+                )
+            );
+            /*Template para relacion de armonia*/
+            this.myDiagram.linkTemplateMap.add("armonia",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "green", strokeWidth: 2 }),
+                )
+            );
+            /*Template para relacion de hostil*/
+            this.myDiagram.linkTemplateMap.add("hostilidad",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "red", strokeWidth: 2 }),
                     $(go.Shape,  // the arrowhead
-                        {fromArrow: "Diamond", stroke: "red", fill:"white",  strokeWidth: 3 }),
-                    )
-                );
-                /*Template para relacion de violencia*/
-                this.myDiagram.linkTemplateMap.add("violencia",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "red", strokeWidth: 3 }),
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "Diamond", stroke: "red", fill:"white",  strokeWidth: 3 }),
+                )
+            );
+            /*Template para relacion de violencia*/
+            this.myDiagram.linkTemplateMap.add("violencia",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "red", strokeWidth: 3 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
+                )
+            );
+            /*Template para relacion de abuso*/
+            this.myDiagram.linkTemplateMap.add("abuso",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "blue", strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "Standard", stroke: "blue", fill:null }),
                     $(go.Shape,  // the arrowhead
-                        { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                    {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
+                )
+            );
+            /*Template para relacion de manipulacion*/
+            this.myDiagram.linkTemplateMap.add("manipulacion",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    new go.Binding("fromArrow", "fromArrow"),
+                    { stroke: "red",  strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "x", stroke: "red", fill:null,strokeWidth: 3 }),
                     $(go.Shape,  // the arrowhead
-                        {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
-                    )
-                );
-                /*Template para relacion de abuso*/
-                this.myDiagram.linkTemplateMap.add("abuso",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "blue", strokeWidth: 2 }),
+                    { toArrow: "OpenTriangle", stroke: "red", fill:null,strokeWidth: 3 })
+                )
+            );
+            /*Template para relacion de distante*/
+            this.myDiagram.linkTemplateMap.add("distante",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "black",strokeDashArray: [5,5], strokeWidth: 4 }),
+                )
+            );
+            /*Template para relacion de amistad*/
+            this.myDiagram.linkTemplateMap.add("amistad",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "green", strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "BackwardHalfTriangleTop", stroke: "green", strokeWidth: 3 }),
                     $(go.Shape,  // the arrowhead
-                        { toArrow: "Standard", stroke: "blue", fill:null }),
-                     $(go.Shape,  // the arrowhead
-                        {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
-                    )
-                );
-                /*Template para relacion de manipulacion*/
-                this.myDiagram.linkTemplateMap.add("manipulacion",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        new go.Binding("fromArrow", "fromArrow"),
-                        { stroke: "red",  strokeWidth: 2 }),
-                    $(go.Shape,  // the arrowhead
-                        {fromArrow: "x", stroke: "red", fill:null,strokeWidth: 3 }),
-                     $(go.Shape,  // the arrowhead
-                        { toArrow: "OpenTriangle", stroke: "red", fill:null,strokeWidth: 3 })
-                    )
-                );
-                /*Template para relacion de distante*/
-                this.myDiagram.linkTemplateMap.add("distante",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "black",strokeDashArray: [5,5], strokeWidth: 4 }),
-                    )
-                );
-                /*Template para relacion de amistad*/
-                this.myDiagram.linkTemplateMap.add("amistad",
-                    $(go.Link,
-                    { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
-                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
-                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
-                    /*Forma del Link */
-                    $(go.Shape,
-                        { stroke: "green", strokeWidth: 2 }),
-                    $(go.Shape,  // the arrowhead
-                        {fromArrow: "BackwardHalfTriangleTop", stroke: "green", strokeWidth: 3 }),
-                     $(go.Shape,  // the arrowhead
-                        { toArrow: "HalfTriangleBottom", stroke: "green", strokeWidth: 3 }),
-                    )
-                );
+                    { toArrow: "HalfTriangleBottom", stroke: "green", strokeWidth: 3 }),
+                )
+            );
 
                 
-            },
-            data ()
-            {
-                return {
-                    nombre : "",
-                    apellido : "",
-                    genero : "",
-                    edad : ""
-                }
-            },
-    
+            },    
             methods: {
                 relaciones(){
                     alert('al presionar llega aqui');
                 },
-                addHombre()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hombre.png")));
-                },
-                addMujer()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/mujer.png")));
-                },
-                addHijoAdoptivo()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hijo_adoptado.png")));
-                },
-                addHijoAdoptivoTemporal()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/hijo_adoptivo_temporal.png")));
-                },
-                addMascota()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/mascota.png")));
-                },
-                addGeneroDesconocido()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/genero_indefinido.png")));
-                },
-                addEmbarazo()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/embarazada.png")));
-                },
-                addAbortoEspontaneo()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/aborto_espontaneo.png")));
-                },
-                addAborto()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/aborto.png")));
-                },
-                addMuerte()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/muerte.png")));
-                },
-                addMellizos()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/gemelos.png")));
-                },
-                addGemelosIdenticos()
-                {
-                    this.myDiagram.add($(go.Part,$(go.Picture, "imagenes/gemelos_identicos.png")));
-                },
                 linktest()
                 {  
-
 
                 },
                 guardartest()
@@ -574,11 +919,22 @@
                     document.getElementById("myForm").style.display = "none";
                 },
                 saveData() {
-                   /* var sujeto = {
+                    var sujeto = {
                         nombre : this.nombre,
                         apellido : this.apellido,
                         edad : this.edad,
-                        genero : this.genero*/
+                    }
+
+                    console.log("NUEVO SUJETO PARA GUARDAR:");
+                    console.log(sujeto);
+                    this.nombre = "";
+                    this.apellido = "";
+                    this.edad = "";
+                },
+                addSujeto(sujeto){
+                    this.myDiagram.startTransaction("make new node");
+                    this.myDiagram.model.addNodeData({ text: "sujeto", category : sujeto});
+                    this.myDiagram.commitTransaction("make new node");
                 },
                 relFamiliar(relacion){
                     /*Crear nodo base para relacion*/
@@ -590,9 +946,15 @@
                     this.myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
                     this.myDiagram.commitTransaction("make new link");
                     counter++;
+                },
+                guardarDiagrama(){
+                    //El this.myDiagram.model.toJson() te transforma el diagrama a Json
+                    //document.getElementById("mySavedModel").value = this.myDiagram.model.toJson();
+                    //pasarselo al brayan
                 }
+            }
         }
-    }
+    
 </script>
 
 
