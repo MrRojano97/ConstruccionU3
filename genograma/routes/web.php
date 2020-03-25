@@ -25,6 +25,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::post('/rutaSujeto','SujetoController@registrarSujeto' ); //metodo para guardar
+Route::get('/rutaSujeto','SujetoController@listarSujetos' );
+Route::get('/rutaSujeto/{post}','SujetoController@listarSujeto' );
+Route::put('/rutaSujeto/{post}','SujetoController@actualizarRegistroSujeto' );
+Route::delete('/rutaSujeto/{post}','SujetoController@eliminarRegistroSujeto' );
+Route::get('/welcome', function(){
+    return view('welcome');
+});
+
 Route::get('/inicio', function(){
     return view('inicio');
 });
@@ -36,4 +45,10 @@ Route::get('/informacion', function(){
 });
 Route::get('/crearGenograma', function(){
     return view('crearGenograma');
+});
+Route::get('/verGenogramas', function(){
+    return view('verGenogramas');
+});
+Route::get('/leandro', function(){
+    return view('leandro');
 });
