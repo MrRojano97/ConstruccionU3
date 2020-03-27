@@ -1939,22 +1939,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var $ = go.GraphObject.make; // This works because we have overridden the /extensionsTS/tsconfig.json file
 // in the options to the loader: 'ts-loader', in the webpack.config.js  
 
@@ -2359,6 +2343,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var counter = 0;
 var $ = go.GraphObject.make;
 var myDiagram;
@@ -2369,7 +2367,8 @@ var myDiagram;
       nombre: "",
       apellido: "",
       genero: "",
-      edad: ""
+      edad: "",
+      Sujeto: ""
     };
   },
   mounted: function mounted() {
@@ -3242,23 +3241,36 @@ var myDiagram;
     },
     linktest: function linktest() {},
     guardartest: function guardartest() {},
-    openForm: function openForm() {
+    openForm: function openForm(Sujeto) {
+      this.Sujeto = Sujeto;
       document.getElementById("myForm").style.display = "block";
     },
     closeForm: function closeForm() {
       document.getElementById("myForm").style.display = "none";
     },
-    saveData: function saveData() {
+    saveData: function saveData(Sujeto) {
       var sujeto = {
         nombre: this.nombre,
         apellido: this.apellido,
         edad: this.edad
       };
+      this.addSujeto2(Sujeto, this.nombre, this.edad);
+      /*
       console.log("NUEVO SUJETO PARA GUARDAR:");
       console.log(sujeto);
+      */
+
       this.nombre = "";
       this.apellido = "";
       this.edad = "";
+    },
+    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: nombre + ", " + edad,
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
     },
     addSujeto: function addSujeto(sujeto) {
       this.myDiagram.startTransaction("make new node");
@@ -7845,7 +7857,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n/* Aca va le stilo del componente */\n.myDivDiagram[data-v-6df28c6a]{\n    z-index: -1;\n}\n.button-container[data-v-6df28c6a]{\n    position: absolute;\n    left: 5%;\n    bottom: 10%;\n}\n.button[data-v-6df28c6a]{\n    height: 40px;\n    width: 100px;\n    color: white;\n    border: none;\n    box-shadow: 1px 1px 2px 3px #0f1110;\n    background-color: #05386b;\n    border-radius: 5px;\n}\n.myDiagramDiv[data-v-6df28c6a]{\n    flex-grow: 1;\n    height: 100%;\n    border: solid 1px black;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n/* Aca va le stilo del componente */\n.myDivDiagram[data-v-6df28c6a]{\n    z-index: -1;\n}\n.myDiagramDiv[data-v-6df28c6a]{\n    flex-grow: 1;\n    height: 100%;\n    border: solid 1px black;\n}\n\n", ""]);
 
 // exports
 
@@ -41653,7 +41665,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("Hombre")
+                              return _vm.openForm("Hombre")
                             }
                           }
                         },
@@ -41670,7 +41682,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("Mujer")
+                              return _vm.openForm("Mujer")
                             }
                           }
                         },
@@ -41687,7 +41699,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("AdopLegal")
+                              return _vm.openForm("AdopLegal")
                             }
                           }
                         },
@@ -41704,7 +41716,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("AdopTemporal")
+                              return _vm.openForm("AdopTemporal")
                             }
                           }
                         },
@@ -41738,7 +41750,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("Desconocido")
+                              return _vm.openForm("Desconocido")
                             }
                           }
                         },
@@ -42304,10 +42316,53 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(41)
                   ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu4",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Generar Reportes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu4" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 1 nodo      "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(42),
+                    _vm._v(" "),
+                    _vm._m(43)
+                  ]
                 )
               ]),
               _vm._v(" "),
-              _vm._m(42)
+              _vm._m(44)
             ])
           ]),
           _vm._v(" "),
@@ -42317,9 +42372,9 @@ var render = function() {
                 "form",
                 { staticClass: "form-container", attrs: { action: "#" } },
                 [
-                  _c("h1", [_vm._v("Ingresar Datos")]),
+                  _c("h1", [_vm._v("Ingresar Datos de " + _vm._s(_vm.Sujeto))]),
                   _vm._v(" "),
-                  _vm._m(43),
+                  _vm._m(45),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42348,7 +42403,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(44),
+                  _vm._m(46),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42377,7 +42432,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(45),
+                  _vm._m(47),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42413,7 +42468,7 @@ var render = function() {
                       attrs: { type: "submit" },
                       on: {
                         click: function($event) {
-                          _vm.saveData(), _vm.closeForm()
+                          _vm.saveData(_vm.Sujeto), _vm.closeForm()
                         }
                       }
                     },
@@ -42440,7 +42495,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(46)
+      _vm._m(48)
     ])
   ])
 }
@@ -42898,6 +42953,28 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("a", [_vm._v("ETC")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Reporte Relaciones 2 nodos    "),
+        _c("i", { staticClass: "fa fa-edit" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Listado tipo de nodos     "),
+        _c("i", { staticClass: "fa fa-edit" })
+      ])
+    ])
   },
   function() {
     var _vm = this
