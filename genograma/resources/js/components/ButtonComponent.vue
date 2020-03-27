@@ -6,59 +6,31 @@
     	</summary>
 		<div>
     		<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Genero</th>
-      <th scope="col">Edad</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Larry</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Larry</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Larry</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>Larry</td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>Larry</td>
-    </tr>
-  </tbody>
-</table>
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Hombre</td>
+                <td>22</td>
+                </tr>
+
+            </tbody>
+            </table>
     	</div>
 	</details>
-
 </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" >
 // Colors
 $grey-light: #f0f4f9;
 $grey: darken($grey-light, 20%);
@@ -80,7 +52,7 @@ html {
 }
 
 body {
-	position: relative;
+    position: relative;
 	background: #f0f4f9;
 	line-height: 1.6;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -106,7 +78,6 @@ a {
 
 details > div {
 	position: relative;
-	z-index: 20;
 	padding: 0.25em 0.5em;
 	margin-bottom: .6em;
 	border-radius: $border-radius;
@@ -118,7 +89,6 @@ details > div {
 // Details & Summary
 summary {
 	position: relative;
-	z-index: 10;
 	display: block;
 	background: white;
 	padding-left: 3em;
@@ -174,3 +144,19 @@ details[open] summary:focus::before {
 }
 
 </style>
+
+<script>
+
+function traerDatos(){
+    const xhttp = new  XMLHttpRequest();
+    xhttp.open('GET','archivoJson', true);
+    xhttp.send();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(this.responseText);
+        }
+    }
+}
+
+
+</script>
