@@ -1,0 +1,29 @@
+CREATE USER admin @localhost IDENTIFIED BY '123456'
+
+CREATE DATABASE genograma
+
+CREATE TABLE personas( 
+    key SMALLINT NOT NULL AUTO_INCREMENT, 
+    PRIMARY KEY(key),
+    name VARCHAR(40),
+    symbol SMALLINT NOT NULL,
+    medical_condition SMALLINT;
+    attribute VARCHAR(40),
+    relationship SMALLINT,
+    mother SMALLINT,
+    father SMALLINT,
+    FOREIGN KEY(relationship) REFERENCES relacion(key),
+    FOREIGN KEY(mother) REFERENCES relacion(key),
+    FOREIGN KEY(father) REFERENCES relacion(key)
+
+);
+CREATE TABLE relacion( 
+    key SMALLINT NOT NULL AUTO_INCREMENT, 
+    PRIMARY KEY(key),
+    family SMALLINT,
+    emotional SMALLINT,
+    person1 SMALLINT,
+    person2 SMALLINT,
+    FOREIGN KEY(person1) REFERENCES personas(key),
+    FOREIGN KEY(person2) REFERENCES personas(key)
+);
