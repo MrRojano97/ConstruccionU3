@@ -52,7 +52,7 @@ class SujetoTest extends TestCase
         $response->assertViewHas('posts',$posts);
     }
 
-
+    /**no lo e probado aun */
     public function testObtenerUnSujeto(){
         $this->withoutExceptionHandling();// desactivamos las excepciones
 
@@ -63,7 +63,7 @@ class SujetoTest extends TestCase
         $response->assertOk();
 
         $response->assertViewIs('rutaSujeto.show');
-        $response->assertViewHas('post',$post);
+        $response->assertViewHas('sujeto',$post);// el primer parametro corresponde al parametro que retornas en la vista.
     }
 
     /** @test */
@@ -110,24 +110,5 @@ class SujetoTest extends TestCase
         $response->assertRedirect('/rutaSujeto');
     }
 
-     /** @test */
-     public function testActualizarJson(){
-        $this->withoutExceptionHandling();// desactivamos las excepciones
-        $post=factory(Sujeto::class)->create();//tengo datos par mis pruebas
-        $nombre=$post->nombre;
-
-        $response= $this->put('/rutaSujeto/'.$post->id,[
-            'archivoJson'=>'hola'
-        ]);
-
-        $this->assertCount(1,Sujeto::all());//confirma si por lo menos hay un post en la tabla post
-            
-        $post = $post->fresh();
-
-        $this->assertEquals($post->archivoJson,'hola');
-        $this->assertEquals($post->nombre, $nombre);//para verificar que los datos guardados previamente no 
-        //se modificaron
-
-        $response->assertRedirect('/rutaSujeto/'.$post->id);
-    }
+    
 }

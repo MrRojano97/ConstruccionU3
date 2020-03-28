@@ -7,92 +7,52 @@ use App\Genoma;
 
 class GenomaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $genoma = Genoma::all();
-        return $genoma;
+    //
+    public function store(Request $request){
+        $request->validate(
+            ['text'=>'',
+            'category'=>'',
+            'idSujeto'=>'']
+        );
+        $genograma = new Genoma();
+        $genograma->text=$request->text;
+        $genograma->category=$request->category;
+        $genograma->idSujeto=$request->idSujeto;
+        $genograma->save();
+        return redirect('/genoma/'.$genograma->id);
+        //return $genograma;
+        //return view('genoma.store',compact('genograma'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    
+    public function index(){
+        $posts=Genoma::all();
+        return view('genoma.index',\compact('posts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $genoma = new Genoma();
-        $genoma->key = $request->key;
-        $genoma->text = $request->text;
-        $genoma->category = $request->category;
-        $genoma->idSujeto = $request->idSujeto;
-        $genoma->save();
-        return $genoma;
+    public function show( $id){
+        $sujeto = Genoma::findOrFail($id);
+        return view('genoma.show',compact('sujeto'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function update(Request $request, $id){
+        $request->validate(
+            ['nombre'=>'',
+            'apellido'=>'',
+            'genero'=>'',
+            'edad'=>'']
+        );
+        $genograma = Genoma::find($id);
+        $genograma->text=$request->text;
+        $genograma->category=$request->category;
+        $genograma->idSujeto=$request->idSujeto;
+        $genograma->save();
+        return redirect('/genoma/'.$genograma->id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $genoma = Genoma::find($id);
-        $genoma->text = $request->text;
-        $genoma->category = $request->category;
-        $genoma->idSujeto = $request->idSujeto;
-        $genoma->save();
-        return $genoma;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $genoma = Genoma::find($id);
-        $genoma->delete();
+    public function destroy($id){
+        $genograma= Genoma::findOrFail($id);
+        $genograma->delete();
+        return redirect('/genoma');
     }
 }
