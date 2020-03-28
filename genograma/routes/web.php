@@ -25,13 +25,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::post('/rutaSujeto','SujetoController@registrarSujeto' ); //metodo para guardar
-Route::get('/rutaSujeto','SujetoController@listarSujetos' );
-Route::get('/rutaSujeto/{post}','SujetoController@listarSujeto' );
-Route::put('/rutaSujeto/{post}','SujetoController@actualizarRegistroSujeto' );
-Route::delete('/rutaSujeto/{post}','SujetoController@eliminarRegistroSujeto' );
+Route::post('/rutaSujeto','SujetoController@store' ); //metodo para guardar
+Route::get('/rutaSujeto','SujetoController@index' );
+Route::get('/rutaSujeto/{post}','SujetoController@show' );
+Route::put('/rutaSujeto/{post}','SujetoController@update' );
+Route::delete('/rutaSujeto/{post}','SujetoController@destroy' );
 
 Route::resource('genoma', 'GenomaController');
+Route::get('/genoma/{post}','GenomaController@show' );
 Route::resource('relacion', 'RelacionController');
 
 Route::get('/welcome', function(){

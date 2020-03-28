@@ -14,11 +14,15 @@ class CreateRelacionsTable extends Migration
     public function up()
     {
         Schema::create('relacions', function (Blueprint $table) {
-            $table->integer('key');
+            $table->integer('id')->primary();
             $table->string("category");
             $table->integer("from");
             $table->integer("to");
             $table->integer("idsujeto");
+
+            $table->foreign('from')->references('id')->on('genomas');
+            $table->foreign('to')->references('id')->on('genomas');
+            $table->foreign('idsujeto')->references('id')->on('sujetos');
         });
     }
 

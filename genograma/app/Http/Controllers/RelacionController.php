@@ -7,93 +7,53 @@ use App\Relacion;
 
 class RelacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $relacion = Relacion::all();
-        return $relacion;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+     //
+     public function store(Request $request){
+        $request->validate(
+            ['category'=>'',
+            'from'=>'',
+            'to'=>'',
+            'idSujeto'=>'']
+        );
         $relacion = new Relacion();
-        $relacion->category = $request->category;
-        $relacion->from = $request->from;
-        $relacion->to = $request->to;
-        $relacion->idSujeto = $request->idSujeto;
+        $relacion->category=$request->category;
+        $relacion->from=$request->from;
+        $relacion->to=$request->to;
+        $relacion->idsujeto=$request->idSujeto;
         $relacion->save();
-        return $relacion;
+        return redirect('/relacion/'.$genograma->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    
+    public function index(){
+        $posts=Relacion::all();
+        return view('relacion.index',\compact('posts'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function show( $id){
+        $sujeto = Relacion::findOrFail($id);
+        return view('relacion.show',compact('sujeto'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $relacion = Relacion::find($id);
-        $relacion->category = $request->category;
-        $relacion->from = $request->from;
-        $relacion->to = $request->to;
-        $relacion->idSujeto = $request->idSujeto;
+    public function update(Request $request, $id){
+        $request->validate(
+            ['category'=>'',
+            'from'=>'',
+            'to'=>'',
+            'idSujeto'=>'']
+        );
+        $relacion = new Relacion();
+        $relacion->category=$request->category;
+        $relacion->from=$request->from;
+        $relacion->to=$request->to;
+        $relacion->idsujeto=$request->idSujeto;
         $relacion->save();
-        return $relacion;
+        return redirect('/relacion/'.$relacion->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $relacion = Relacion::find($id);
+    public function destroy($id){
+        $relacion= Relacion::findOrFail($id);
         $relacion->delete();
+        return redirect('/relacion');
     }
 }
