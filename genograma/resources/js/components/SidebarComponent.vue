@@ -219,7 +219,7 @@
                                 </ul>
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu3">
-                                     <li>
+                                    <li>
                                         <a @click="guardarDiagrama()">Guardar      <i class="fa fa-edit"></i>    </a>
                                     </li>
                                     <li>
@@ -232,6 +232,20 @@
                                         <a >ETC</a>
                                     </li>
                                 </ul>
+                                <a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Generar Reportes</a>
+                                <ul class="collapse list-unstyled" id="homeSubmenu4">
+                                    <li>
+                                        <a @click="guardarDiagrama()">Reporte Relaciones 1 nodo      <i class="fa fa-edit"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a @click="guardarDiagrama()">Reporte Relaciones 2 nodos    <i class="fa fa-edit"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a @click="guardarDiagrama()">Listado tipo de nodos     <i class="fa fa-edit"></i>    </a>
+                                    </li>                                    
+                                </ul>
+                                
+
                             </li>
                             <li>
                                 <a href="#">Accion</a>
