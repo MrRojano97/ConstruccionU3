@@ -1946,14 +1946,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+var baseUrl = "http://127.0.0.1:8000/";
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {// Acá debería ir declarado el mapa (o json) que representa el diagrama
-    };
+  created: function created() {// esta función se ejecuta al cargar el componente
+    // implementar alguna forma de setear los datos del usuario actual.
+    // se supone que en la ventana modal se deberían cargar los datos del sujeto
+    //this.getUsuarioActual(); //método tentativo
+  },
+  data: {
+    // Acá debería ir declarado el mapa (o json) que representa el diagrama
+    //estos datos corresponden al usuario actual
+    nombreUsuarioActual: '',
+    apellidoUsuarioActual: '',
+    edadUsuarioActual: '',
+    generoUsuarioActual: '',
+    diagramaUsuarioActual: {}
   },
   methods: {
     guardarDiagrama: function guardarDiagrama() {
-      console.log("guardando diagrama!"); //TODO: implementar aquí llamado a ruta para guardar el diagrama
+      axios.post(baseUrl + "rutaSujeto", {
+        'nombre': this.nombreUsuarioActual,
+        'apellido': this.apellidoUsuarioActual,
+        'edad': this.edadUsuarioActual,
+        'genero': this.generoUsuarioActual,
+        'diagrama': this.diagramaUsuarioActual
+      }).then(function (response) {
+        console.log("---> RECIBIENDO DESDE GUARDAR DIAGRAMA:" + response);
+      });
+    },
+    setDiagramaActual: function setDiagramaActual(diagrama) {
+      this.diagramaUsuarioActual = diagrama;
+    },
+    getUsuarioActual: function getUsuarioActual() {// Esta función debería ser algo asi:
+      // axios.get(baseUrl+"rutaSujeto").then(response => {
+      //     this.nombreUsuarioActual = response.nombre;
+      //     thislapellidoUsuarioActual = response.apellido;
+      //     this.edadUsuarioActual = response.edad;
+      //     this.greneroUsuarioActual = response.genero;
+      //     this.diagramaUsuarioActual = response.diagrama;
+      // });
     }
   }
 });
@@ -40673,14 +40704,7 @@ var render = function() {
     _c("div", { staticClass: "button-container" }, [
       _c(
         "button",
-        {
-          staticClass: "button",
-          on: {
-            click: function($event) {
-              return _vm.guardarDiagrama()
-            }
-          }
-        },
+        { staticClass: "button", on: { click: _vm.guardarDiagrama } },
         [_vm._v("Guardar")]
       )
     ])
