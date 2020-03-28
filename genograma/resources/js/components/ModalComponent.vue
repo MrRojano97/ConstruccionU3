@@ -15,12 +15,12 @@
         <label class="label2"> </label>
         <button class="button">Cargar</button>
         <label class="label1"> </label>
-        </p> 
+        </p>
       </div>
     </div>
   </div>
 </div>
-            
+
 </body>
 
 </template>
@@ -33,7 +33,7 @@
         background: none;
         cursor: pointer;
 
-        
+
         display: inline-block;
         padding: 15px 25px;
         background-color: #00008B;
@@ -41,17 +41,17 @@
         color: #FFF;
         font-size: 18px;
         font-weight: 200;
-        
+
         box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
         transition: 0.4s ease-out;
-        
+
         &:hover {
         box-shadow: 6px 6px rgba(0, 0, 0, 0.6);
         }
     }
 
     .label1 {
-        
+
         width: 35%;
     }
 
@@ -69,7 +69,7 @@
     export default {
         data() {
             return {
-                
+
             }
         },
         mounted() {

@@ -3,6 +3,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -15,9 +16,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
-Vue.component('canvas-component', require('./components/CanvasComponent.vue').default); 
-Vue.component('modal-component', require('./components/ModalComponent.vue').default); 
-
+Vue.component('canvas-component', require('./components/CanvasComponent.vue').default);
+Vue.component('modal-component', require('./components/ModalComponent.vue').default);
+Vue.component('button-component', require('./components/ButtonComponent.vue').default);
 
 //
 Vue.prototype.$myDiagram = 'myDiagram';
