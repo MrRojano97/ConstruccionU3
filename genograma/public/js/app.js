@@ -40361,7 +40361,7 @@ function addStyle (obj, options) {
 	// If a transform function was defined, run it on the css
 	if (options.transform && obj.css) {
 	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
+		 ? options.transform(obj.css)
 		 : options.transform.default(obj.css);
 
 	    if (result) {
@@ -41053,6 +41053,902 @@ var render = function() {
           )
         ])
       ])
+  return _c("div", { staticClass: "conteiner" }, [
+    _c("div", { staticClass: "row justify-content-md-center" }, [
+      _c("div", { staticClass: "col-3" }, [
+        _c("div", { staticClass: "side-div" }, [
+          _c("nav", { attrs: { id: "sidebar" } }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-unstyled components" }, [
+              _c("li", { staticClass: "active" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Nueva Persona")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm("Hombre")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hombre "),
+                          _c("i", { staticClass: "fa fa-square" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm("Mujer")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Mujer "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm("AdopLegal")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hijo adoptivo legal "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm("AdopTemporal")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hijo adoptivo temporal "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Mascota")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Mascota "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.openForm("Desconocido")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Género desconocido "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Embarazo")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Embarazo "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Espontaneo")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Aborto espontáneo "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Aborto")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Aborto "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Muerte")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(" Muerte  "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Mellizos")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(" Mellizos "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.addSujeto("Identicos")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Gemelos idénticos "),
+                          _c("i", { staticClass: "fa fa-circle" })
+                        ]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu1",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Relaciones Familiares")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu1" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Matrimonio")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Matrimonio     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Sep-Fact")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Separacion por hecho     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Sep-Leg")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Separacion legal     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Divorcio")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Divorcio     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Engagement")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Compromiso    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Eng-Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Compromiso con convivencia     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Eng-Sep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Compromiso y separacion    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Nullity")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Nulidad     "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _vm._m(11),
+                    _vm._v(" "),
+                    _vm._m(12)
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu2",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Relacion Emocionales")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu2" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("indiferencia")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Indiferencia "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("armonia")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("armonía "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("hostilidad")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Hostilidad "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("violencia")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Violencia "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("abuso")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Abuso "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("manipulacion")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Manipulación "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("distante")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Distante "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("amistad")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Amistad "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(13),
+                    _vm._v(" "),
+                    _vm._m(14),
+                    _vm._v(" "),
+                    _vm._m(15),
+                    _vm._v(" "),
+                    _vm._m(16),
+                    _vm._v(" "),
+                    _vm._m(17),
+                    _vm._v(" "),
+                    _vm._m(18),
+                    _vm._v(" "),
+                    _vm._m(19),
+                    _vm._v(" "),
+                    _vm._m(20),
+                    _vm._v(" "),
+                    _vm._m(21),
+                    _vm._v(" "),
+                    _vm._m(22),
+                    _vm._v(" "),
+                    _vm._m(23),
+                    _vm._v(" "),
+                    _vm._m(24),
+                    _vm._v(" "),
+                    _vm._m(25),
+                    _vm._v(" "),
+                    _vm._m(26),
+                    _vm._v(" "),
+                    _vm._m(27),
+                    _vm._v(" "),
+                    _vm._m(28),
+                    _vm._v(" "),
+                    _vm._m(29),
+                    _vm._v(" "),
+                    _vm._m(30),
+                    _vm._v(" "),
+                    _vm._m(31),
+                    _vm._v(" "),
+                    _vm._m(32),
+                    _vm._v(" "),
+                    _vm._m(33),
+                    _vm._v(" "),
+                    _vm._m(34),
+                    _vm._v(" "),
+                    _vm._m(35),
+                    _vm._v(" "),
+                    _vm._m(36),
+                    _vm._v(" "),
+                    _vm._m(37),
+                    _vm._v(" "),
+                    _vm._m(38)
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu3",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Operaciones")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu3" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Guardar      "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(39),
+                    _vm._v(" "),
+                    _vm._m(40),
+                    _vm._v(" "),
+                    _vm._m(41)
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu4",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Generar Reportes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu4" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 1 nodo      "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 2 nodos    "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Listado tipo de nodos     "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(42)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", { staticClass: "form-popup", attrs: { id: "myForm" } }, [
+              _c(
+                "form",
+                { staticClass: "form-container", attrs: { action: "#" } },
+                [
+                  _c("h1", [_vm._v("Ingresar Datos de " + _vm._s(_vm.Sujeto))]),
+                  _vm._v(" "),
+                  _vm._m(43),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.nombre,
+                        expression: "nombre"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese nombre",
+                      name: "nombre",
+                      id: "nombre",
+                      required: ""
+                    },
+                    domProps: { value: _vm.nombre },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.nombre = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(44),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.apellido,
+                        expression: "apellido"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese apellido",
+                      name: "psw",
+                      id: "psw",
+                      required: ""
+                    },
+                    domProps: { value: _vm.apellido },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.apellido = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(45),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.edad,
+                        expression: "edad"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese edad",
+                      name: "edad",
+                      id: "edad",
+                      required: ""
+                    },
+                    domProps: { value: _vm.edad },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.edad = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          _vm.saveData(_vm.Sujeto), _vm.closeForm()
+                        }
+                      }
+                    },
+                    [_vm._v("Guardar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn cancel",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeForm()
+                        }
+                      }
+                    },
+                    [_vm._v("Cancelar")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(46)
     ])
   ])
 }
@@ -41543,6 +42439,30 @@ var staticRenderFns = [
         _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ETC")])])
       ]
     )
+  },
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Eliminar    "),
+        _c("i", { staticClass: "fa fa-trash" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Editar      "),
+        _c("i", { staticClass: "fa fa-edit" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", [_vm._v("ETC")])])
   },
   function() {
     var _vm = this
@@ -53853,7 +54773,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "6df28c6a",
   null
-  
+
 )
 
 /* hot reload */
@@ -53873,7 +54793,7 @@ component.options.__file = "resources/js/components/CanvasComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CanvasComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CanvasComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -53889,7 +54809,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CanvasComponent.vue?vue&type=style&index=0&id=6df28c6a&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CanvasComponent.vue?vue&type=style&index=0&id=6df28c6a&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CanvasComponent_vue_vue_type_style_index_0_id_6df28c6a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /***/ }),
 
@@ -53940,7 +54860,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "54833a28",
   null
-  
+
 )
 
 /* hot reload */
@@ -53960,7 +54880,7 @@ component.options.__file = "resources/js/components/SidebarComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -53976,7 +54896,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SidebarComponent.vue?vue&type=style&index=0&id=54833a28&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarComponent_vue_vue_type_style_index_0_id_54833a28_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /***/ }),
 
