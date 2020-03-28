@@ -21,17 +21,20 @@ class SujetoController extends Controller
         $sujeto->genero=$request->genero;
         $sujeto->edad=$request->edad;
         $sujeto->save();
-        return redirect('/rutaSujeto/'.$sujeto->id);
+        //return redirect('/rutaSujeto/'.$sujeto->id);
+        return $sujeto;
     }
 
     public function index(){
         $posts=Sujeto::all();
-        return view('rutaSujeto.index',\compact('posts'));
+        //return view('rutaSujeto.index',\compact('posts'));
+        return $posts;
     }
 
     public function show( $id){
         $sujeto = Sujeto::findOrFail($id);
         return view('rutaSujeto.show',\compact('sujeto'));
+        return $sujeto;
     }
 
     public function update(Request $request, $id){
@@ -48,11 +51,12 @@ class SujetoController extends Controller
         $sujeto->edad=$request->edad;
         $sujeto->save();
         return redirect('/rutaSujeto/'.$sujeto->id);
+        return $sujeto;
     }
 
     public function destroy($id){
         $sujeto= Sujeto::findOrFail($id);
         $sujeto->delete();
-        return redirect('/rutaSujeto');
+        return $id;
     }
 }
