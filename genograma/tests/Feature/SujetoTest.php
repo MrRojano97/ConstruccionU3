@@ -52,7 +52,7 @@ class SujetoTest extends TestCase
         $response->assertViewHas('posts',$posts);
     }
 
-
+    /**no lo e probado aun */
     public function testObtenerUnSujeto(){
         $this->withoutExceptionHandling();// desactivamos las excepciones
 
@@ -63,7 +63,7 @@ class SujetoTest extends TestCase
         $response->assertOk();
 
         $response->assertViewIs('rutaSujeto.show');
-        $response->assertViewHas('post',$post);
+        $response->assertViewHas('sujeto',$post);// el primer parametro corresponde al parametro que retornas en la vista.
     }
 
     /** @test */
@@ -77,6 +77,7 @@ class SujetoTest extends TestCase
             'apellido'=>'test apellido',
             'genero'=>'test genero',
             'edad'=>'test edad',
+            'informacion'=>'(JSON_ARRAY())22'
         ]);
 
         //$response->assertOK();//confirme que no hay ningun error
@@ -108,4 +109,6 @@ class SujetoTest extends TestCase
 
         $response->assertRedirect('/rutaSujeto');
     }
+
+    
 }
