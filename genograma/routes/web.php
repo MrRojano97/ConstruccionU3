@@ -31,6 +31,9 @@ Route::get('/rutaSujeto/{post}','SujetoController@show' );
 Route::put('/rutaSujeto/{post}','SujetoController@update' );
 Route::delete('/rutaSujeto/{post}','SujetoController@destroy' );
 
+Route::get('/informeGenomaUnNodo/{post}','InformesController@informeGenomaUnNodo' );
+Route::get('/informeGenomaDosNodo/{post}','InformesController@informeGenomaUnNodo' );
+
 Route::resource('genoma', 'GenomaController');
 Route::get('/genoma/{post}','GenomaController@show' );
 Route::resource('relacion', 'RelacionController');
