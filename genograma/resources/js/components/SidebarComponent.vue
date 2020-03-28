@@ -75,7 +75,7 @@
                                         <a href="#" @click="relFamiliar('Nullity')">Nulidad     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia legal    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Leg-Coh')">Convivencia legal    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Convivencia legal con separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -87,28 +87,28 @@
                                         <a href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Coh')">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('Coh-Sep')">Convivencia y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia no sentimental    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('NCoh-Sep')" >Convivencia no sentimental    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" >Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
-                                    <li>
-                                        <a href="#">Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                     <li>
+                                        <a href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
@@ -695,6 +695,8 @@
                 { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 }) 
             );
 
+            //RELACIONES FAMILIARES 
+
             /*Template para relacion de Matrimonio*/
             this.myDiagram.linkTemplateMap.add("Matrimonio",
                 $(go.Link,
@@ -762,7 +764,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                    { stroke: "blue",  strokeDashArray: [5,2],strokeWidth: 2 }),
                 $(go.Shape,
                     { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
@@ -774,7 +776,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "blue",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                    { stroke: "blue",  strokeDashArray: [5,2],strokeWidth: 2 }),
                 $(go.Shape,
                     { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
@@ -791,7 +793,109 @@
                     { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
                 )
             );
-                /*Template para relacion de indiferencia*/
+
+            /*Template para relacion de Cohabitacion Legal (1) */
+
+            this.myDiagram.linkTemplateMap.add("Leg-Coh",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [3,2],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+
+            /*Template para relacion de Cohabitacion Legal y Separacion por hecho (4)*/
+
+            /*Template para relacion de Cohabitacion Legal y Separacino Oficial Legal (6) */
+
+            /*Template para relacion de Comprometidos (commited relationship) (9)*/
+
+            /*Template  para relacion de Cohabitacion (2)*/
+            this.myDiagram.linkTemplateMap.add("Coh",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [1.5,1.5],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+
+            /*Template para relacion de Cohabitacion y separacion  (5)*/
+
+            this.myDiagram.linkTemplateMap.add("Coh-Sep",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [2,2],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+
+            /*Template para relacion de Cohabitacion No Sentimental(7) */
+
+            this.myDiagram.linkTemplateMap.add("NCoh-Sep",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [2,4],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+            
+            /*Template para relacion Casual/Saliendo (3)*/
+
+            this.myDiagram.linkTemplateMap.add("Casual",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue", strokeDashArray: [2,1], strokeWidth: 2 })
+                )
+            );
+            
+
+            /*Template para relacion de Una Noche (8)*/
+
+            this.myDiagram.linkTemplateMap.add("1Noche",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue", strokeDashArray: [2,3], strokeWidth: 3 })
+                )
+            );
+
+            /*Template para relacion de Amorio (10)*/
+
+            this.myDiagram.linkTemplateMap.add("Amorio",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "DeepPink", strokeDashArray: [2,2], strokeWidth: 3 })
+                )
+            );
+
+
+            //RELACIONES EMOCIONALES
+
+            /*Template para relacion de indiferencia*/
             this.myDiagram.linkTemplateMap.add("indiferencia",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
