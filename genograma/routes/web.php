@@ -30,6 +30,10 @@ Route::get('/rutaSujeto','SujetoController@listarSujetos' );
 Route::get('/rutaSujeto/{post}','SujetoController@listarSujeto' );
 Route::put('/rutaSujeto/{post}','SujetoController@actualizarRegistroSujeto' );
 Route::delete('/rutaSujeto/{post}','SujetoController@eliminarRegistroSujeto' );
+
+Route::resource('genoma', 'GenomaController');
+Route::resource('relacion', 'RelacionController');
+
 Route::get('/welcome', function(){
     return view('welcome');
 });

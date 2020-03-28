@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Relacion;
+use App\Genoma;
 
-class RelacionController extends Controller
+class GenomaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class RelacionController extends Controller
      */
     public function index()
     {
-        $relacion = Relacion::all();
-        return $relacion;
+        $genoma = Genoma::all();
+        return $genoma;
     }
 
     /**
@@ -36,13 +36,13 @@ class RelacionController extends Controller
      */
     public function store(Request $request)
     {
-        $relacion = new Relacion();
-        $relacion->category = $request->category;
-        $relacion->from = $request->from;
-        $relacion->to = $request->to;
-        $relacion->idSujeto = $request->idSujeto;
-        $relacion->save();
-        return $relacion;
+        $genoma = new Genoma();
+        $genoma->key = $request->key;
+        $genoma->text = $request->text;
+        $genoma->category = $request->category;
+        $genoma->idSujeto = $request->idSujeto;
+        $genoma->save();
+        return $genoma;
     }
 
     /**
@@ -76,13 +76,12 @@ class RelacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $relacion = Relacion::find($id);
-        $relacion->category = $request->category;
-        $relacion->from = $request->from;
-        $relacion->to = $request->to;
-        $relacion->idSujeto = $request->idSujeto;
-        $relacion->save();
-        return $relacion;
+        $genoma = Genoma::find($id);
+        $genoma->text = $request->text;
+        $genoma->category = $request->category;
+        $genoma->idSujeto = $request->idSujeto;
+        $genoma->save();
+        return $genoma;
     }
 
     /**
@@ -93,7 +92,7 @@ class RelacionController extends Controller
      */
     public function destroy($id)
     {
-        $relacion = Relacion::find($id);
-        $relacion->delete();
+        $genoma = Genoma::find($id);
+        $genoma->delete();
     }
 }
