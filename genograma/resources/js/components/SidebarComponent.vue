@@ -242,9 +242,9 @@
                                     </li>
                                     <li>
                                         <a @click="guardarDiagrama()">Listado tipo de nodos     <i class="fa fa-edit"></i>    </a>
-                                    </li>                                    
+                                    </li>
                                 </ul>
-                                
+
 
                             </li>
                             <li>
@@ -274,10 +274,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-9" onload="init()">
                 <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
-                    
+
             </div>
         </div>
     </div>
@@ -348,7 +348,7 @@
             var nodeSelectionAdornmentTemplate =
                 $(go.Adornment, "Auto",
                 $(go.Shape, { fill: null, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] }),
-                $(go.Placeholder)
+                $(go.Placeholder),
                 );
 
             var nodeResizeAdornmentTemplate =
@@ -376,7 +376,7 @@
 
             this.myDiagram.nodeTemplateMap.add( "Hombre",
                 $(go.Node, "Spot",
-                { locationSpot: go.Spot.Center },
+                { locationSpot: go.Spot.Center,},
                 new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
                 { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
                 { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
@@ -703,10 +703,10 @@
                     { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })  // use selection object's strokeWidth
                 );
 
-            var headSelectionAdornmentTemplate = 
+            var headSelectionAdornmentTemplate =
                 $(go.Adornment, "Arrowhead",
                 $(go.Shape,
-                { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 }) 
+                { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })
             );
 
             /*Template para relacion de Matrimonio*/
@@ -716,7 +716,7 @@
                 { relinkableFrom: true, relinkableTo: true, reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 /*Forma del Link */
-                new go.Binding("points").makeTwoWay(),      
+                new go.Binding("points").makeTwoWay(),
                 $(go.Shape,
                     { stroke: "black", strokeWidth: 2 }),
                 ),
@@ -914,14 +914,14 @@
                 )
             );
 
-                
-            },    
+
+            },
             methods: {
                 relaciones(){
                     alert('al presionar llega aqui');
                 },
                 linktest()
-                {  
+                {
 
                 },
                 guardartest()
@@ -950,8 +950,8 @@
                     this.apellido = "";
                     this.edad = "";
 
-                    
-                    
+
+
                 },
                 addSujeto2(sujeto,nombre,edad){
                     this.myDiagram.startTransaction("make new node");
@@ -977,11 +977,11 @@
                 guardarDiagrama(){
                     var sujeto = {
                         nombre: 'test3',
-                        apellido: 'testeo3', 
-                        genero: 'M', 
-                        edad: '2', 
+                        apellido: 'testeo3',
+                        genero: 'M',
+                        edad: '2',
                         archivoJson: this.myDiagram.model.toJson()
-                    } 
+                    }
                     const nuevoSujeto = sujeto;
                     axios.post('/rutaSujeto', nuevoSujeto)
                         .then((res) =>{
@@ -989,9 +989,8 @@
                 }
             }
         }
-    
+
 </script>
 
 
-  
-  
+
