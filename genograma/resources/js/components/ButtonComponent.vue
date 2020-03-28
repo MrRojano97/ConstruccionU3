@@ -1,8 +1,71 @@
 <template>
+<div>
 <div id="botonDetalles">
     <details>
    		<summary role="button">
-    		Informacion Reportes
+    		 Relacion de un Nodo
+    	</summary>
+		<div>
+    		<table class="table">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Relacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Ignacia</td>
+                    <td>Barrios</td>
+                    <td>25</td>
+                    <td>Matrimonio</td>
+                </tr>
+
+
+            </tbody>
+            </table>
+    	</div>
+	</details>
+</div>
+<div id="botonDetalles">
+    <details>
+   		<summary role="button">
+    		 Relacion entre 2 Nodos
+    	</summary>
+		<div>
+    		<table class="table">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Relacion</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>Emilio</td>
+                    <td>amistad</td>
+                    <td>3</td>
+                    <td>Nicole</td>
+                </tr>
+
+
+            </tbody>
+            </table>
+    	</div>
+	</details>
+</div>
+<div id="botonDetalles">
+    <details>
+   		<summary role="button">
+    		 Tipos de Nodos
     	</summary>
 		<div>
     		<table class="table">
@@ -17,18 +80,21 @@
             </thead>
             <tbody>
                 <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Hombre</td>
-                <td>22</td>
+                    <td>4</td>
+                    <td>Juan</td>
+                    <td>Ramirez</td>
+                    <td>Hombre</td>
+                    <td>22</td>
                 </tr>
+
 
             </tbody>
             </table>
     	</div>
 	</details>
 </div>
+</div>
+
 </template>
 <style lang="scss" >
 // Colors
@@ -146,7 +212,6 @@ details[open] summary:focus::before {
 </style>
 
 <script>
-
 function traerDatos(){
     const xhttp = new  XMLHttpRequest();
     xhttp.open('GET','archivoJson', true);

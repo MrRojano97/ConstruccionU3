@@ -2053,10 +2053,82 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 function traerDatos() {
   var xhttp = new XMLHttpRequest();
   xhttp.open('GET', 'archivoJson', true);
   xhttp.send();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+    }
+  };
 }
 
 /***/ }),
@@ -41734,39 +41806,121 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "botonDetalles" } }, [
-      _c("details", [
-        _c("summary", { attrs: { role: "button" } }, [
-          _vm._v("\n    \t\tInformacion Reportes\n    \t")
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("table", { staticClass: "table" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Genero")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")])
+    return _c("div", [
+      _c("div", { attrs: { id: "botonDetalles" } }, [
+        _c("details", [
+          _c("summary", { attrs: { role: "button" } }, [
+            _vm._v("\n    \t\t Relacion de un Nodo\n    \t")
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("table", { staticClass: "table" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Relacion")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v("1")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Ignacia")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Barrios")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("25")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Matrimonio")])
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Mark")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Otto")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Hombre")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("22")])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "botonDetalles" } }, [
+        _c("details", [
+          _c("summary", { attrs: { role: "button" } }, [
+            _vm._v("\n    \t\t Relacion entre 2 Nodos\n    \t")
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("table", { staticClass: "table" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Relacion")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v("2")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Emilio")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("amistad")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("3")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Nicole")])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "botonDetalles" } }, [
+        _c("details", [
+          _c("summary", { attrs: { role: "button" } }, [
+            _vm._v("\n    \t\t Tipos de Nodos\n    \t")
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("table", { staticClass: "table" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Genero")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v("4")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Juan")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Ramirez")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Hombre")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("22")])
+                ])
               ])
             ])
           ])
