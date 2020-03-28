@@ -42355,14 +42355,44 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(42),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 2 nodos    "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
-                    _vm._m(43)
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Listado tipo de nodos     "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ])
                   ]
                 )
               ]),
               _vm._v(" "),
-              _vm._m(44)
+              _vm._m(42)
             ])
           ]),
           _vm._v(" "),
@@ -42374,7 +42404,7 @@ var render = function() {
                 [
                   _c("h1", [_vm._v("Ingresar Datos de " + _vm._s(_vm.Sujeto))]),
                   _vm._v(" "),
-                  _vm._m(45),
+                  _vm._m(43),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42403,7 +42433,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(46),
+                  _vm._m(44),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42432,7 +42462,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(47),
+                  _vm._m(45),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42495,7 +42525,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(48)
+      _vm._m(46)
     ])
   ])
 }
@@ -42953,28 +42983,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("a", [_vm._v("ETC")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Reporte Relaciones 2 nodos    "),
-        _c("i", { staticClass: "fa fa-edit" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Listado tipo de nodos     "),
-        _c("i", { staticClass: "fa fa-edit" })
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -55534,8 +55542,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
