@@ -19,8 +19,8 @@ class GenomaController extends Controller
         $genograma->category=$request->category;
         $genograma->idSujeto=$request->idSujeto;
         $genograma->save();
-        return redirect('/genoma/'.$genograma->id);
-        //return $genograma;
+        //return redirect('/genoma/'.$genograma->id);
+        return $genograma;
         //return view('genoma.store',compact('genograma'));
     }
 
@@ -32,7 +32,8 @@ class GenomaController extends Controller
 
     public function show( $id){
         $sujeto = Genoma::findOrFail($id);
-        return view('genoma.show',compact('sujeto'));
+        //return view('genoma.show',compact('sujeto'));
+        return $sujeto;
     }
 
     public function update(Request $request, $id){
@@ -47,12 +48,13 @@ class GenomaController extends Controller
         $genograma->category=$request->category;
         $genograma->idSujeto=$request->idSujeto;
         $genograma->save();
-        return redirect('/genoma/'.$genograma->id);
+        //return redirect('/genoma/'.$genograma->id);
+        return $genograma;
     }
 
     public function destroy($id){
         $genograma= Genoma::findOrFail($id);
         $genograma->delete();
-        return redirect('/genoma');
+        return $id;
     }
 }
