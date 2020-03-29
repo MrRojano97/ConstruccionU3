@@ -256,7 +256,7 @@
                         <!--            <button class="open-button" v-on:click="openForm">Editar</button>-->
                         <div class="form-popup" id="myForm">
                             <form action="#" class="form-container">
-                                <h1>Ingresar Datos de {{Sujeto}}</h1>
+                                <h1>Ingresar Datos</h1>
 
                                 <label for="nombre"><b>Nombre</b></label>
                                 <input v-model="nombre" type="text" placeholder="Ingrese nombre" name="nombre" id="nombre" required>
@@ -302,7 +302,7 @@
                 apellido : "",
                 genero : "",
                 edad : "",
-                nodosSeleccionado: nodosSeleccionados
+                nodosSeleccionado: nodosSeleccionados,
                 esPrincipal: false
             }
         },
@@ -327,18 +327,22 @@
             },
             saveData(Sujeto) {
                 var sujeto = {
-                    nombre : this.nombre,
-                    apellido : this.apellido,
-                    edad : this.edad,
-                }
-                this.addSujeto2(Sujeto,this.nombre,this.edad);
-                /*
-                console.log("NUEVO SUJETO PARA GUARDAR:");
-                console.log(sujeto);
-                */
-                this.nombre = "";
-                this.apellido = "";
-                this.edad = "";
+                        nombre : this.nombre,
+                        apellido : this.apellido,
+                        edad : this.edad,
+                        esPrincipal : this.esPrincipal,
+                    }
+                    
+                    this.addSujeto2(Sujeto,this.nombre,this.edad);
+                    /*
+                    console.log("NUEVO SUJETO PARA GUARDAR:");
+                    console.log(sujeto);
+                    */
+                    console.log(this.esPrincipal)
+                    this.nombre = "";
+                    this.apellido = "";
+                    this.edad = "";
+                    this.esPrincipal = false;
 
             },
             addSujeto2(sujeto,nombre,edad){
@@ -1013,72 +1017,6 @@
 
         },
     }
-
-                },
-                openForm(Sujeto) {
-                    this.Sujeto = Sujeto;
-                    document.getElementById("myForm").style.display = "block";
-                },
-                closeForm() {
-                    document.getElementById("myForm").style.display = "none";
-                },
-               saveData(Sujeto) {
-                    var sujeto = {
-                        nombre : this.nombre,
-                        apellido : this.apellido,
-                        edad : this.edad,
-                        esPrincipal : this.esPrincipal,
-                    }
-                    
-                    this.addSujeto2(Sujeto,this.nombre,this.edad);
-                    /*
-                    console.log("NUEVO SUJETO PARA GUARDAR:");
-                    console.log(sujeto);
-                    */
-                    console.log(this.esPrincipal)
-                    this.nombre = "";
-                    this.apellido = "";
-                    this.edad = "";
-                    this.esPrincipal = false;
-                    
-                    
-                },
-                addSujeto2(sujeto,nombre,edad){
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: nombre+", "+edad, category : sujeto});
-                    this.myDiagram.commitTransaction("make new node");
-                },
-                addSujeto(sujeto){
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: "sujeto", category : sujeto});
-                    this.myDiagram.commitTransaction("make new node");
-                },
-                relFamiliar(relacion){
-                    /*Crear nodo base para relacion*/
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ key: counter });
-                    this.myDiagram.commitTransaction("make new node");
-                    /* Crear relacion con formato especificado en 'relacion' */
-                    this.myDiagram.startTransaction("make new link");
-                    this.myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
-                    this.myDiagram.commitTransaction("make new link");
-                    counter++;
-                },
-                guardarDiagrama(){
-                    var sujeto = {
-                        nombre: 'test3',
-                        apellido: 'testeo3', 
-                        genero: 'M', 
-                        edad: '2', 
-                        archivoJson: this.myDiagram.model.toJson()
-                    } 
-                    const nuevoSujeto = sujeto;
-                    axios.post('/rutaSujeto', nuevoSujeto)
-                        .then((res) =>{
-                        })
-                }
-            }
-        }
     
 </script>
 
