@@ -1,7 +1,7 @@
 <template>
     <div class="conteiner">
         <div class="row">
-            <div class="col">
+            <div class="col-2">
                 <div class="side-div">
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -165,6 +165,57 @@
                                     <li>
                                         <a href="#" @click="relFamiliar('amistad')">Amistad <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
+                                    <li>
+                                        <a href="#"  @click="relFamiliar('Amor')">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Admirador <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Conflicto <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Fundida/fusionada <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Limerencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Conexión emocional <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Desconfianza <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Enfocada negativamente <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Desconocidos <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Normal <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
                                 </ul>
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu3">
@@ -209,12 +260,10 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-9" onload="init()">
-                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:1000px"></div>
-
+            <div class="col-7" onload="init()">
+                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:900px"></div>
             </div>
-            <div class="col"><button-component></button-component></div>
+            <div class="col-3"><button-component></button-component></div>
         </div>
     </div>
 </template>
@@ -265,9 +314,10 @@
                 "undoManager.isEnabled": true
             });
 
+
             //
 
-                function makePort(name, spot, output, input) {
+            function makePort(name, spot, output, input) {
                 // the port is basically just a small transparent square
                 return $(go.Shape, "Circle",
                 {
@@ -278,6 +328,7 @@
                     alignment: spot,  // align the port on the main Shape
                     alignmentFocus: spot,  // just inside the Shape
                     portId: name,  // declare this object to be a "port"
+                    fromLinkable: output, toLinkable: input,
                     fromSpot: spot, toSpot: spot,  // declare where links may connect at this port
                     cursor: "pointer"  // show a different cursor to indicate potential link point
                 });
@@ -676,7 +727,7 @@
             /*Template para relacion de Separacion por Hecho*/
             this.myDiagram.linkTemplateMap.add("Sep-Fact",
                 $(go.Link,
-                    { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 /*Forma del Link */
@@ -1164,6 +1215,23 @@
                     {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
                 )
             );
+
+
+
+            /*Template para relacion de Amor */
+            this.myDiagram.linkTemplateMap.add("Amor",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "green", strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "Circle", stroke: "green", strokeWidth: 3 , fill:"green"}),
+                )
+            );
+
             },
             methods: {
                 relaciones(){
