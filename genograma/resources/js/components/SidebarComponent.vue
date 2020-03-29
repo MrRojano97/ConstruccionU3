@@ -1,7 +1,7 @@
 <template>
     <div class="conteiner">
         <div class="row">
-            <div class="col">
+            <div class="col-2">
                 <div class="side-div">
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -166,7 +166,7 @@
                                         <a href="#">Cortada y reparada <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('Amor')">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -260,10 +260,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6" onload="init()">
-                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
+            <div class="col-7" onload="init()">
+                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:900px"></div>
             </div>
-            <div class="col"><button-component></button-component></div>
+            <div class="col-3"><button-component></button-component></div>
         </div>
     </div>
 </template>
@@ -314,9 +314,10 @@
                 "undoManager.isEnabled": true
             });
 
+
             //
 
-                function makePort(name, spot, output, input) {
+            function makePort(name, spot, output, input) {
                 // the port is basically just a small transparent square
                 return $(go.Shape, "Circle",
                 {
@@ -327,6 +328,7 @@
                     alignment: spot,  // align the port on the main Shape
                     alignmentFocus: spot,  // just inside the Shape
                     portId: name,  // declare this object to be a "port"
+                    fromLinkable: output, toLinkable: input,
                     fromSpot: spot, toSpot: spot,  // declare where links may connect at this port
                     cursor: "pointer"  // show a different cursor to indicate potential link point
                 });
@@ -726,7 +728,7 @@
             /*Template para relacion de Separacion por Hecho*/
             this.myDiagram.linkTemplateMap.add("Sep-Fact",
                 $(go.Link,
-                    { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 /*Forma del Link */
@@ -1044,6 +1046,21 @@
                 )
             );
 
+
+
+            /*Template para relacion de Amor */
+            this.myDiagram.linkTemplateMap.add("Amor",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "green", strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "Circle", stroke: "green", strokeWidth: 3 , fill:"green"}),
+                )
+            );
 
             },
             methods: {
