@@ -23,8 +23,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 Route::post('/rutaSujeto','SujetoController@registrarSujeto' ); //metodo para guardar
 Route::get('/rutaSujeto','SujetoController@listarSujetos' );
 Route::get('/rutaSujeto/{post}','SujetoController@listarSujeto' );

@@ -25,7 +25,8 @@
           <div>
 
             <textarea id="mySavedModel" style="width:0%;height:0px">
-              " "
+
+
             </textarea>
           </div>
         </div>

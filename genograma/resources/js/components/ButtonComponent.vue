@@ -6,6 +6,8 @@
     		 Relacion de un Nodo
     	</summary>
 		<div>
+            <input id="example2" type="text"/>
+            <input id="btn" type="submit"/>
     		<table class="table">
             <thead>
                 <tr>
@@ -37,6 +39,10 @@
     		 Relacion entre 2 Nodos
     	</summary>
 		<div>
+            <input id="example2" type="text"/>
+            <input id="btn" type="submit"/>
+            <input id="example2" type="text"/>
+            <input id="btn" type="submit"/>
     		<table class="table">
             <thead>
                 <tr>
@@ -94,8 +100,46 @@
 	</details>
 </div>
 </div>
-
 </template>
+<style scoped>
+body{
+background-color: #e0e0e0
+}
+#example2 {
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 3px 5px 2px 0px               rgba(0,0,0,0.3) inset,
+  -1px -3px 10px 0px rgba(250,250,250,0.3) inset;
+  border-style: none;
+  outline: none;
+  margin:10px;
+  font-size: 16px; font-family: monospace;
+  }
+
+
+#btn{
+  padding: 4px;
+  border-radius: 50px;
+  box-shadow: 3px 5px 2px 0px rgba(0,0,0,0.3),
+  -1px -3px 10px 0px rgba(250,250,250,0.3);
+  border-style: none;
+  outline: none;
+	margin:12px;
+  font-size: 14px; font-family: monospace;
+  cursor: pointer;
+  }
+
+  #btn:hover{
+  transform : scale(0.98) translateY(2px);
+  }
+
+  #btn:active
+  {
+   box-shadow: 3px 5px 2px 0px            rgba(0,0,0,0.3) inset,
+  -1px -3px 10px 0px rgba(250,250,250,0.3) inset;
+  }
+
+</style>
 <style lang="scss" >
 // Colors
 $grey-light: #f0f4f9;

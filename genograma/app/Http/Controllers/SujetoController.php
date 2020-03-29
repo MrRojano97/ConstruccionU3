@@ -25,6 +25,7 @@ class SujetoController extends Controller
         return view('rutaSujeto.index',\compact('posts'));
     }
 
+
     public function listarSujeto(Sujeto $post){
         return view('rutaSujeto.show',compact('post'));
     }
