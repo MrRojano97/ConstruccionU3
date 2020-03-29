@@ -3,102 +3,33 @@
 <div id="botonDetalles">
     <details>
    		<summary role="button">
-    		 Relacion de un Nodo
-    	</summary>
-		<div>
-            <input id="example2" type="text"/>
-            <input id="btn" type="submit"/>
-    		<table class="table">
-            <thead>
-                <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Relacion</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Ignacia</td>
-                    <td>Barrios</td>
-                    <td>25</td>
-                    <td>Matrimonio</td>
-                </tr>
-
-
-            </tbody>
-            </table>
-    	</div>
-	</details>
-</div>
-<div id="botonDetalles">
-    <details>
-   		<summary role="button">
-    		 Relacion entre 2 Nodos
-    	</summary>
-		<div>
-            <input id="example2" type="text"/>
-            <input id="btn" type="submit"/>
-            <input id="example2" type="text"/>
-            <input id="btn" type="submit"/>
-    		<table class="table">
-            <thead>
-                <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Relacion</th>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2</td>
-                    <td>Emilio</td>
-                    <td>amistad</td>
-                    <td>3</td>
-                    <td>Nicole</td>
-                </tr>
-
-
-            </tbody>
-            </table>
-    	</div>
-	</details>
-</div>
-<div id="botonDetalles">
-    <details>
-   		<summary role="button">
-    		 Tipos de Nodos
+    		 Informacion Reportes
     	</summary>
 		<div>
     		<table class="table">
             <thead>
                 <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Genero</th>
-                <th scope="col">Edad</th>
+                <th scope="col">col1</th>
+                <th scope="col">col2</th>
+                <th scope="col">col3</th>
+                <th scope="col">col4</th>
+                <th scope="col">col5</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>4</td>
-                    <td>Juan</td>
-                    <td>Ramirez</td>
-                    <td>Hombre</td>
-                    <td>22</td>
+                    <th>info1</th>
+                    <th>info2</th>
+                    <th>info3</th>
+                    <th>info4</th>
+                    <th>info5</th>
                 </tr>
-
-
             </tbody>
             </table>
     	</div>
 	</details>
 </div>
+
 </div>
 </template>
 <style scoped>
