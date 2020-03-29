@@ -3,46 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Relacion;
 
 class RelacionController extends Controller
 {
-    public $sujetoA;
-    public $sujetoB;
-    public $tipoRelacion;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct($sujetoA, $sujetoB, $tipoRelacion)
-    {
-        $this->sujetoA = $sujetoA;
-        $this->sujetoB = $sujetoB;
-        $this->tipoRelacion = $tipoRelacion;
+     //
+     public function store(Request $request){
+        $request->validate(
+            ['category'=>'',
+            'from'=>'',
+            'to'=>'',
+            'idSujeto'=>'']
+        );
+        $relacion = new Relacion();
+        $relacion->category=$request->category;
+        $relacion->from=$request->from;
+        $relacion->to=$request->to;
+        $relacion->idsujeto=$request->idSujeto;
+        $relacion->save();
+        return $relacion;
     }
 
-    public function getSujetoA(){
-        return $this->sujetoA;
-    }
-
-    public function setSujetoA($sujeto){
-        $this->sujetoA = $sujeto;
-    }
-
-    public function getSujetoB(){
-        return $this->sujetoB;
-    }
-
-    public function setSujetoB($sujeto){
-        $this->sujetoB = $sujeto;
-    }
     
-    public function getTipoRelacion(){
-        return $this->tipoRelacion;
+    public function index(){
+        $posts=Relacion::all();
+        //return view('relacion.index',\compact('posts'));
+        return $posts;
     }
 
-    public function setTipoRelacion($tipo){
-        $this->tipoRelacion = $tipo;
+    public function show( $id){
+        $sujeto = Relacion::findOrFail($id);
+        //return view('relacion.show',compact('sujeto'));
+        return $sujeto ;
+    }
+
+    public function update(Request $request, $id){
+        $request->validate(
+            ['category'=>'',
+            'from'=>'',
+            'to'=>'',
+            'idSujeto'=>'']
+        );
+        $relacion = Relacion::find($id);
+        $relacion->category=$request->category;
+        $relacion->from=$request->from;
+        $relacion->to=$request->to;
+        $relacion->idsujeto=$request->idSujeto;
+        $relacion->save();
+        //return redirect('/relacion/'.$relacion->id);
+        return $relacion;
+    }
+
+    public function destroy($id){
+        $relacion= Relacion::findOrFail($id);
+        $relacion->delete();
+        //return redirect('/relacion');
+        return $id;
     }
 }

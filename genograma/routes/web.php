@@ -24,12 +24,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/informeGenomaUnNodo/{post}','InformesController@informeGenomaUnNodo' );
+Route::get('/informeGenomaDosNodo/{post}','InformesController@informeGenomaUnNodo' );
 
-Route::post('/rutaSujeto','SujetoController@registrarSujeto' ); //metodo para guardar
-Route::get('/rutaSujeto','SujetoController@listarSujetos' );
-Route::get('/rutaSujeto/{post}','SujetoController@listarSujeto' );
-Route::put('/rutaSujeto/{post}','SujetoController@actualizarRegistroSujeto' );
-Route::delete('/rutaSujeto/{post}','SujetoController@eliminarRegistroSujeto' );
+Route::resource('genoma', 'GenomaController');
+Route::resource('rutaSujeto', 'SujetoController');
+Route::resource('relacion', 'RelacionController');
+
 Route::get('/welcome', function(){
     return view('welcome');
 });
