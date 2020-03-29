@@ -1926,26 +1926,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var $ = go.GraphObject.make; // This works because we have overridden the /extensionsTS/tsconfig.json file
-// in the options to the loader: 'ts-loader', in the webpack.config.js  
+// in the options to the loader: 'ts-loader', in the webpack.config.js
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Diagram',
   mounted: function mounted() {
-    var myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV 
+    var myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
     {
       grid: $(go.Panel, "Grid", $(go.Shape, "LineH", {
         stroke: "lightgray",
@@ -2360,6 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
 var counter = 0;
 var $ = go.GraphObject.make;
 var myDiagram;
+var nodosSeleccionados = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Diagram',
   data: function data() {
@@ -2368,8 +2356,84 @@ var myDiagram;
       apellido: "",
       genero: "",
       edad: "",
-      Sujeto: ""
+      Sujeto: "",
+      nodosSeleccionado: nodosSeleccionados
     };
+  },
+  methods: {
+    relaciones: function relaciones() {
+      alert('al presionar llega aqui');
+    },
+    linktest: function linktest() {},
+    guardartest: function guardartest() {},
+    openForm: function openForm(Sujeto) {
+      this.Sujeto = Sujeto;
+      document.getElementById("myForm").style.display = "block";
+    },
+    closeForm: function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    },
+    saveData: function saveData(Sujeto) {
+      var sujeto = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad
+      };
+      this.addSujeto2(Sujeto, this.nombre, this.edad);
+      /*
+      console.log("NUEVO SUJETO PARA GUARDAR:");
+      console.log(sujeto);
+      */
+
+      this.nombre = "";
+      this.apellido = "";
+      this.edad = "";
+    },
+    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: nombre + ", " + edad,
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
+    },
+    addSujeto: function addSujeto(sujeto) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: "sujeto",
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
+    },
+    relFamiliar: function relFamiliar(relacion) {
+      /*Crear nodo base para relacion*/
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter
+      });
+      this.myDiagram.commitTransaction("make new node");
+      /* Crear relacion con formato especificado en 'relacion' */
+
+      this.myDiagram.startTransaction("make new link");
+      this.myDiagram.model.addLinkData({
+        from: counter,
+        to: counter,
+        category: relacion
+      });
+      this.myDiagram.commitTransaction("make new link");
+      counter++;
+    },
+    guardarDiagrama: function guardarDiagrama() {
+      var sujeto = {
+        nombre: 'test3',
+        apellido: 'testeo3',
+        genero: 'M',
+        edad: '2',
+        archivoJson: this.myDiagram.model.toJson()
+      };
+      var nuevoSujeto = sujeto;
+      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
+    }
   },
   mounted: function mounted() {
     this.myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
@@ -2537,6 +2601,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2564,6 +2631,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2591,6 +2661,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2618,6 +2691,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2645,6 +2721,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2672,6 +2751,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2699,6 +2781,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2726,6 +2811,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2753,6 +2841,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2780,6 +2871,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2807,6 +2901,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2834,6 +2931,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2849,6 +2949,14 @@ var myDiagram;
           port.fill = show ? "rgba(0,0,0,.3)" : null;
         }
       });
+    }
+
+    function actualizarNodosSeleccionados(entorno, nodo) {
+      nodosSeleccionados = [];
+      entorno.diagram.selection.each(function (nodo) {
+        nodosSeleccionados.push(nodo.data.text);
+      });
+      console.log("-> nodos seleccionados: [" + nodosSeleccionados + "]");
     }
 
     var linkSelectionAdornmentTemplate = $(go.Adornment, "Link", $(go.Shape, // isPanelMain declares that this Shape shares the Link.geometry
@@ -3234,81 +3342,6 @@ var myDiagram;
       stroke: "green",
       strokeWidth: 3
     })));
-  },
-  methods: {
-    relaciones: function relaciones() {
-      alert('al presionar llega aqui');
-    },
-    linktest: function linktest() {},
-    guardartest: function guardartest() {},
-    openForm: function openForm(Sujeto) {
-      this.Sujeto = Sujeto;
-      document.getElementById("myForm").style.display = "block";
-    },
-    closeForm: function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    },
-    saveData: function saveData(Sujeto) {
-      var sujeto = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        edad: this.edad
-      };
-      this.addSujeto2(Sujeto, this.nombre, this.edad);
-      /*
-      console.log("NUEVO SUJETO PARA GUARDAR:");
-      console.log(sujeto);
-      */
-
-      this.nombre = "";
-      this.apellido = "";
-      this.edad = "";
-    },
-    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        text: nombre + ", " + edad,
-        category: sujeto
-      });
-      this.myDiagram.commitTransaction("make new node");
-    },
-    addSujeto: function addSujeto(sujeto) {
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        text: "sujeto",
-        category: sujeto
-      });
-      this.myDiagram.commitTransaction("make new node");
-    },
-    relFamiliar: function relFamiliar(relacion) {
-      /*Crear nodo base para relacion*/
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        key: counter
-      });
-      this.myDiagram.commitTransaction("make new node");
-      /* Crear relacion con formato especificado en 'relacion' */
-
-      this.myDiagram.startTransaction("make new link");
-      this.myDiagram.model.addLinkData({
-        from: counter,
-        to: counter,
-        category: relacion
-      });
-      this.myDiagram.commitTransaction("make new link");
-      counter++;
-    },
-    guardarDiagrama: function guardarDiagrama() {
-      var sujeto = {
-        nombre: 'test3',
-        apellido: 'testeo3',
-        genero: 'M',
-        edad: '2',
-        archivoJson: this.myDiagram.model.toJson()
-      };
-      var nuevoSujeto = sujeto;
-      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
-    }
   }
 });
 
@@ -41533,8 +41566,8 @@ var render = function() {
   return _c("div", {
     staticStyle: {
       "flex-grow": "1",
-      border: "solid 1px black",
-      height: "900px"
+      height: "900px",
+      border: "solid 1px black"
     },
     attrs: { id: "myDiagramDiv" }
   })
