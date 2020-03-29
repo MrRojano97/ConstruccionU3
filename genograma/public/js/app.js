@@ -2369,7 +2369,8 @@ var myDiagram;
       nombre: "",
       apellido: "",
       genero: "",
-      edad: ""
+      edad: "",
+      Sujeto: ""
     };
   },
   mounted: function mounted() {
@@ -3242,23 +3243,36 @@ var myDiagram;
     },
     linktest: function linktest() {},
     guardartest: function guardartest() {},
-    openForm: function openForm() {
+    openForm: function openForm(Sujeto) {
+      this.Sujeto = Sujeto;
       document.getElementById("myForm").style.display = "block";
     },
     closeForm: function closeForm() {
       document.getElementById("myForm").style.display = "none";
     },
-    saveData: function saveData() {
+    saveData: function saveData(Sujeto) {
       var sujeto = {
         nombre: this.nombre,
         apellido: this.apellido,
         edad: this.edad
       };
+      this.addSujeto2(Sujeto, this.nombre, this.edad);
+      /*
       console.log("NUEVO SUJETO PARA GUARDAR:");
       console.log(sujeto);
+      */
+
       this.nombre = "";
       this.apellido = "";
       this.edad = "";
+    },
+    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: nombre + ", " + edad,
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
     },
     addSujeto: function addSujeto(sujeto) {
       this.myDiagram.startTransaction("make new node");
@@ -41653,7 +41667,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("Hombre")
+                              return _vm.openForm("Hombre")
                             }
                           }
                         },
@@ -41670,7 +41684,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("Mujer")
+                              return _vm.openForm("Mujer")
                             }
                           }
                         },
@@ -41687,7 +41701,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("AdopLegal")
+                              return _vm.openForm("AdopLegal")
                             }
                           }
                         },
@@ -41704,7 +41718,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("AdopTemporal")
+                              return _vm.openForm("AdopTemporal")
                             }
                           }
                         },
@@ -41738,7 +41752,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.openForm(), _vm.addSujeto("Desconocido")
+                              return _vm.openForm("Desconocido")
                             }
                           }
                         },
@@ -42317,7 +42331,7 @@ var render = function() {
                 "form",
                 { staticClass: "form-container", attrs: { action: "#" } },
                 [
-                  _c("h1", [_vm._v("Ingresar Datos")]),
+                  _c("h1", [_vm._v("Ingresar Datos de " + _vm._s(_vm.Sujeto))]),
                   _vm._v(" "),
                   _vm._m(43),
                   _vm._v(" "),
@@ -42413,7 +42427,7 @@ var render = function() {
                       attrs: { type: "submit" },
                       on: {
                         click: function($event) {
-                          _vm.saveData(), _vm.closeForm()
+                          _vm.saveData(_vm.Sujeto), _vm.closeForm()
                         }
                       }
                     },
