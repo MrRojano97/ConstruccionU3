@@ -11,7 +11,7 @@
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
         <p>                  Bienvenido. ¿Qué desea realizar?           </p>
         <label class="label1"> </label>
-        <button class="button">Nuevo</button>
+        <button class="button" @click="closeModal()">Nuevo</button>
         <label class="label2"> </label>
         <button class="button">Cargar</button>
         <label class="label1"> </label>
@@ -79,6 +79,9 @@
         methods: {
             openModal() {
                 document.getElementById('id01').style.display='block';
+            },
+            closeModal() {
+                document.getElementById('id01').style.display='none'
             }
         },
         beforeMount() {
