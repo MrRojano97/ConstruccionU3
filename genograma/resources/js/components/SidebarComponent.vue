@@ -102,7 +102,7 @@
                                         <a class="disabled" href="#" >Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <aclass="disabled"  href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                      <li>
                                         <a class="disabled" href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -111,7 +111,7 @@
                                         <a class="disabled" href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
@@ -145,13 +145,13 @@
                                         <a href="#">Abuso físico <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Control <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Control <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Cortada <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Mejores amigos <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Mejores amigos <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Hostilidad cercana <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -163,7 +163,7 @@
                                         <a href="#">Abuso emocional <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Celos <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Celos <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Cortada y reparada <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -178,7 +178,7 @@
                                         <a href="#">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Admirador <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -187,7 +187,7 @@
                                         <a href="#">Conflicto <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Fundida/fusionada <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -196,7 +196,7 @@
                                         <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Limerencia <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -217,7 +217,7 @@
                                         <a href="#">Desconocidos <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Normal <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#">Normal <i class="fa fa-arrow-circle-right"></i> </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
