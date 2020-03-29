@@ -78,10 +78,10 @@
                                         <a href="#" @click="relFamiliar('Leg-Coh')">Convivencia legal    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia legal con separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('LCoh-Sep')">Convivencia legal con separacion por hecho     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Convivencia legal con separacion legal    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('LCoh-LSep')">Convivencia legal con separacion legal    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -89,11 +89,11 @@
                                     <li>
                                         <a href="#" @click="relFamiliar('Coh')">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
-                                    <li>
+                                    <li>    
                                         <a href="#" @click="relFamiliar('Coh-Sep')">Convivencia y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#" @click="relFamiliar('NCoh-Sep')" >Convivencia no sentimental    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('NSen-Coh')" >Convivencia no sentimental    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" >Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -262,7 +262,7 @@
             </div>
             
             <div class="col-9" onload="init()">
-                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
+                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:1000px"></div>
                     
             </div>
         </div>
@@ -314,6 +314,8 @@
                 "rotatingTool.snapAngleEpsilon": 15,
                 "undoManager.isEnabled": true
             });
+
+            //
 
                 function makePort(name, spot, output, input) {
                 // the port is basically just a small transparent square
@@ -374,7 +376,9 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false ,
+                    editable: true},
+
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -401,7 +405,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true },
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -427,7 +432,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false ,
+                    editable: true},
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -453,7 +459,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false ,
+                    editable: true},
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -479,7 +486,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true},
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -505,7 +513,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true },
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -531,7 +540,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true},
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -557,7 +567,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true },
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -583,7 +594,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true },
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -609,7 +621,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true},
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -635,7 +648,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true },
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -661,7 +675,8 @@
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
                     maxSize: new go.Size(100, 30),
-                    isMultiline: false },
+                    isMultiline: false,
+                    editable: true },
                     new go.Binding("text")),
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
@@ -754,7 +769,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "blue", strokeDashArray: [5,5], strokeWidth: 2 })
+                    { stroke: "blue", strokeDashArray: [5,2 ], strokeWidth: 2 })
                 )
             );
             /*Template para relacion de Comprometidos y Cohabitacion*/
@@ -788,7 +803,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "red",  strokeDashArray: [5,5],strokeWidth: 2 }),
+                    { stroke: "red",strokeWidth: 2 }),
                 $(go.Shape,
                     { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
                 )
@@ -809,10 +824,36 @@
             );
 
             /*Template para relacion de Cohabitacion Legal y Separacion por hecho (4)*/
+            this.myDiagram.linkTemplateMap.add("LCoh-Sep",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [5,2],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );  
 
             /*Template para relacion de Cohabitacion Legal y Separacino Oficial Legal (6) */
 
+            this.myDiagram.linkTemplateMap.add("LCoh-LSep",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                $(go.Shape,
+                    { stroke: "blue",  strokeDashArray: [5,2],strokeWidth: 2 }),
+                $(go.Shape,
+                    { toArrow: "OpenTriangleBottom",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
+                )
+            );
+
             /*Template para relacion de Comprometidos (commited relationship) (9)*/
+
+
+
 
             /*Template  para relacion de Cohabitacion (2)*/
             this.myDiagram.linkTemplateMap.add("Coh",
@@ -821,7 +862,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "blue",  strokeDashArray: [1.5,1.5],strokeWidth: 2 }),
+                    { stroke: "blue",  strokeDashArray: [2,1],strokeWidth: 2 }),
                 $(go.Shape,
                     { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
@@ -843,7 +884,7 @@
 
             /*Template para relacion de Cohabitacion No Sentimental(7) */
 
-            this.myDiagram.linkTemplateMap.add("NCoh-Sep",
+            this.myDiagram.linkTemplateMap.add("NSen-Coh",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
@@ -863,7 +904,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "blue", strokeDashArray: [2,1], strokeWidth: 2 })
+                    { stroke: "blue", strokeDashArray: [1,1], strokeWidth: 2 })
                 )
             );
             
@@ -876,7 +917,7 @@
                 { relinkableFrom: true, relinkableTo: true ,reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 $(go.Shape,
-                    { stroke: "blue", strokeDashArray: [2,3], strokeWidth: 3 })
+                    { stroke: "blue", strokeDashArray: [2,2], strokeWidth: 3 })
                 )
             );
 
@@ -1031,7 +1072,7 @@
                         apellido : this.apellido,
                         edad : this.edad,
                     }
-                    this.addSujeto2(Sujeto,this.nombre,this.edad);
+                    this.addSujeto2(Sujeto,this.nombre,this.apellido,this.edad);
                     /*
                     console.log("NUEVO SUJETO PARA GUARDAR:");
                     console.log(sujeto);
@@ -1043,9 +1084,9 @@
                     
                     
                 },
-                addSujeto2(sujeto,nombre,edad){
+                addSujeto2(sujeto,nombre,apellido,edad){
                     this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: nombre+", "+edad, category : sujeto});
+                    this.myDiagram.model.addNodeData({ text: nombre+" "+apellido+", "+edad, category : sujeto});
                     this.myDiagram.commitTransaction("make new node");
                 },
                 addSujeto(sujeto){
