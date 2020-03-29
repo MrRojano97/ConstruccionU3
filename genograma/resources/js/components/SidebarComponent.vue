@@ -675,31 +675,7 @@
                         mouseLeave: function(e, node) { showSmallPorts(node, false); }
                     }
                 ));
-                { locationSpot: go.Spot.Center },
-                new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-                { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
-                { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
-                { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
-                new go.Binding("angle").makeTwoWay(),
-                // the main object is a Panel that surrounds a TextBlock with a Shape
-                $(go.Picture, "imagenes/aborto_espontaneo.png"
-                ),
-                $(go.TextBlock,
-                    { margin: new go.Margin(3, 0, 0, 0),
-                    maxSize: new go.Size(100, 30),
-                    isMultiline: false,
-                    editable: true },
-                    new go.Binding("text")),
-                // four small named ports, one on each side:
-                makePort("T", go.Spot.Top, true, true),
-                makePort("L", go.Spot.Left, true, true),
-                makePort("R", go.Spot.Right, true, true),
-                makePort("B", go.Spot.Bottom, true, true),
-                { // handle mouse enter/leave events to show/hide the ports
-                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
-                }
-            ));
+                
             this.myDiagram.nodeTemplateMap.add( "Aborto",
                 $(go.Node, "Spot",
                 { locationSpot: go.Spot.Center },
