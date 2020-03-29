@@ -12,7 +12,7 @@
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="openForm('Hombre')">Hombre <i class="fa fa-square"></i> </a>
+                                        <a @click="openForm('Hombre')">Hoasdmbre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
                                         <a @click="openForm('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
@@ -51,6 +51,9 @@
                                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relaciones Familiares</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu1">
                                     <li>
+                                        <a href="#"  @click="addFamilia()">Familia    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
                                         <a href="#"  @click="relFamiliar('Matrimonio')">Matrimonio     <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
@@ -84,7 +87,7 @@
                                         <a href="#" @click="relFamiliar('LCoh-LSep')">Convivencia legal con separacion legal    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('Coh')">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -96,19 +99,19 @@
                                         <a href="#" @click="relFamiliar('NSen-Coh')" >Convivencia no sentimental    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#" >Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#" >Convivencia no sentimental y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <aclass="disabled"  href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                      <li>
-                                        <a href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="disabled" href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
@@ -229,7 +232,7 @@
                                         <a href="#">Editar      <i class="fa fa-edit"></i>    </a>
                                     </li>
                                     <li>
-                                        <a >ETC</a>
+                                        <a @click="mostartJson()">ETC</a>
                                     </li>
                                 </ul>
                             </li>
@@ -272,6 +275,7 @@
 
 <script>
     var counter = 0;
+    var familia= 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000 
     var $ = go.GraphObject.make;
     var myDiagram;
     export default {
@@ -311,11 +315,8 @@
                 "rotatingTool.handleDistance": 30,
                 "rotatingTool.snapAngleMultiple": 15,
                 "rotatingTool.snapAngleEpsilon": 15,
-                "undoManager.isEnabled": true
+                "undoManager.isEnabled": true,
             });
-
-
-            //
 
             function makePort(name, spot, output, input) {
                 // the port is basically just a small transparent square
@@ -362,6 +363,7 @@
                 $(go.Shape, "Circle", { name: "CIRCLE", cursor: "pointer", desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
                 $(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
                 );
+
 
             this.myDiagram.nodeTemplateMap.add( "Hombre",
                 $(go.Node, "Spot",
@@ -724,6 +726,9 @@
                     { stroke: "black", strokeWidth: 2 }),
                 ),
             );
+
+
+
             /*Template para relacion de Separacion por Hecho*/
             this.myDiagram.linkTemplateMap.add("Sep-Fact",
                 $(go.Link,
@@ -1116,8 +1121,8 @@
                     { stroke: "green", strokeWidth: 2 }),
                 $(go.Shape,  // the arrowhead
                     {fromArrow: "BackwardHalfTriangleTop", stroke: "green", strokeWidth: 3 }),
-                    $(go.Shape,  // the arrowhead
-                    { toArrow: "HalfTriangleBottom", stroke: "green", strokeWidth: 3 }),
+                $(go.Shape,  // the arrowhead
+                { toArrow: "HalfTriangleBottom", stroke: "green", strokeWidth: 3 }),
                 )
             );
              /*Template para relacion de fusionado*/
@@ -1215,7 +1220,29 @@
                     {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
                 )
             );
+                this.myDiagram.nodeTemplateMap.add("LinkLabel",
+                    $(go.Node,
+                    {
+                        selectable: true, avoidable: false,
+                        layerName: "Foreground"
+                    },  // always have link label nodes in front of Links
+                    $(go.Shape, "Ellipse",
+                        {
+                        width: 5, height: 5, stroke: null,
+                        portId: "", fromLinkable: true, toLinkable: true
+                        })
+                    ));
+                        // the regular link template, a straight blue arrow
+                this.myDiagram.linkTemplateMap.add("Link",
+                    $(go.Link,
+                    { relinkableFrom: true, relinkableTo: true},
+                    $(go.Shape, { stroke: "#2E68CC", strokeWidth: 2 })
+                    ));
 
+                // GraphLinksModel support for link label nodes requires specifying two properties.
+            this.myDiagram.model =
+                $(go.GraphLinksModel,
+                { linkLabelKeysProperty: "labelKeys" });
 
 
             /*Template para relacion de Amor */
@@ -1233,13 +1260,15 @@
             );
 
             },
+            // Whenever a new Link is drawng by the LinkingTool, it also adds a node data object
+            // that acts as the label node for the link, to allow links to be drawn to/from the link.
+            this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData =
+                { category: "LinkLabel" };
+                }
+                    ,    
             methods: {
                 relaciones(){
                     alert('al presionar llega aqui');
-                },
-                linktest()
-                {
-
                 },
                 guardartest()
                 {
@@ -1270,7 +1299,29 @@
 
 
                 },
-                addSujeto2(sujeto,nombre,apellido,edad){
+                addRelFamilia(){
+
+
+                },
+                addFamilia()
+                {
+                    /*Crear nodo base para relacion*/
+                    this.myDiagram.startTransaction("make new node");
+                    this.myDiagram.model.addNodeData({ key: counter });
+                    this.myDiagram.commitTransaction("make new node");
+
+                    /* Crear relacion con formato especificado en 'relacion' */
+                    this.myDiagram.startTransaction("make new link");
+                    this.myDiagram.model.addLinkData({from :counter, to :counter, labelKeys:[familia],category:'Link'});
+                    this.myDiagram.commitTransaction("make new link");
+                    /*Crear nodo base para relacion*/
+                    this.myDiagram.startTransaction("make new node");
+                    this.myDiagram.model.addNodeData({ category:'LinkLabel' ,key:familia});
+                    this.myDiagram.commitTransaction("make new node");
+                    familia++;
+                    counter++;
+                },
+                addSujeto2(sujeto,nombre,edad){
                     this.myDiagram.startTransaction("make new node");
                     this.myDiagram.model.addNodeData({ text: nombre+" "+apellido+", "+edad, category : sujeto});
                     this.myDiagram.commitTransaction("make new node");
@@ -1290,6 +1341,11 @@
                     this.myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
                     this.myDiagram.commitTransaction("make new link");
                     counter++;
+                },
+                mostartJson()
+                {
+                    
+                    console.log(this.myDiagram.model.toJson());
                 },
                 guardarDiagrama(){
                     var sujeto = {
