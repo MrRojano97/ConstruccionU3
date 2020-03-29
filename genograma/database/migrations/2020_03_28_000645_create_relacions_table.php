@@ -18,11 +18,11 @@ class CreateRelacionsTable extends Migration
             $table->string("category");
             $table->integer("from");
             $table->integer("to");
-            $table->integer("idsujeto");
-
+            $table->integer("idSujeto");
+            $table->timestamps();
             $table->foreign('from')->references('id')->on('genomas');
             $table->foreign('to')->references('id')->on('genomas');
-            $table->foreign('idsujeto')->references('id')->on('sujetos');
+            $table->foreign('idSujeto')->references('id')->on('sujetos');
         });
     }
 

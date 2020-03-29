@@ -35,7 +35,7 @@ Route::get('/informeGenomaUnNodo/{post}','InformesController@informeGenomaUnNodo
 Route::get('/informeGenomaDosNodo/{post}','InformesController@informeGenomaUnNodo' );
 
 Route::resource('genoma', 'GenomaController');
-Route::get('/genoma/{post}','GenomaController@show' );
+//Route::get('/genoma/{post}','GenomaController@show' );
 Route::resource('relacion', 'RelacionController');
 
 Route::get('/welcome', function(){
