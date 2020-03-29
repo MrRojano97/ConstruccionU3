@@ -1259,13 +1259,15 @@
                 )
             );
 
-            },
             // Whenever a new Link is drawng by the LinkingTool, it also adds a node data object
             // that acts as the label node for the link, to allow links to be drawn to/from the link.
-            this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData =
-                { category: "LinkLabel" };
-                }
-                    ,    
+            
+            this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData ={ category: "LinkLabel" };
+
+            },
+            
+            
+                   
             methods: {
                 relaciones(){
                     alert('al presionar llega aqui');
