@@ -37,7 +37,7 @@
                                         <p class="margin-b-5">2. Formato gráfico de lectura fácil.</p>
                                         <p class="margin-b-5">3. Logra identificar pautas generacionales, biomédicas y psicosociales.</p>
                                     </div>
-                                    <a href="#" class="content-wrapper-link"></a>    
+                                    <a href="#" class="content-wrapper-link"></a>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".2s">
                                 <div class="service" data-height="height">
                                     <div class="service-element">
-                                        <img class="img-responsive" src="https://sites.google.com/site/mdcluisaperez/_/rsrc/1436159893500/2-3-inconvenientes/publicidad-en-internet-desventajas.png">
+                                        <img class="img-responsive" style="width: 230px;" src="https://sites.google.com/site/mdcluisaperez/_/rsrc/1436159893500/2-3-inconvenientes/publicidad-en-internet-desventajas.png">
                                     </div>
                                     <div class="service-info">
                                         <h3>Limitaciones</h3>
@@ -53,7 +53,7 @@
                                         <p class="margin-b-5">2. El tiempo requerido para su elaboración (20 a 30 minutos en promedio)</p>
                                         <p class="margin-b-5">3. Que solo refleja la situación de un momento determinado.</p>
                                     </div>
-                                    <a href="#" class="content-wrapper-link"></a>    
+                                    <a href="#" class="content-wrapper-link"></a>
                                 </div>
                             </div>
                         </div>
@@ -62,20 +62,20 @@
                                 <div class="service" data-height="height">
                                     <div class="service-element">
                                         <img class="img-responsive grande" src="https://2.bp.blogspot.com/-x0m9oTRP-kA/VHuCkTI-opI/AAAAAAAAFls/jrMwsfRh2Y4/s1600/ventajas-y-desventajas.png">
-                                        
+
                                     </div>
                                     <div class="service-info">
                                         <h3>Discrepancias</h3>
                                         <p class="margin-b-5"><p class="margin-b-5"> Como la información obtenida es solo de una persona, lo cual para algunos autores puede distorsionar, consciente o inconscientemente la realidad.</p>
                                     </div>
-                                    <a href="#" class="content-wrapper-link"></a>    
+                                    <a href="#" class="content-wrapper-link"></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
     </div>
-    
+
 @endsection
 
 @extends('layouts.fother')
