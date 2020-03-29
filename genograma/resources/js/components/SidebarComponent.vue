@@ -89,7 +89,7 @@
                                     <li>
                                         <a href="#" @click="relFamiliar('Coh')">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
-                                    <li>    
+                                    <li>
                                         <a href="#" @click="relFamiliar('Coh-Sep')">Convivencia y separacion    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
@@ -136,85 +136,34 @@
                                         <a href="#" @click="relFamiliar('distante')">Distante <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
+                                        <a href="#" @click="relFamiliar('distante_Hostil')">Distante Hostil<i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('cercanoHostil')">Cercano Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('fusionado_Hostil')">fusionado Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('fusionado')">Fusionado  <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('abusoFisico')">Abuso Fisico  <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('abusoEmocional')">Abuso Emocional  <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('violenciaDistante')">Violencia Distante <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('violenciaCercana')">Violencia Cercana <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('fusionadoViolencia')">fusionado violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
                                         <a href="#" @click="relFamiliar('amistad')">Amistad <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Abuso físico <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Control <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Cortada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Mejores amigos <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Hostilidad cercana <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Violencia cercana <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Abuso emocional <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Celos <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Cortada y reparada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Admirador <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Conflicto <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fundida/fusionada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Limerencia <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Conexión emocional <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Desconfianza <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enfocada negativamente <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Desconocidos <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Normal <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
@@ -260,8 +209,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6" onload="init()">
-                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
+
+            <div class="col-9" onload="init()">
+                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:1000px"></div>
+
             </div>
             <div class="col"><button-component></button-component></div>
         </div>
@@ -389,7 +340,6 @@
                     mouseLeave: function(e, node) { showSmallPorts(node, false); }
                 }
             ));
-
             this.myDiagram.nodeTemplateMap.add( "Mujer",
                 $(go.Node, "Spot",
                 { locationSpot: go.Spot.Center },
@@ -709,7 +659,7 @@
                 { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })
             );
 
-            //RELACIONES FAMILIARES 
+            //RELACIONES FAMILIARES
 
             /*Template para relacion de Matrimonio*/
             this.myDiagram.linkTemplateMap.add("Matrimonio",
@@ -807,9 +757,7 @@
                     { toArrow: "TripleForwardSlash", stroke: "red", strokeWidth: 3, scale: 1.3 }),
                 )
             );
-
             /*Template para relacion de Cohabitacion Legal (1) */
-
             this.myDiagram.linkTemplateMap.add("Leg-Coh",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -821,7 +769,6 @@
                     { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
             );
-
             /*Template para relacion de Cohabitacion Legal y Separacion por hecho (4)*/
             this.myDiagram.linkTemplateMap.add("LCoh-Sep",
                 $(go.Link,
@@ -833,10 +780,8 @@
                 $(go.Shape,
                     { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
-            );  
-
+            );
             /*Template para relacion de Cohabitacion Legal y Separacino Oficial Legal (6) */
-
             this.myDiagram.linkTemplateMap.add("LCoh-LSep",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -848,11 +793,7 @@
                     { toArrow: "OpenTriangleBottom",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
             );
-
             /*Template para relacion de Comprometidos (commited relationship) (9)*/
-
-
-
 
             /*Template  para relacion de Cohabitacion (2)*/
             this.myDiagram.linkTemplateMap.add("Coh",
@@ -868,7 +809,6 @@
             );
 
             /*Template para relacion de Cohabitacion y separacion  (5)*/
-
             this.myDiagram.linkTemplateMap.add("Coh-Sep",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -880,9 +820,7 @@
                     { toArrow: "OpenTriangleTop",stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
             );
-
             /*Template para relacion de Cohabitacion No Sentimental(7) */
-
             this.myDiagram.linkTemplateMap.add("NSen-Coh",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -894,9 +832,7 @@
                     { toArrow: "BigEndArrow", stroke: "blue", strokeWidth: 3, scale: 1.3 }),
                 )
             );
-            
             /*Template para relacion Casual/Saliendo (3)*/
-
             this.myDiagram.linkTemplateMap.add("Casual",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -906,10 +842,7 @@
                     { stroke: "blue", strokeDashArray: [1,1], strokeWidth: 2 })
                 )
             );
-            
-
             /*Template para relacion de Una Noche (8)*/
-
             this.myDiagram.linkTemplateMap.add("1Noche",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -919,9 +852,7 @@
                     { stroke: "blue", strokeDashArray: [2,2], strokeWidth: 3 })
                 )
             );
-
             /*Template para relacion de Amorio (10)*/
-
             this.myDiagram.linkTemplateMap.add("Amorio",
                 $(go.Link,
                 { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -996,6 +927,46 @@
                 $(go.Shape,
                     { stroke: "blue", strokeWidth: 2 }),
                 $(go.Shape,  // the arrowhead
+                    { toArrow: "Standard", stroke: "blue", fill:"white" }),
+                    $(go.Shape,  // the arrowhead
+                    {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
+                )
+            );
+            /*Template para relacion de abuso fisico*/
+            this.myDiagram.linkTemplateMap.add("abusoFisico",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "blue", strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "Standard", stroke: "blue", fill:"blue" }),
+                    $(go.Shape,  // the arrowhead
+                    {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
+                )
+            );
+            /*Template para relacion de abuso emosional*/
+            this.myDiagram.linkTemplateMap.add("abusoEmocional",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0.3: "blue", 0.7: "blue"}),
+                        strokeCap: "square"
+                        })
+                }),
+                $(go.Shape,  // the arrowhead
                     { toArrow: "Standard", stroke: "blue", fill:null }),
                     $(go.Shape,  // the arrowhead
                     {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
@@ -1028,6 +999,61 @@
                     { stroke: "black",strokeDashArray: [5,5], strokeWidth: 4 }),
                 )
             );
+             /*Template para relacion de distante hostil*/
+            this.myDiagram.linkTemplateMap.add("cercanoHostil",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "red",  strokeDashArray: [3,3], strokeWidth: 4 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "StretchedDiamond", stroke: "red", fill:"white",strokeWidth: 3 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                )
+            );
+             /*Template para relacion de distante_Hostil*/
+            this.myDiagram.linkTemplateMap.add("distante_Hostil",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "red",  strokeDashArray: [2,2], strokeWidth: 3 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "StretchedDiamond", stroke: "red", fill:"white",strokeWidth: 3 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                )
+            );
+            /*Template para relacion de fusionado_Hostil*/
+            this.myDiagram.linkTemplateMap.add("fusionado_Hostil",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0.3: "red", 0.7: "red"}),
+                        strokeCap: "square"
+                        })
+                }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                    $(go.Shape,  // the arrowhead
+                    { fromArrow: "Diamond", stroke: "red", fill:"white",  strokeWidth: 3 }),
+                )
+            );
             /*Template para relacion de amistad*/
             this.myDiagram.linkTemplateMap.add("amistad",
                 $(go.Link,
@@ -1043,8 +1069,101 @@
                     { toArrow: "HalfTriangleBottom", stroke: "green", strokeWidth: 3 }),
                 )
             );
-
-
+             /*Template para relacion de fusionado*/
+            this.myDiagram.linkTemplateMap.add("fusionado",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0: "red", 0.5: "red", 1: "red" }),
+                        strokeCap: "square"
+                        })
+                })
+            ));
+            /*Template para relacion de violenciaDistante*/
+            this.myDiagram.linkTemplateMap.add("violenciaDistante",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0.3: "red", 0.7: "red"}),
+                        strokeCap: "square"
+                        })
+                }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
+                )
+            );
+            /*Template para relacion de violenciaCercana*/
+            this.myDiagram.linkTemplateMap.add("violenciaCercana",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0: "red", 0.5: "red", 1: "red"}),
+                        strokeCap: "square"
+                        })
+                }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
+                )
+            );
+            /*Template para relacion de fusionado violencia*/
+            this.myDiagram.linkTemplateMap.add("fusionadoViolencia",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0: "red", 0.5: "black", 1: "red"}),
+                        strokeCap: "square"
+                        })
+                }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
+                )
+            );
             },
             methods: {
                 relaciones(){
