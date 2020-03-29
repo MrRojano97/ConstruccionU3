@@ -2119,6 +2119,50 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 function traerDatos() {
   var xhttp = new XMLHttpRequest();
   xhttp.open('GET', 'archivoJson', true);
@@ -2580,6 +2624,7 @@ __webpack_require__.r(__webpack_exports__);
 var counter = 0;
 var $ = go.GraphObject.make;
 var myDiagram;
+var nodosSeleccionados = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Diagram',
   data: function data() {
@@ -2588,8 +2633,84 @@ var myDiagram;
       apellido: "",
       genero: "",
       edad: "",
-      Sujeto: ""
+      Sujeto: "",
+      nodosSeleccionado: nodosSeleccionados
     };
+  },
+  methods: {
+    relaciones: function relaciones() {
+      alert('al presionar llega aqui');
+    },
+    linktest: function linktest() {},
+    guardartest: function guardartest() {},
+    openForm: function openForm(Sujeto) {
+      this.Sujeto = Sujeto;
+      document.getElementById("myForm").style.display = "block";
+    },
+    closeForm: function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    },
+    saveData: function saveData(Sujeto) {
+      var sujeto = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad
+      };
+      this.addSujeto2(Sujeto, this.nombre, this.edad);
+      /*
+      console.log("NUEVO SUJETO PARA GUARDAR:");
+      console.log(sujeto);
+      */
+
+      this.nombre = "";
+      this.apellido = "";
+      this.edad = "";
+    },
+    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: nombre + ", " + edad,
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
+    },
+    addSujeto: function addSujeto(sujeto) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        text: "sujeto",
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
+    },
+    relFamiliar: function relFamiliar(relacion) {
+      /*Crear nodo base para relacion*/
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter
+      });
+      this.myDiagram.commitTransaction("make new node");
+      /* Crear relacion con formato especificado en 'relacion' */
+
+      this.myDiagram.startTransaction("make new link");
+      this.myDiagram.model.addLinkData({
+        from: counter,
+        to: counter,
+        category: relacion
+      });
+      this.myDiagram.commitTransaction("make new link");
+      counter++;
+    },
+    guardarDiagrama: function guardarDiagrama() {
+      var sujeto = {
+        nombre: 'test3',
+        apellido: 'testeo3',
+        genero: 'M',
+        edad: '2',
+        archivoJson: this.myDiagram.model.toJson()
+      };
+      var nuevoSujeto = sujeto;
+      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
+    }
   },
   mounted: function mounted() {
     this.myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
@@ -2757,6 +2878,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2784,6 +2908,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2811,6 +2938,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2838,6 +2968,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2865,6 +2998,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2892,6 +3028,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2919,6 +3058,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2946,6 +3088,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -2973,6 +3118,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -3000,6 +3148,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -3027,6 +3178,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -3054,6 +3208,9 @@ var myDiagram;
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
@@ -3069,6 +3226,14 @@ var myDiagram;
           port.fill = show ? "rgba(0,0,0,.3)" : null;
         }
       });
+    }
+
+    function actualizarNodosSeleccionados(entorno, nodo) {
+      nodosSeleccionados = [];
+      entorno.diagram.selection.each(function (nodo) {
+        nodosSeleccionados.push(nodo.data.text);
+      });
+      console.log("-> nodos seleccionados: [" + nodosSeleccionados + "]");
     }
 
     var linkSelectionAdornmentTemplate = $(go.Adornment, "Link", $(go.Shape, // isPanelMain declares that this Shape shares the Link.geometry
@@ -8065,9 +8230,9 @@ var myDiagram;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss& ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -8078,6 +8243,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "@-webkit-keyframes expand {\n0% {\n    opacity: 0;\n    max-height: 0;\n}\n100% {\n    opacity: 1;\n    max-height: 30em;\n}\n}\n@keyframes expand {\n0% {\n    opacity: 0;\n    max-height: 0;\n}\n100% {\n    opacity: 1;\n    max-height: 30em;\n}\n}\nhtml {\n  overflow-y: scroll;\n}\nbody {\n  position: relative;\n  background: #f0f4f9;\n  line-height: 1.6;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;\n}\n.botonDetalles {\n  display: block;\n  /* IE */\n  width: 70%;\n  max-width: 50em;\n  margin: 3em auto;\n}\np {\n  margin: 0;\n}\np + p {\n  margin-top: 1.5em;\n}\na {\n  color: #05386b;\n}\ndetails > div {\n  position: relative;\n  padding: 0.25em 0.5em;\n  margin-bottom: 0.6em;\n  border-radius: 0.3em;\n  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);\n  background-color: white;\n}\nsummary {\n  position: relative;\n  display: block;\n  background: white;\n  padding-left: 3em;\n  margin-bottom: 0.5em;\n  font-size: 1.4em;\n  line-height: 3;\n  box-sizing: border-box;\n  list-style: none;\n  cursor: pointer;\n  border-radius: 0.3em;\n  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);\n}\nsummary:hover,\nsummary:focus {\n  background: #05386b;\n  color: white;\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);\n  outline: 0;\n}\nsummary::-webkit-details-marker {\n  display: none;\n}\nsummary::before {\n  content: \"+\";\n  position: absolute;\n  top: 50%;\n  left: 1em;\n  transform: translateY(-50%);\n  width: 1em;\n  height: 1em;\n  margin-right: 1em;\n  background: #05386b;\n  color: white;\n  font-family: Arial, sans-serif;\n  font-size: 20px;\n  line-height: 1;\n  text-align: center;\n  border-radius: 50%;\n}\ndetails[open] summary::before {\n  content: \"-\";\n  line-height: 0.9;\n}\ndetails[open] summary:hover::before,\ndetails[open] summary:focus::before {\n  background: white;\n  color: #05386b;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nbody[data-v-c59fa660]{\nbackground-color: #e0e0e0\n}\n#example2[data-v-c59fa660] {\n  padding: 10px;\n  border-radius: 50px;\n  box-shadow: 3px 5px 2px 0px               rgba(0,0,0,0.3) inset,\n  -1px -3px 10px 0px rgba(250,250,250,0.3) inset;\n  border-style: none;\n  outline: none;\n  margin:10px;\n  font-size: 16px; font-family: monospace;\n}\n#btn[data-v-c59fa660]{\n  padding: 4px;\n  border-radius: 50px;\n  box-shadow: 3px 5px 2px 0px rgba(0,0,0,0.3),\n  -1px -3px 10px 0px rgba(250,250,250,0.3);\n  border-style: none;\n  outline: none;\n\tmargin:12px;\n  font-size: 14px; font-family: monospace;\n  cursor: pointer;\n}\n#btn[data-v-c59fa660]:hover{\n  transform : scale(0.98) translateY(2px);\n}\n#btn[data-v-c59fa660]:active\n  {\n   box-shadow: 3px 5px 2px 0px            rgba(0,0,0,0.3) inset,\n  -1px -3px 10px 0px rgba(250,250,250,0.3) inset;\n}\n\n", ""]);
 
 // exports
 
@@ -41110,15 +41294,45 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&":
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=1&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -41784,10 +41998,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41814,6 +42028,10 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", [
+            _c("input", { attrs: { id: "example2", type: "text" } }),
+            _vm._v(" "),
+            _c("input", { attrs: { id: "btn", type: "submit" } }),
+            _vm._v(" "),
             _c("table", { staticClass: "table" }, [
               _c("thead", [
                 _c("tr", [
@@ -41854,6 +42072,14 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", [
+            _c("input", { attrs: { id: "example2", type: "text" } }),
+            _vm._v(" "),
+            _c("input", { attrs: { id: "btn", type: "submit" } }),
+            _vm._v(" "),
+            _c("input", { attrs: { id: "example2", type: "text" } }),
+            _vm._v(" "),
+            _c("input", { attrs: { id: "btn", type: "submit" } }),
+            _vm._v(" "),
             _c("table", { staticClass: "table" }, [
               _c("thead", [
                 _c("tr", [
@@ -42735,6 +42961,79 @@ var render = function() {
                     _vm._m(40),
                     _vm._v(" "),
                     _vm._m(41)
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu4",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Generar Reportes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu4" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 1 nodo      "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 2 nodos    "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Listado tipo de nodos     "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ])
                   ]
                 )
               ]),
@@ -55640,11 +55939,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=template&id=c59fa660& */ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&");
+/* harmony import */ var _ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& */ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&");
 /* harmony import */ var _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ButtonComponent.vue?vue&type=script&lang=js&");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& */ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&");
+/* harmony import */ var _ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=style&index=1&lang=scss& */ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -55653,13 +55954,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "c59fa660",
   null
   
 )
@@ -55687,35 +55988,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&":
+/***/ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&":
 /*!***************************************************************************************!*\
-  !*** ./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  !*** ./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss& ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=1&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=template&id=c59fa660& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -55984,6 +56301,8 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! D:\Escritorio\Construccion\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\Escritorio\Construccion\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
