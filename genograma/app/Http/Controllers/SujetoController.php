@@ -9,31 +9,28 @@ class SujetoController extends Controller
 {
     //
     public function store(Request $request){
-        $request->validate(
-            ['nombre'=>'',
-            'apellido'=>'',
-            'genero'=>'',
-            'edad'=>'']
-        );
+        
         $sujeto = new Sujeto();
         $sujeto->nombre=$request->nombre;
         $sujeto->apellido=$request->apellido;
         $sujeto->genero=$request->genero;
         $sujeto->edad=$request->edad;
+        $sujeto->archivoJson=$request->archivoJson;
         $sujeto->save();
         //return redirect('/rutaSujeto/'.$sujeto->id);
         return $sujeto;
-    }
+    } 
 
     public function index(){
-        $posts=Sujeto::all();
-        //return view('rutaSujeto.index',\compact('posts'));
-        return $posts;
+        $sujetos=Sujeto::all();
+        
+        return $sujetos;
+        //return compact('posts');
     }
 
     public function show( $id){
         $sujeto = Sujeto::findOrFail($id);
-        return view('rutaSujeto.show',\compact('sujeto'));
+        //return view('rutaSujeto.show',\compact('sujeto'));
         return $sujeto;
     }
 
@@ -59,4 +56,5 @@ class SujetoController extends Controller
         $sujeto->delete();
         return $id;
     }
+
 }

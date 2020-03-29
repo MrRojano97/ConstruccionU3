@@ -32,7 +32,7 @@ Route::put('/rutaSujeto/{post}','SujetoController@update' );
 Route::delete('/rutaSujeto/{post}','SujetoController@destroy' );
 
 Route::resource('genoma', 'GenomaController');
-Route::get('/genoma/{post}','GenomaController@show' );
+//Route::get('/genoma/{post}','GenomaController@show' );
 Route::resource('relacion', 'RelacionController');
 
 Route::get('/welcome', function(){

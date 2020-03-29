@@ -27,7 +27,7 @@ class GenomaController extends Controller
     
     public function index(){
         $posts=Genoma::all();
-        return view('genoma.index',\compact('posts'));
+        return $posts;
     }
 
     public function show( $id){
@@ -56,5 +56,5 @@ class GenomaController extends Controller
         $genograma= Genoma::findOrFail($id);
         $genograma->delete();
         return $id;
-    }
+    } 
 }
