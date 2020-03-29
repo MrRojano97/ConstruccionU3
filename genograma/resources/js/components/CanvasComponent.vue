@@ -29,7 +29,6 @@
     }
 </script-->
 
-
 <script>
 
   var $ = go.GraphObject.make;
@@ -47,8 +46,7 @@
                 $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
                 $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
                 )
-
-     });
+            });
     }
   }
 </script>
