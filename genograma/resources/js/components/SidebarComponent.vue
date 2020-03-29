@@ -1,7 +1,7 @@
 <template>
     <div class="conteiner">
-        <div class="row justify-content-md-center">
-            <div class="col-3">
+        <div class="row">
+            <div class="col">
                 <div class="side-div">
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -260,11 +260,10 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-9" onload="init()">
-                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:1000px"></div>
-                    
+            <div class="col-6" onload="init()">
+                <div id="myDiagramDiv" style="flex-grow: 1;border: solid 1px black;height:630px"></div>
             </div>
+            <div class="col"><button-component></button-component></div>
         </div>
     </div>
 </template>
@@ -704,10 +703,10 @@
                     { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })  // use selection object's strokeWidth
                 );
 
-            var headSelectionAdornmentTemplate = 
+            var headSelectionAdornmentTemplate =
                 $(go.Adornment, "Arrowhead",
                 $(go.Shape,
-                { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 }) 
+                { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })
             );
 
             //RELACIONES FAMILIARES 
@@ -719,7 +718,7 @@
                 { relinkableFrom: true, relinkableTo: true, reshapable: true },
                 {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                 /*Forma del Link */
-                new go.Binding("points").makeTwoWay(),      
+                new go.Binding("points").makeTwoWay(),
                 $(go.Shape,
                     { stroke: "black", strokeWidth: 2 }),
                 ),
@@ -1045,14 +1044,14 @@
                 )
             );
 
-                
-            },    
+
+            },
             methods: {
                 relaciones(){
                     alert('al presionar llega aqui');
                 },
                 linktest()
-                {  
+                {
 
                 },
                 guardartest()
@@ -1081,8 +1080,8 @@
                     this.apellido = "";
                     this.edad = "";
 
-                    
-                    
+
+
                 },
                 addSujeto2(sujeto,nombre,apellido,edad){
                     this.myDiagram.startTransaction("make new node");
@@ -1108,11 +1107,11 @@
                 guardarDiagrama(){
                     var sujeto = {
                         nombre: 'test3',
-                        apellido: 'testeo3', 
-                        genero: 'M', 
-                        edad: '2', 
+                        apellido: 'testeo3',
+                        genero: 'M',
+                        edad: '2',
                         archivoJson: this.myDiagram.model.toJson()
-                    } 
+                    }
                     const nuevoSujeto = sujeto;
                     axios.post('/rutaSujeto', nuevoSujeto)
                         .then((res) =>{
@@ -1120,9 +1119,8 @@
                 }
             }
         }
-    
+
 </script>
 
 
-  
-  
+

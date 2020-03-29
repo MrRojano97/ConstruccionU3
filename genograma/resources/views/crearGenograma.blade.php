@@ -21,8 +21,6 @@
           <div>
             <sidebar-component></sidebar-component>
             <modal-component></modal-component>
-            <!--<div id="myPaletteDiv" style="width: 105px; margin-right: 2px; background-color: whitesmoke; border: solid 1px black"></div>-->
-            <canvas-component></canvas-component>
           </div>
           <div>
 
