@@ -1,18 +1,19 @@
 <template>
     <div class="conteiner">
+    <modal-component @idsujeto="id = $event"></modal-component> 
         <div class="row">
             <div class="col-2">
                 <div class="side-div">
                     <nav id="sidebar">
                         <div class="sidebar-header">
-                            <h3>Acciones </h3>
+                            <h3> Acciones </h3>
                         </div>
                         <ul class="list-unstyled components">
                             <li class="active">
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="openForm('Hombre')">Hombre <i class="fa fa-square"></i> </a>
+                                        <a @click="openForm('Hombre')">{{id}} Hombre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
                                         <a @click="openForm('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
@@ -301,6 +302,7 @@
         name: 'Diagram',
         data (){
             return {
+                id: "",
                 nombre : "",
                 apellido : "",
                 genero : "",
@@ -341,7 +343,7 @@
                     console.log("NUEVO SUJETO PARA GUARDAR:");
                     console.log(sujeto);
                     */
-                    console.log(this.esPrincipal)
+                    console.log(this.id);
                     this.nombre = "";
                     this.apellido = "";
                     this.edad = "";
@@ -458,7 +460,6 @@
                     $(go.Shape, { fill: null, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] }),
                     $(go.Placeholder),
                 );
-
             var nodeResizeAdornmentTemplate =
                 $(go.Adornment, "Spot",
                     { locationSpot: go.Spot.Right },
@@ -482,7 +483,6 @@
                     $(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
                 );
 
-
             this.myDiagram.nodeTemplateMap.add( "Hombre",
                 $(go.Node, "Spot",
                 { locationSpot: go.Spot.Center },
@@ -492,7 +492,7 @@
                 { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
                 new go.Binding("angle").makeTwoWay(),
                 // the main object is a Panel that surrounds a TextBlock with a Shape
-                $(go.Picture, "imagenes/hombre.png"
+                $(go.Picture, "imagenes/hombre2.png"
                 ),
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
@@ -501,6 +501,7 @@
                     editable: true},
 
                     new go.Binding("text")),
+               
                 // four small named ports, one on each side:
                 makePort("T", go.Spot.Top, true, true),
                 makePort("L", go.Spot.Left, true, true),
