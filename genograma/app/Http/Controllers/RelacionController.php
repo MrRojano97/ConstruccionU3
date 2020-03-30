@@ -16,7 +16,7 @@ class RelacionController extends Controller
             'from'=>'',
             'to'=>'',
             'idSujeto'=>'']
-        );
+        ); 
         $relacion = new Relacion();
         $relacion->id=$request->id;
         $relacion->category=$request->category;
@@ -34,20 +34,20 @@ class RelacionController extends Controller
         return $posts;
     }
 
-    public function show( $id){
-        $sujeto = Relacion::findOrFail($id);
+    public function show( $idRelacion,$idSujeto){
+        $sujeto = Relacion::where('id', '=', $idRelacion, 'and', 'idSujeto', '=', $idSujeto );
         //return view('relacion.show',compact('sujeto'));
         return $sujeto ;
     }
 
-    public function update(Request $request, $id){
+    public function update( $idRelacion,$idSujeto, Request $request){
         $request->validate(
             ['category'=>'',
             'from'=>'',
             'to'=>'',
             'idSujeto'=>'']
         );
-        $relacion = Relacion::find($id);
+        $relacion = Relacion::where('id', '=', $idRelacion, 'and', 'idSujeto', '=', $idSujeto );
         $relacion->category=$request->category;
         $relacion->from=$request->from;
         $relacion->to=$request->to;
@@ -57,10 +57,10 @@ class RelacionController extends Controller
         return $relacion;
     }
 
-    public function destroy($id){
-        $relacion= Relacion::findOrFail($id);
+    public function destroy($idRelacion,$idSujeto){
+        $relacion= Relacion::where('id', '=', $idRelacion, 'and', 'idSujeto', '=', $idSujeto );
         $relacion->delete();
         //return redirect('/relacion');
-        return $id;
+        return $idRelacion;
     }
 }
