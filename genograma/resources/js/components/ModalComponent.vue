@@ -1,5 +1,3 @@
-
-
 <template>
 
 <body>
@@ -8,7 +6,6 @@
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content">
       <div class="w3-container">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
         <p>                  Bienvenido. ¿Qué desea realizar?           </p>
         <label class="label1"> </label>
         <button class="button" @click="closeModal()">Nuevo</button>
@@ -69,11 +66,11 @@
     export default {
         data() {
             return {
-
+                idsujeto: ''
             }
         },
         mounted() {
-            console.log('Wena los ka')
+            
             this.openModal();
         },
         methods: {
@@ -81,7 +78,19 @@
                 document.getElementById('id01').style.display='block';
             },
             closeModal() {
-                document.getElementById('id01').style.display='none'
+                var sujeto = {
+                    nombre: 'Franceso',
+                    apellido: 'Virgolini',
+                    genero: 'Fiuuuuuuu',
+                    edad: '45',
+                    archivoJson: 'cualquier wea'
+                }
+                const nuevoSujeto = sujeto;
+                axios.post('/sujeto', nuevoSujeto)
+                    .then((res) =>{
+                        this.$emit('idsujeto',res.data.sujeto.id);
+                    })
+                document.getElementById('id01').style.display='none';
             }
         },
         beforeMount() {

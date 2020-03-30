@@ -20,7 +20,6 @@
       <div id="sample">
           <div>
             <sidebar-component></sidebar-component>
-            <modal-component></modal-component>
           </div>
 
             <textarea id="mySavedModel" style="width:0%;height:0px">
