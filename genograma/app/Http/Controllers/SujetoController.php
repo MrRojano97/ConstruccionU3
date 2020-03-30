@@ -14,24 +14,24 @@ class SujetoController extends Controller
         $sujeto->id=$request->id;
         $sujeto->nombre=$request->nombre;
         $sujeto->apellido=$request->apellido;
-        $sujeto->edad=$request->edad;
         $sujeto->archivoJson=$request->archivoJson;
         $sujeto->save();
         //return redirect('/rutaSujeto/'.$sujeto->id);
-        return $sujeto;
+        //return $sujeto;
+        return compact('sujeto');
     } 
 
     public function index(){
         $sujetos=Sujeto::all();
         
-        return $sujetos;
+        return compact('sujetos');
         //return compact('posts');
     }
 
     public function show( $id){
         $sujeto = Sujeto::findOrFail($id);
         //return view('rutaSujeto.show',\compact('sujeto'));
-        return $sujeto;
+        return compact('sujeto');
     }
 
     public function update(Request $request, $id){
@@ -39,17 +39,15 @@ class SujetoController extends Controller
             [
             'nombre'=>'',
             'apellido'=>'',
-            'edad'=>'',
             'archivoJson'=>''
             ]
         );
         $sujeto = Sujeto::find($id);
         $sujeto->nombre=$request->nombre;
         $sujeto->apellido=$request->apellido;
-        $sujeto->edad=$request->edad;
         $sujeto->archivoJson=$request->archivoJson;
         $sujeto->save();
-        return $sujeto;
+        return compact('sujeto');
     } 
 
     public function destroy($id){

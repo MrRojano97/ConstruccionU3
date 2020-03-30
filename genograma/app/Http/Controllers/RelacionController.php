@@ -24,7 +24,7 @@ class RelacionController extends Controller
         $relacion->to=$request->to;
         $relacion->idsujeto=$request->idSujeto;
         $relacion->save();
-        return $relacion;
+        return compact('relacion');
     }
 
     
@@ -36,6 +36,7 @@ class RelacionController extends Controller
 
     public function show( $idRelacion,$idSujeto){
         $sujeto = Relacion::where('id', '=', $idRelacion, 'and', 'idSujeto', '=', $idSujeto );
+        $sujeto=$sujeto->get();
         //return view('relacion.show',compact('sujeto'));
         return $sujeto ;
     }
