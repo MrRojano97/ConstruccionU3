@@ -13,8 +13,9 @@ class CreateRelacionsTable extends Migration
      */
     public function up()
     { 
+        //LA ID DEL SUJETO MAS ID DEL GENOMA SERA LA PRIMARI KEY
         Schema::create('relacions', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id');
             $table->string("category");
             $table->integer("from");
             $table->integer("to");
@@ -23,6 +24,7 @@ class CreateRelacionsTable extends Migration
             $table->foreign('from')->references('id')->on('genomas');
             $table->foreign('to')->references('id')->on('genomas');
             $table->foreign('idSujeto')->references('id')->on('sujetos');
+            $table->primary(['id', 'idSujeto']);
         });
     }
 
