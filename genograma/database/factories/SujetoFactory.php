@@ -10,6 +10,7 @@ $factory->define(Sujeto::class, function (Faker $faker) {
         'nombre'=> $faker->sentence(),
         'apellido'=>$faker ->sentence(),
         'genero'=>$faker ->sentence(),
-        'edad'=>$faker->sentence()
+        'edad'=>$faker->sentence(),
+        'archivoJson'=>$faker->sentence()
     ];
 });
