@@ -15,7 +15,8 @@ class SujetoController extends Controller
         $sujeto->nombre=$request->nombre;
         $sujeto->apellido=$request->apellido;
         $sujeto->archivoJson=$request->archivoJson;
-        $sujeto->save();
+        $a=$sujeto->save();
+        //print_r(($a->id));
         //return redirect('/rutaSujeto/'.$sujeto->id);
         //return $sujeto;
         return compact('sujeto');
