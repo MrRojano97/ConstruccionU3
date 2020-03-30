@@ -2148,7 +2148,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var $ = go.GraphObject.make; // This works because we have overridden the /extensionsTS/tsconfig.json file
 // in the options to the loader: 'ts-loader', in the webpack.config.js
 
@@ -2262,6 +2261,9 @@ $(document).ready(function () {});
   methods: {
     openModal: function openModal() {
       document.getElementById('id01').style.display = 'block';
+    },
+    closeModal: function closeModal() {
+      document.getElementById('id01').style.display = 'none';
     }
   },
   beforeMount: function beforeMount() {
@@ -2280,6 +2282,28 @@ $(document).ready(function () {});
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2553,8 +2577,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 var counter = 0;
+var familia = 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000
+
 var $ = go.GraphObject.make;
 var myDiagram;
+var seleccionado;
 var nodosSeleccionados = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Diagram',
@@ -2564,8 +2591,8 @@ var nodosSeleccionados = [];
       apellido: "",
       genero: "",
       edad: "",
-      Sujeto: "",
-      nodosSeleccionado: nodosSeleccionados
+      nodosSeleccionado: nodosSeleccionados,
+      esPrincipal: false
     };
   },
   methods: {
@@ -2585,7 +2612,8 @@ var nodosSeleccionados = [];
       var sujeto = {
         nombre: this.nombre,
         apellido: this.apellido,
-        edad: this.edad
+        edad: this.edad,
+        esPrincipal: this.esPrincipal
       };
       this.addSujeto2(Sujeto, this.nombre, this.edad);
       /*
@@ -2593,25 +2621,60 @@ var nodosSeleccionados = [];
       console.log(sujeto);
       */
 
+      console.log(this.esPrincipal);
       this.nombre = "";
       this.apellido = "";
       this.edad = "";
+      this.esPrincipal = false;
+    },
+    addRelFamilia: function addRelFamilia() {},
+    addFamilia: function addFamilia() {
+      /*Crear nodo base para relacion*/
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter
+      });
+      this.myDiagram.commitTransaction("make new node");
+      /* Crear relacion con formato especificado en 'relacion' */
+
+      this.myDiagram.startTransaction("make new link");
+      this.myDiagram.model.addLinkData({
+        from: counter,
+        to: counter,
+        labelKeys: [familia],
+        category: 'Link'
+      });
+      this.myDiagram.commitTransaction("make new link");
+      /*Crear nodo base para relacion*/
+
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        category: 'LinkLabel',
+        key: familia
+      });
+      this.myDiagram.commitTransaction("make new node");
+      familia++;
+      counter++;
     },
     addSujeto2: function addSujeto2(sujeto, nombre, edad) {
       this.myDiagram.startTransaction("make new node");
       this.myDiagram.model.addNodeData({
+        key: counter,
         text: nombre + ", " + edad,
         category: sujeto
       });
       this.myDiagram.commitTransaction("make new node");
+      counter++;
     },
     addSujeto: function addSujeto(sujeto) {
       this.myDiagram.startTransaction("make new node");
       this.myDiagram.model.addNodeData({
+        key: counter,
         text: "sujeto",
         category: sujeto
       });
       this.myDiagram.commitTransaction("make new node");
+      counter++;
     },
     relFamiliar: function relFamiliar(relacion) {
       /*Crear nodo base para relacion*/
@@ -2631,6 +2694,9 @@ var nodosSeleccionados = [];
       this.myDiagram.commitTransaction("make new link");
       counter++;
     },
+    mostartJson: function mostartJson() {
+      console.log(this.myDiagram.model.toJson());
+    },
     guardarDiagrama: function guardarDiagrama() {
       var sujeto = {
         nombre: 'test3',
@@ -2640,10 +2706,12 @@ var nodosSeleccionados = [];
         archivoJson: this.myDiagram.model.toJson()
       };
       var nuevoSujeto = sujeto;
-      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
+      axios.post('/sujeto', nuevoSujeto).then(function (res) {});
     }
   },
   mounted: function mounted() {
+    var _$;
+
     this.myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
     {
       grid: $(go.Panel, "Grid", $(go.Shape, "LineH", {
@@ -2691,6 +2759,14 @@ var nodosSeleccionados = [];
       "rotatingTool.snapAngleMultiple": 15,
       "rotatingTool.snapAngleEpsilon": 15,
       "undoManager.isEnabled": true
+    });
+    this.myDiagram.addDiagramListener("TextEdited", function (e) {
+      var nuevo = e.subject;
+      var genoma = {
+        texto: nuevo,
+        idSujeto: idSujeto
+      };
+      axios.put("/genoma/".concat(seleccionado), genoma);
     });
 
     function makePort(name, spot, output, input) {
@@ -2805,18 +2881,23 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/hombre.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
+        console.log(seleccionado);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Mujer", $(go.Node, "Spot", {
@@ -2835,18 +2916,22 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/mujer.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
       }
     }));
     this.myDiagram.nodeTemplateMap.add("AdopLegal", $(go.Node, "Spot", {
@@ -2867,7 +2952,7 @@ var nodosSeleccionados = [];
       maxSize: new go.Size(100, 30),
       isMultiline: false
     }, new go.Binding("text")), // four small named ports, one on each side:
-    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), (_$ = {
       // handle mouse enter/leave events to show/hide the ports
       click: function click(e, node) {
         actualizarNodosSeleccionados(e, node);
@@ -2878,7 +2963,12 @@ var nodosSeleccionados = [];
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
       }
-    }));
+    }, _defineProperty(_$, "click", function click(e, node) {
+      actualizarNodosSeleccionados(e, node);
+    }), _defineProperty(_$, "selectionChanged", function selectionChanged(part) {
+      seleccionado = part.data.key;
+      console.log(seleccionado);
+    }), _$)));
     this.myDiagram.nodeTemplateMap.add("AdopTemporal", $(go.Node, "Spot", {
       locationSpot: go.Spot.Center
     }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
@@ -2895,18 +2985,22 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/hijo_adoptivo_temporal.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Mascota", $(go.Node, "Spot", {
@@ -2925,18 +3019,19 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/mascota.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Desconocido", $(go.Node, "Spot", {
@@ -2955,18 +3050,22 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/genero_indefinido.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Embarazo", $(go.Node, "Spot", {
@@ -2985,18 +3084,19 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/embarazada.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Espontaneo", $(go.Node, "Spot", {
@@ -3017,7 +3117,7 @@ var nodosSeleccionados = [];
       maxSize: new go.Size(100, 30),
       isMultiline: false
     }, new go.Binding("text")), // four small named ports, one on each side:
-    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), _defineProperty({
       // handle mouse enter/leave events to show/hide the ports
       click: function click(e, node) {
         actualizarNodosSeleccionados(e, node);
@@ -3028,7 +3128,9 @@ var nodosSeleccionados = [];
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
       }
-    }));
+    }, "click", function click(e, node) {
+      actualizarNodosSeleccionados(e, node);
+    })));
     this.myDiagram.nodeTemplateMap.add("Aborto", $(go.Node, "Spot", {
       locationSpot: go.Spot.Center
     }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
@@ -3045,18 +3147,19 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/aborto.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Muerte", $(go.Node, "Spot", {
@@ -3075,18 +3178,19 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/muerte.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Mellizos", $(go.Node, "Spot", {
@@ -3105,18 +3209,19 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/gemelos.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Identicos", $(go.Node, "Spot", {
@@ -3135,18 +3240,19 @@ var nodosSeleccionados = [];
     $(go.Picture, "imagenes/gemelos_identicos.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
-      click: function click(e, node) {
-        actualizarNodosSeleccionados(e, node);
-      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
 
@@ -3162,7 +3268,7 @@ var nodosSeleccionados = [];
     function actualizarNodosSeleccionados(entorno, nodo) {
       nodosSeleccionados = [];
       entorno.diagram.selection.each(function (nodo) {
-        nodosSeleccionados.push(nodo.data.text);
+        nodosSeleccionados.push(nodo.data.key);
       });
       console.log("-> nodos seleccionados: [" + nodosSeleccionados + "]");
     }
@@ -3180,7 +3286,8 @@ var nodosSeleccionados = [];
       fill: null,
       stroke: "deepskyblue",
       strokeWidth: 0
-    }));
+    })); //RELACIONES FAMILIARES
+
     /*Template para relacion de Matrimonio*/
 
     this.myDiagram.linkTemplateMap.add("Matrimonio", $(go.Link, {
@@ -3280,7 +3387,7 @@ var nodosSeleccionados = [];
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "blue",
-      strokeDashArray: [5, 5],
+      strokeDashArray: [5, 2],
       strokeWidth: 2
     })));
     /*Template para relacion de Comprometidos y Cohabitacion*/
@@ -3297,7 +3404,7 @@ var nodosSeleccionados = [];
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "blue",
-      strokeDashArray: [5, 5],
+      strokeDashArray: [5, 2],
       strokeWidth: 2
     }), $(go.Shape, {
       toArrow: "BigEndArrow",
@@ -3319,7 +3426,7 @@ var nodosSeleccionados = [];
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "blue",
-      strokeDashArray: [5, 5],
+      strokeDashArray: [5, 2],
       strokeWidth: 2
     }), $(go.Shape, {
       toArrow: "OpenTriangleTop",
@@ -3341,7 +3448,6 @@ var nodosSeleccionados = [];
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "red",
-      strokeDashArray: [5, 5],
       strokeWidth: 2
     }), $(go.Shape, {
       toArrow: "TripleForwardSlash",
@@ -3349,6 +3455,192 @@ var nodosSeleccionados = [];
       strokeWidth: 3,
       scale: 1.3
     })));
+    /*Template para relacion de Cohabitacion Legal (1) */
+
+    this.myDiagram.linkTemplateMap.add("Leg-Coh", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [3, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion Legal y Separacion por hecho (4)*/
+
+    this.myDiagram.linkTemplateMap.add("LCoh-Sep", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleTop",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion Legal y Separacino Oficial Legal (6) */
+
+    this.myDiagram.linkTemplateMap.add("LCoh-LSep", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleBottom",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Comprometidos (commited relationship) (9)*/
+
+    /*Template  para relacion de Cohabitacion (2)*/
+
+    this.myDiagram.linkTemplateMap.add("Coh", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 1],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion y separacion  (5)*/
+
+    this.myDiagram.linkTemplateMap.add("Coh-Sep", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleTop",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion No Sentimental(7) */
+
+    this.myDiagram.linkTemplateMap.add("NSen-Coh", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 4],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion Casual/Saliendo (3)*/
+
+    this.myDiagram.linkTemplateMap.add("Casual", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [1, 1],
+      strokeWidth: 2
+    })));
+    /*Template para relacion de Una Noche (8)*/
+
+    this.myDiagram.linkTemplateMap.add("1Noche", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 2],
+      strokeWidth: 3
+    })));
+    /*Template para relacion de Amorio (10)*/
+
+    this.myDiagram.linkTemplateMap.add("Amorio", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "DeepPink",
+      strokeDashArray: [2, 2],
+      strokeWidth: 3
+    }))); //RELACIONES EMOCIONALES
+
     /*Template para relacion de indiferencia*/
 
     this.myDiagram.linkTemplateMap.add("indiferencia", $(go.Link, {
@@ -3465,6 +3757,79 @@ var nodosSeleccionados = [];
     {
       toArrow: "Standard",
       stroke: "blue",
+      fill: "white"
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "PlusCircle",
+      stroke: "blue",
+      fill: "blue",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de abuso fisico*/
+
+    this.myDiagram.linkTemplateMap.add("abusoFisico", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "blue",
+      strokeWidth: 2
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Standard",
+      stroke: "blue",
+      fill: "blue"
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "PlusCircle",
+      stroke: "blue",
+      fill: "blue",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de abuso emosional*/
+
+    this.myDiagram.linkTemplateMap.add("abusoEmocional", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0.3: "blue",
+          0.7: "blue"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Standard",
+      stroke: "blue",
+      fill: null
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Standard",
+      stroke: "blue",
       fill: null
     }), $(go.Shape, // the arrowhead
     {
@@ -3522,6 +3887,108 @@ var nodosSeleccionados = [];
       strokeDashArray: [5, 5],
       strokeWidth: 4
     })));
+    /*Template para relacion de distante hostil*/
+
+    this.myDiagram.linkTemplateMap.add("cercanoHostil", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "red",
+      strokeDashArray: [3, 3],
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de distante_Hostil*/
+
+    this.myDiagram.linkTemplateMap.add("distante_Hostil", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "red",
+      strokeDashArray: [2, 2],
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de fusionado_Hostil*/
+
+    this.myDiagram.linkTemplateMap.add("fusionado_Hostil", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0.3: "red",
+          0.7: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    })));
     /*Template para relacion de amistad*/
 
     this.myDiagram.linkTemplateMap.add("amistad", $(go.Link, {
@@ -3550,81 +4017,211 @@ var nodosSeleccionados = [];
       stroke: "green",
       strokeWidth: 3
     })));
-  },
-  methods: {
-    relaciones: function relaciones() {
-      alert('al presionar llega aqui');
-    },
-    linktest: function linktest() {},
-    guardartest: function guardartest() {},
-    openForm: function openForm(Sujeto) {
-      this.Sujeto = Sujeto;
-      document.getElementById("myForm").style.display = "block";
-    },
-    closeForm: function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    },
-    saveData: function saveData(Sujeto) {
-      var sujeto = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        edad: this.edad
-      };
-      this.addSujeto2(Sujeto, this.nombre, this.edad);
-      /*
-      console.log("NUEVO SUJETO PARA GUARDAR:");
-      console.log(sujeto);
-      */
+    /*Template para relacion de fusionado*/
 
-      this.nombre = "";
-      this.apellido = "";
-      this.edad = "";
+    this.myDiagram.linkTemplateMap.add("fusionado", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
     },
-    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        text: nombre + ", " + edad,
-        category: sujeto
-      });
-      this.myDiagram.commitTransaction("make new node");
-    },
-    addSujeto: function addSujeto(sujeto) {
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        text: "sujeto",
-        category: sujeto
-      });
-      this.myDiagram.commitTransaction("make new node");
-    },
-    relFamiliar: function relFamiliar(relacion) {
-      /*Crear nodo base para relacion*/
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        key: counter
-      });
-      this.myDiagram.commitTransaction("make new node");
-      /* Crear relacion con formato especificado en 'relacion' */
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0: "red",
+          0.5: "red",
+          1: "red"
+        }),
+        strokeCap: "square"
+      })
+    })));
+    /*Template para relacion de violenciaDistante*/
 
-      this.myDiagram.startTransaction("make new link");
-      this.myDiagram.model.addLinkData({
-        from: counter,
-        to: counter,
-        category: relacion
-      });
-      this.myDiagram.commitTransaction("make new link");
-      counter++;
+    this.myDiagram.linkTemplateMap.add("violenciaDistante", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
     },
-    guardarDiagrama: function guardarDiagrama() {
-      var sujeto = {
-        nombre: 'test3',
-        apellido: 'testeo3',
-        genero: 'M',
-        edad: '2',
-        archivoJson: this.myDiagram.model.toJson()
-      };
-      var nuevoSujeto = sujeto;
-      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
-    }
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0.3: "red",
+          0.7: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    })));
+    /*Template para relacion de violenciaCercana*/
+
+    this.myDiagram.linkTemplateMap.add("violenciaCercana", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0: "red",
+          0.5: "red",
+          1: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    })));
+    /*Template para relacion de fusionado violencia*/
+
+    this.myDiagram.linkTemplateMap.add("fusionadoViolencia", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0: "red",
+          0.5: "black",
+          1: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    })));
+    this.myDiagram.nodeTemplateMap.add("LinkLabel", $(go.Node, {
+      selectable: true,
+      avoidable: false,
+      layerName: "Foreground"
+    }, // always have link label nodes in front of Links
+    $(go.Shape, "Ellipse", {
+      width: 5,
+      height: 5,
+      stroke: null,
+      portId: "",
+      fromLinkable: true,
+      toLinkable: true
+    }))); // the regular link template, a straight blue arrow
+
+    this.myDiagram.linkTemplateMap.add("Link", $(go.Link, {
+      relinkableFrom: true,
+      relinkableTo: true
+    }, $(go.Shape, {
+      stroke: "#2E68CC",
+      strokeWidth: 2
+    }))); // GraphLinksModel support for link label nodes requires specifying two properties.
+
+    this.myDiagram.model = $(go.GraphLinksModel, {
+      linkLabelKeysProperty: "labelKeys"
+    });
+    /*Template para relacion de Amor */
+
+    this.myDiagram.linkTemplateMap.add("Amor", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "green",
+      strokeWidth: 2
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Circle",
+      stroke: "green",
+      strokeWidth: 3,
+      fill: "green"
+    }))); // Whenever a new Link is drawng by the LinkingTool, it also adds a node data object
+    // that acts as the label node for the link, to allow links to be drawn to/from the link.
+
+    this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData = {
+      category: "LinkLabel"
+    };
   }
 });
 
@@ -42046,54 +42643,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("body", [
-      _c("div", { staticClass: "w3-container" }, [
-        _c("div", { staticClass: "w3-modal", attrs: { id: "id01" } }, [
-          _c("div", { staticClass: "w3-modal-content" }, [
-            _c("div", { staticClass: "w3-container" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "w3-button w3-display-topright",
-                  attrs: {
-                    onclick:
-                      "document.getElementById('id01').style.display='none'"
+  return _c("body", [
+    _c("div", { staticClass: "w3-container" }, [
+      _c("div", { staticClass: "w3-modal", attrs: { id: "id01" } }, [
+        _c("div", { staticClass: "w3-modal-content" }, [
+          _c("div", { staticClass: "w3-container" }, [
+            _c(
+              "span",
+              {
+                staticClass: "w3-button w3-display-topright",
+                attrs: {
+                  onclick:
+                    "document.getElementById('id01').style.display='none'"
+                }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "                  Bienvenido. ¿Qué desea realizar?           "
+              )
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "label1" }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "button",
+                on: {
+                  click: function($event) {
+                    return _vm.closeModal()
                   }
-                },
-                [_vm._v("×")]
-              ),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "                  Bienvenido. ¿Qué desea realizar?           "
-                )
-              ]),
-              _vm._v(" "),
-              _c("label", { staticClass: "label1" }),
-              _vm._v(" "),
-              _c("button", { staticClass: "button" }, [_vm._v("Nuevo")]),
-              _vm._v(" "),
-              _c("label", { staticClass: "label2" }),
-              _vm._v(" "),
-              _c("button", { staticClass: "button" }, [_vm._v("Cargar")]),
-              _vm._v(" "),
-              _c("label", { staticClass: "label1" }),
-              _vm._v(" "),
-              _c("p")
-            ])
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c("label", { staticClass: "label2" }),
+            _vm._v(" "),
+            _c("button", { staticClass: "button" }, [_vm._v("Cargar")]),
+            _vm._v(" "),
+            _c("label", { staticClass: "label1" }),
+            _vm._v(" "),
+            _c("p")
           ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -42117,7 +42718,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "conteiner" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
+      _c("div", { staticClass: "col-2" }, [
         _c("div", { staticClass: "side-div" }, [
           _c("nav", { attrs: { id: "sidebar" } }, [
             _vm._m(0),
@@ -42377,6 +42978,24 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
+                              return _vm.addFamilia()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Familia    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
                               return _vm.relFamiliar("Matrimonio")
                             }
                           }
@@ -42514,29 +43133,176 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Leg-Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia legal    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("LCoh-Sep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "Convivencia legal con separacion por hecho     "
+                          ),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("LCoh-LSep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia legal con separacion legal    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
                     _vm._m(1),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Coh-Sep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia y separacion    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("NSen-Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia no sentimental    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _vm._m(2),
                     _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("1Noche")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Relación esporádica    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "disabled",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Casual")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Relación casual    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
                     _vm._m(3),
                     _vm._v(" "),
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _vm._m(7),
-                    _vm._v(" "),
-                    _vm._m(8),
-                    _vm._v(" "),
-                    _vm._m(9),
-                    _vm._v(" "),
-                    _vm._m(10),
-                    _vm._v(" "),
-                    _vm._m(11),
-                    _vm._v(" "),
-                    _vm._m(12)
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Amorio")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Amorío    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -42693,6 +43459,120 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
+                              return _vm.relFamiliar("distante_Hostil")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Distante Hostil"),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("cercanoHostil")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Cercano Hostil "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("fusionado")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Fusionado  "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("abusoEmocional")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Abuso Emocional  "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("violenciaDistante")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Violencia Distante "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("violenciaCercana")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Violencia Cercana "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
                               return _vm.relFamiliar("amistad")
                             }
                           }
@@ -42703,6 +43583,36 @@ var render = function() {
                         ]
                       )
                     ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Amor")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Amor "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _vm._m(11),
+                    _vm._v(" "),
+                    _vm._m(12),
                     _vm._v(" "),
                     _vm._m(13),
                     _vm._v(" "),
@@ -42722,39 +43632,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(21),
                     _vm._v(" "),
-                    _vm._m(22),
-                    _vm._v(" "),
-                    _vm._m(23),
-                    _vm._v(" "),
-                    _vm._m(24),
-                    _vm._v(" "),
-                    _vm._m(25),
-                    _vm._v(" "),
-                    _vm._m(26),
-                    _vm._v(" "),
-                    _vm._m(27),
-                    _vm._v(" "),
-                    _vm._m(28),
-                    _vm._v(" "),
-                    _vm._m(29),
-                    _vm._v(" "),
-                    _vm._m(30),
-                    _vm._v(" "),
-                    _vm._m(31),
-                    _vm._v(" "),
-                    _vm._m(32),
-                    _vm._v(" "),
-                    _vm._m(33),
-                    _vm._v(" "),
-                    _vm._m(34),
-                    _vm._v(" "),
-                    _vm._m(35),
-                    _vm._v(" "),
-                    _vm._m(36),
-                    _vm._v(" "),
-                    _vm._m(37),
-                    _vm._v(" "),
-                    _vm._m(38)
+                    _vm._m(22)
                   ]
                 ),
                 _vm._v(" "),
@@ -42795,11 +43673,23 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(39),
+                    _vm._m(23),
                     _vm._v(" "),
-                    _vm._m(40),
+                    _vm._m(24),
                     _vm._v(" "),
-                    _vm._m(41)
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.mostartJson()
+                            }
+                          }
+                        },
+                        [_vm._v("ETC")]
+                      )
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -42877,7 +43767,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(42)
+              _vm._m(25)
             ])
           ]),
           _vm._v(" "),
@@ -42887,9 +43777,9 @@ var render = function() {
                 "form",
                 { staticClass: "form-container", attrs: { action: "#" } },
                 [
-                  _c("h1", [_vm._v("Ingresar Datos de " + _vm._s(_vm.Sujeto))]),
+                  _c("h1", [_vm._v("Ingresar Datos")]),
                   _vm._v(" "),
-                  _vm._m(43),
+                  _vm._m(26),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42918,7 +43808,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(44),
+                  _vm._m(27),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42947,7 +43837,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(45),
+                  _vm._m(28),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42975,6 +43865,48 @@ var render = function() {
                       }
                     }
                   }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.esPrincipal,
+                        expression: "esPrincipal"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "checkbox" },
+                    domProps: {
+                      checked: Array.isArray(_vm.esPrincipal)
+                        ? _vm._i(_vm.esPrincipal, null) > -1
+                        : _vm.esPrincipal
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.esPrincipal,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.esPrincipal = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.esPrincipal = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.esPrincipal = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "checkbox" } }, [
+                    _vm._v(" ¿Es Sujeto Principal? ")
+                  ]),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -43010,9 +43942,9 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(46),
+      _vm._m(29),
       _vm._v(" "),
-      _c("div", { staticClass: "col" }, [_c("button-component")], 1)
+      _c("div", { staticClass: "col-3" }, [_c("button-component")], 1)
     ])
   ])
 }
@@ -43030,40 +43962,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia legal    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia legal con separacion por hecho     "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia legal con separacion legal    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Relacion comprometida    "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43074,40 +43973,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia y separacion    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia no sentimental    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Convivencia no sentimental y separacion    "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43118,29 +43984,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Relación esporádica    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Relación casual    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Relación casual y separacion   "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43151,29 +43995,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Amorío    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Abuso físico "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Control "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43184,18 +44006,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Cortada "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Mejores amigos "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43206,63 +44017,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Hostilidad cercana "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Violencia cercana "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Abuso emocional "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Celos "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Cortada y reparada "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Amor "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
     ])
@@ -43294,7 +44050,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Abuso sexual "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43327,7 +44083,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Enamorados "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43360,7 +44116,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Negligencia "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43469,12 +44225,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", [_vm._v("ETC")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Accion")])])
   },
   function() {
@@ -43503,12 +44253,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6", attrs: { onload: "init()" } }, [
+    return _c("div", { staticClass: "col-7", attrs: { onload: "init()" } }, [
       _c("div", {
         staticStyle: {
           "flex-grow": "1",
           border: "solid 1px black",
-          height: "630px"
+          height: "900px"
         },
         attrs: { id: "myDiagramDiv" }
       })
@@ -56138,8 +56888,6 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Escritorio\Construccion\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Escritorio\Construccion\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
 

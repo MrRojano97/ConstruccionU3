@@ -87,7 +87,7 @@
                                         <a href="#" @click="relFamiliar('LCoh-LSep')">Convivencia legal con separacion legal    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="#" href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('Coh')">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -105,10 +105,7 @@
                                         <a href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                      <li>
-                                        <a class="disabled" href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a class="disabled" href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="#" href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -117,11 +114,11 @@
                                 <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relacion Emocionales</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu2">
 
-                                    <li>
+                                   <li>
                                         <a href="#" @click="relFamiliar('indiferencia')">Indiferencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#" @click="relFamiliar('armonia')">armonía <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('armonia')">armonia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('hostilidad')">Hostilidad <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -133,7 +130,7 @@
                                         <a href="#" @click="relFamiliar('abuso')">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#" @click="relFamiliar('manipulacion')">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('manipulacion')">Manipulaci�n <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('distante')">Distante <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -145,13 +142,13 @@
                                         <a href="#" @click="relFamiliar('cercanoHostil')">Cercano Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Control <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('control')">Control <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('fusionado')">Fusionado  <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Mejores amigos <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('mejoresAmigos')">Mejores amigos <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('abusoEmocional')">Abuso Emocional  <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -163,7 +160,16 @@
                                         <a href="#" @click="relFamiliar('violenciaCercana')">Violencia Cercana <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Celos <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#" @click="relFamiliar('celos')">Celos <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('corteSeparado')">Corte Separado <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('corteReparado')">Corte Reparado <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('odio')">Odio <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('amistad')">Amistad <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -172,52 +178,25 @@
                                         <a href="#"  @click="relFamiliar('Amor')">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a  href="#"  @click="relFamiliar('fusionado_Hostil')">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('fusionadoViolencia')">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('abusoSexual')">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Admirador <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('Enamorados')">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Conflicto <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('negligencia')">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Enamorados <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#"  @click="relFamiliar('limerenencia')">Limerencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Fundida/fusionada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a class="disabled" href="#">Negligencia <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Limerencia <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enfocada <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Conexión emocional <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Desconfianza <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Enfocada negativamente <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Desconocidos <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Normal <i class="fa fa-arrow-circle-right"></i> </a>
+                                        <a href="#"  @click="relFamiliar('normal')">Normal <i class="fa fa-arrow-circle-right"></i> </a>
                                     </li>
                                 </ul>
                                 <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operaciones</a>
@@ -292,9 +271,10 @@
 
 <script>
     var counter = 0;
-    var familia= 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000 
+    var familia= 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000
     var $ = go.GraphObject.make;
     var myDiagram;
+    var seleccionado;
     var nodosSeleccionados = [];
 
     export default {
@@ -335,7 +315,7 @@
                         edad : this.edad,
                         esPrincipal : this.esPrincipal,
                     }
-                    
+
                     this.addSujeto2(Sujeto,this.nombre,this.edad);
                     /*
                     console.log("NUEVO SUJETO PARA GUARDAR:");
@@ -372,13 +352,15 @@
             },
             addSujeto2(sujeto,nombre,edad){
                 this.myDiagram.startTransaction("make new node");
-                this.myDiagram.model.addNodeData({ text: nombre + ", "+edad, category : sujeto});
+                this.myDiagram.model.addNodeData({ key: counter, text: nombre + ", "+edad, category : sujeto});
                 this.myDiagram.commitTransaction("make new node");
+                counter++;
             },
             addSujeto(sujeto){
                 this.myDiagram.startTransaction("make new node");
-                this.myDiagram.model.addNodeData({ text: "sujeto", category : sujeto});
+                this.myDiagram.model.addNodeData({ key: counter,text: "sujeto", category : sujeto});
                 this.myDiagram.commitTransaction("make new node");
+                counter++;
             },
             relFamiliar(relacion){
                 /*Crear nodo base para relacion*/
@@ -391,7 +373,7 @@
                 this.myDiagram.commitTransaction("make new link");
                 counter++;
             },
-            mostartJson(){  
+            mostartJson(){
                 console.log(this.myDiagram.model.toJson());
             },
             guardarDiagrama(){
@@ -436,6 +418,17 @@
                     "rotatingTool.snapAngleEpsilon": 15,
                     "undoManager.isEnabled": true
                 });
+
+            this.myDiagram.addDiagramListener("TextEdited",
+                function(e) {
+                    var nuevo = e.subject;
+
+                    const  genoma= {
+                    texto: nuevo,
+                    idSujeto: idSujeto};
+
+                    axios.put(`/genoma/${seleccionado}`,genoma)
+            });
 
             function makePort(name, spot, output, input) {
                 // the port is basically just a small transparent square
@@ -507,8 +500,13 @@
                 makePort("R", go.Spot.Right, true, true),
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
-                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseEnter: function(e, node) { showSmallPorts(node, true);},
+                    mouseLeave: function(e, node) { showSmallPorts(node, false);},
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                        console.log(seleccionado);
+                    },
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Mujer",
@@ -535,7 +533,12 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "AdopLegal",
@@ -562,7 +565,13 @@
                     { // handle mouse enter/leave events to show/hide the ports
                         click: function(e, node){actualizarNodosSeleccionados(e, node);},
                         mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                        mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                        mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                            click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
+                        selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                        console.log(seleccionado);
+                    }
                     }
                 ));
             this.myDiagram.nodeTemplateMap.add( "AdopTemporal",
@@ -589,7 +598,12 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Mascota",
@@ -616,7 +630,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Desconocido",
@@ -643,7 +659,12 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Embarazo",
@@ -670,7 +691,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Espontaneo",
@@ -697,10 +720,12 @@
                     { // handle mouse enter/leave events to show/hide the ports
                         click: function(e, node){actualizarNodosSeleccionados(e, node);},
                         mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                        mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                        mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                     }
                 ));
-                
+
             this.myDiagram.nodeTemplateMap.add( "Aborto",
                 $(go.Node, "Spot",
                 { locationSpot: go.Spot.Center },
@@ -725,7 +750,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Muerte",
@@ -752,7 +779,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Mellizos",
@@ -779,7 +808,8 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Identicos",
@@ -806,7 +836,8 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node); },
                 }
             ));
 
@@ -821,7 +852,7 @@
             function actualizarNodosSeleccionados(entorno, nodo){
                 nodosSeleccionados = [];
                 entorno.diagram.selection.each(function(nodo){
-                    nodosSeleccionados.push(nodo.data.text);
+                    nodosSeleccionados.push(nodo.data.key);
                 });
                 console.log("-> nodos seleccionados: [" + nodosSeleccionados + "]");
             }
@@ -1049,7 +1080,7 @@
 
             //RELACIONES EMOCIONALES
 
-            /*Template para relacion de indiferencia*/
+             /*Template para relacion de indiferencia*/
             this.myDiagram.linkTemplateMap.add("indiferencia",
                 $(go.Link,
                     { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
@@ -1057,6 +1088,17 @@
                     {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
                     $(go.Shape,
                         { stroke: "black", strokeDashArray: [5,5], strokeWidth: 2 })
+                )
+            );
+             /*Template para relacion de odio*/
+            this.myDiagram.linkTemplateMap.add("odio",
+                $(go.Link,
+                    { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    $(go.Shape,
+                        { stroke: "red", strokeDashArray: [5,5], strokeWidth: 2 })
+
                 )
             );
             /*Template para relacion de armonia*/
@@ -1113,6 +1155,21 @@
                     { toArrow: "Standard", stroke: "blue", fill:"white" }),
                     $(go.Shape,  // the arrowhead
                     {fromArrow: "PlusCircle", stroke: "blue", fill:"blue",strokeWidth: 3 }),
+                )
+            );
+             /*Template para relacion de Limerenencia*/
+            this.myDiagram.linkTemplateMap.add("limerenencia",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                    { stroke: "black", strokeWidth: 2 }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "Standard", stroke: "black", fill:"white" }),
+                    $(go.Shape,  // the arrowhead
+                    {fromArrow: "PlusCircle", stroke: "black", fill:"white",strokeWidth: 3 }),
                 )
             );
             /*Template para relacion de abuso fisico*/
@@ -1173,6 +1230,28 @@
                         { toArrow: "OpenTriangle", stroke: "red", fill:null,strokeWidth: 3 })
                 )
             );
+            /*Template para relacion de Corte Separado*/
+            this.myDiagram.linkTemplateMap.add("corteSeparado",
+                $(go.Link,
+                    { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "red",strokeDashArray: [5,5], strokeWidth: 4 }),
+                )
+            );
+            /*Template para relacion de corte Reparado*/
+            this.myDiagram.linkTemplateMap.add("corteReparado",
+                $(go.Link,
+                    { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                    { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                    {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                    /*Forma del Link */
+                    $(go.Shape,
+                        { stroke: "green",strokeDashArray: [5,5], strokeWidth: 4 }),
+                )
+            );
             /*Template para relacion de distante*/
             this.myDiagram.linkTemplateMap.add("distante",
                 $(go.Link,
@@ -1212,6 +1291,31 @@
                     {fromArrow: "StretchedDiamond", stroke: "red", fill:"white",strokeWidth: 3 }),
                 $(go.Shape,  // the arrowhead
                     { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                )
+            );
+              /*Template para relacion de fusionado violencia*/
+            this.myDiagram.linkTemplateMap.add("fusionadoViolencia",
+                $(go.Link,
+                { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+                /*Forma del Link */
+                $(go.Shape,
+                {
+                    stroke: "transparent", strokeWidth: 6,  // to make it pickable
+                    pathPattern:
+                    $(go.Shape,
+                        {
+                        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+                        fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0: "red", 0.5: "black", 1: "red"}),
+                        strokeCap: "square"
+                        })
+                }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "StretchedDiamond", stroke: "red", fill:"red",strokeWidth: 4 }),
+                $(go.Shape,  // the arrowhead
+                    {fromArrow: "Diamond", stroke: "red", fill:"red",strokeWidth: 4 })
                 )
             );
             /*Template para relacion de fusionado_Hostil*/
@@ -1388,13 +1492,36 @@
                 )
             );
 
+            /Template para relacion de fusionado_Hostil/
+            this.myDiagram.linkTemplateMap.add("fusionado_Hostil",
+               $(go.Link,
+              { selectable : true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
+                { relinkableFrom: true, relinkableTo: true ,reshapable: true },
+                {routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver,},
+             /*Forma del Link */
+            $(go.Shape,
+    {                     stroke: "transparent", strokeWidth: 6,
+ // to make it pickable
+      pathPattern:
+         $(go.Shape,
+                 {      geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+                       fill: "transparent",
+                        stroke: $(go.Brush, go.Brush.Linear, { 0.3: "red", 0.7: "red"}),
+                        strokeCap: "square"                         })                 }),
+              $(go.Shape,  // the arrowhead
+                { toArrow: "StretchedDiamond", stroke: "red", fill:"white", strokeWidth: 3 }),
+                   $(go.Shape,  // the arrowhead
+             { fromArrow: "Diamond", stroke: "red", fill:"white",  strokeWidth: 3 }),
+              )
+   );
+
             // Whenever a new Link is drawng by the LinkingTool, it also adds a node data object
             // that acts as the label node for the link, to allow links to be drawn to/from the link.
-            
+
             this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData ={ category: "LinkLabel" };
 
             },
-            
+
         }
 
 </script>
