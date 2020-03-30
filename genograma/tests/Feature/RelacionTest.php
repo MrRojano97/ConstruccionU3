@@ -27,24 +27,33 @@ class RelacionTest extends TestCase
         
         $this->withoutExceptionHandling();// desactivamos las excepciones
         /**datos de prueba */
-        factory(Sujeto::class)->create(); 
-        $sujeto= Sujeto::first();
-        $genoma1= $this->post('/genoma',[
-            'text'=>'test text',
+        //creamos nuestro primer genoma.
+        $sujeto=factory(Sujeto::class)->create();
+        $response= $this->post('/genoma',[
+            'id'=>1,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
+        $this->assertCount(1,Genoma::all());
         $Genoma1= Genoma::findOrFail(1);
-        
-        $genoma2= $this->post('/genoma',[
-            'text'=>'test text',
+        // creamos nuestro segundo genoma
+        $response= $this->post('/genoma',[
+            'id'=>2,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
-        ]); 
+        ]);
+        $this->assertCount(2,Genoma::all());
         $Genoma2= Genoma::findOrFail(2);
-        
-
         $relacion= $this->post('/relacion',[
+            'id'=>1,
             'category'=>'test category',
             'from'=>$Genoma1->id,
             'to'=>$Genoma2->id,
@@ -52,6 +61,7 @@ class RelacionTest extends TestCase
         ]);
         $this->assertCount(1,Relacion::all());//confirma si por lo menos hay un post en la tabla post 
         $post = Relacion::first();
+
         $this->assertEquals($post->category,'test category');
         $this->assertEquals($post->from,$Genoma1->id);
         $this->assertEquals($post->to,$Genoma2->id);
@@ -65,29 +75,39 @@ class RelacionTest extends TestCase
         /**Creamos una relacion */
         $this->withoutExceptionHandling();// desactivamos las excepciones
         /**datos de prueba */
-        factory(Sujeto::class)->create(); 
-        $sujeto= Sujeto::first();
-        $genoma1= $this->post('/genoma',[
-            'text'=>'test text',
+        //creamos nuestro primer genoma.
+        $sujeto=factory(Sujeto::class)->create();
+        $response= $this->post('/genoma',[
+            'id'=>1,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
+        $this->assertCount(1,Genoma::all());
         $Genoma1= Genoma::findOrFail(1);
-        
-        $genoma2= $this->post('/genoma',[
-            'text'=>'test text',
+        // creamos nuestro segundo genoma
+        $response= $this->post('/genoma',[
+            'id'=>2,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
-        ]); 
+        ]);
+        $this->assertCount(2,Genoma::all());
         $Genoma2= Genoma::findOrFail(2);
-        
-
         $relacion= $this->post('/relacion',[
+            'id'=>1,
             'category'=>'test category',
             'from'=>$Genoma1->id,
             'to'=>$Genoma2->id,
             'idSujeto'=>$sujeto->id
         ]);
+        $this->assertCount(1,Relacion::all());//confirma si por lo menos hay un post en la tabla post 
         /**Una vez creada obtenemos la unica relacion registrada en la base de datos */
         $post= Relacion::first();
 
@@ -105,24 +125,35 @@ class RelacionTest extends TestCase
     /** @test */
     public function testActualizarTablaRelacion(){
         $this->withoutExceptionHandling();// desactivamos las excepciones
-        factory(Sujeto::class)->create(); 
-        $sujeto= Sujeto::first();
-        $genoma1= $this->post('/genoma',[
-            'text'=>'test text',
+
+        /**datos de prueba */
+        //creamos nuestro primer genoma.
+        $sujeto=factory(Sujeto::class)->create();
+        $response= $this->post('/genoma',[
+            'id'=>1,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
+        $this->assertCount(1,Genoma::all());
         $Genoma1= Genoma::findOrFail(1);
-        
-        $genoma2= $this->post('/genoma',[
-            'text'=>'test text',
+        // creamos nuestro segundo genoma
+        $response= $this->post('/genoma',[
+            'id'=>2,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
-        ]); 
+        ]);
+        $this->assertCount(2,Genoma::all());
         $Genoma2= Genoma::findOrFail(2);
-        
-
         $relacion= $this->post('/relacion',[
+            'id'=>1,
             'category'=>'test category',
             'from'=>$Genoma1->id,
             'to'=>$Genoma2->id,
@@ -154,30 +185,40 @@ class RelacionTest extends TestCase
     public function testEliminarRelacion(){
         $this->withoutExceptionHandling();// desactivamos las excepciones
 
-        //** creo un genoma de prueba */
-        factory(Sujeto::class)->create(); 
-        $sujeto= Sujeto::first();
-        $genoma1= $this->post('/genoma',[
-            'text'=>'test text',
+        //** creo un datos de prueba */
+        $sujeto=factory(Sujeto::class)->create();
+        $response= $this->post('/genoma',[
+            'id'=>1,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
+        $this->assertCount(1,Genoma::all());
         $Genoma1= Genoma::findOrFail(1);
-        
-        $genoma2= $this->post('/genoma',[
-            'text'=>'test text',
+        // creamos nuestro segundo genoma
+        $response= $this->post('/genoma',[
+            'id'=>2,
+            'nombre'=>'test nombre',
+            'apellido'=>'test apellido',
+            'edad'=>'test edad',
             'category'=>'test category',
+            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
-        ]); 
+        ]);
+        $this->assertCount(2,Genoma::all());
         $Genoma2= Genoma::findOrFail(2);
-        
-
         $relacion= $this->post('/relacion',[
+            'id'=>1,
             'category'=>'test category',
             'from'=>$Genoma1->id,
             'to'=>$Genoma2->id,
             'idSujeto'=>$sujeto->id
         ]);
+        $this->assertCount(1,Relacion::all());
+        
         //**obtengo el primer genoma guardado */
        $post= Relacion::first();
         $response= $this->delete('/relacion/'.$post->id);

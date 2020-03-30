@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+
 use Tests\TestCase;
 use App\Sujeto;
 
@@ -15,10 +16,10 @@ class SujetoTest extends TestCase
     public function testRegistrarSujeto(){
 
         $this->withoutExceptionHandling();// desactivamos las excepciones
-        $response= $this->post('/rutaSujeto',[
+        $response= $this->post('/sujeto',[
+            'id'=>1,
             'nombre'=>'test nombre',
             'apellido'=>'test apellido',
-            'genero'=>'test genero',
             'edad'=>'test edad',
             'archivoJson'=>'mi archivo'
 
@@ -28,10 +29,9 @@ class SujetoTest extends TestCase
         $post =Sujeto::first();
         
         /**Verificamos que los datos ingresados esten registrados en la base de datos */
-        
+        $this->assertEquals($post->id,1);
         $this->assertEquals($post->nombre,'test nombre');
         $this->assertEquals($post->apellido,'test apellido');
-        $this->assertEquals($post->genero,'test genero');
         $this->assertEquals($post->edad,'test edad');
     }
 
@@ -46,33 +46,19 @@ class SujetoTest extends TestCase
 
         $this->withoutExceptionHandling();// desactivamos las excepciones
 
-        factory(Sujeto::class,2)->create();//tengo datos par mis pruebas
+         $post=factory(Sujeto::class)->create();//tengo datos par mis pruebas
 
-        $response= $this->get('/rutaSujeto/');//llamo a la ruta
-
-        $post= Sujeto::findOrFail(1);// aca nos aprovechamos que sabemos que hay dos sujetos con los id 1 y 2
+        $response= $this->get('/sujeto/'.$post->id);//llamo a la ruta
+        $post= Sujeto::first();
         $response->assertOk();
         
         $this->assertDatabaseHas('sujetos', [
+            'id' => $post->id,
             'nombre' => $post->nombre,
             'apellido' => $post->apellido,
-            'genero' => $post->genero,
             'edad' => $post->edad,
             'archivoJson' => $post->archivoJson
         ]);
-        $post= Sujeto::findOrFail(2);// aca nos aprovechamos que sabemos que hay dos sujetos con los id 1 y 2
-        $response->assertOk();
-        
-        $this->assertDatabaseHas('sujetos', [
-            'nombre' => $post->nombre,
-            'apellido' => $post->apellido,
-            'genero' => $post->genero,
-            'edad' => $post->edad,
-            'archivoJson' => $post->archivoJson
-        ]);
-        
-
-      
     }
 
     /**no lo e probado aun */
@@ -81,14 +67,14 @@ class SujetoTest extends TestCase
 
          $post=factory(Sujeto::class)->create();//tengo datos par mis pruebas
 
-        $response= $this->get('/rutaSujeto/'.$post->id);//llamo a la ruta
+        $response= $this->get('/sujeto/'.$post->id);//llamo a la ruta
         $post= Sujeto::first();
         $response->assertOk();
         
         $this->assertDatabaseHas('sujetos', [
+            'id' => $post->id,
             'nombre' => $post->nombre,
             'apellido' => $post->apellido,
-            'genero' => $post->genero,
             'edad' => $post->edad,
             'archivoJson' => $post->archivoJson
         ]);
@@ -100,24 +86,22 @@ class SujetoTest extends TestCase
 
         $post=factory(Sujeto::class)->create();//tengo datos par mis pruebas
 
-        $response= $this->put('/rutaSujeto/'.$post->id,[
+        $response= $this->put('/sujeto/'.$post->id,[
             'nombre'=>'test nombre',
             'apellido'=>'test apellido',
-            'genero'=>'test genero',
             'edad'=>'test edad',
-            'informacion'=>'(JSON_ARRAY())22'
+            'archivoJson'=>'archivo json'
         ]);
 
-        //$response->assertOK();//confirme que no hay ningun error
+        $response->assertOK();//confirme que no hay ningun error
         //confirma que estas contando un post en mi tabla de post
         $this->assertCount(1,Sujeto::all());//confirma si por lo menos hay un post en la tabla post
 
-        $post = $post->fresh();
-
+        $post =$post->fresh();
         $this->assertEquals($post->nombre,'test nombre');
         $this->assertEquals($post->apellido,'test apellido');
-        $this->assertEquals($post->genero,'test genero');
         $this->assertEquals($post->edad,'test edad');
+        $this->assertEquals($post->archivoJson,'archivo json');
 
     }
 
@@ -127,7 +111,7 @@ class SujetoTest extends TestCase
 
         $post=factory(Sujeto::class)->create();//tengo datos par mis pruebas
 
-        $response= $this->delete('/rutaSujeto/'.$post->id);
+        $response= $this->delete('/sujeto/'.$post->id);
 
         //$response->assertOK();//confirme que no hay ningun error
         //confirma que estas contando un post en mi tabla de post
