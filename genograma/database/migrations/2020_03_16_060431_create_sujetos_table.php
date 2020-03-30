@@ -17,7 +17,6 @@ class CreateSujetosTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('genero');
             $table->integer('edad');
             $table->text('archivoJson');
             $table->timestamps();
