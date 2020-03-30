@@ -87,7 +87,7 @@
                                         <a href="#" @click="relFamiliar('LCoh-LSep')">Convivencia legal con separacion legal    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a class="disabled" href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="#" href="#">Relacion comprometida    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('Coh')">Convivencia    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -105,10 +105,7 @@
                                         <a href="#"  @click="relFamiliar('1Noche')">Relación esporádica    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                      <li>
-                                        <a class="disabled" href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
-                                    </li>
-                                    <li>
-                                        <a class="disabled" href="#">Relación casual y separacion   <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a class="#" href="#" @click="relFamiliar('Casual')" >Relación casual    <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#"  @click="relFamiliar('Amorio')">Amorío    <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -131,6 +128,9 @@
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('abuso')">Abuso <i class="fa fa-arrow-circle-right"></i>    </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="relFamiliar('abusoFisico')">Abuso Físico<i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a href="#" @click="relFamiliar('manipulacion')">Manipulación <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -172,10 +172,10 @@
                                         <a href="#"  @click="relFamiliar('Amor')">Amor <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Fundida Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#">Fusionado Hostil <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
-                                        <a href="#">Fundida violencia <i class="fa fa-arrow-circle-right"></i>    </a>
+                                        <a href="#">Fusionado violencia <i class="fa fa-arrow-circle-right"></i>    </a>
                                     </li>
                                     <li>
                                         <a class="disabled" href="#">Abuso sexual <i class="fa fa-arrow-circle-right"></i>    </a>
@@ -292,7 +292,7 @@
 
 <script>
     var counter = 0;
-    var familia= 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000 
+    var familia= 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000
     var $ = go.GraphObject.make;
     var myDiagram;
     var seleccionado;
@@ -336,7 +336,7 @@
                         edad : this.edad,
                         esPrincipal : this.esPrincipal,
                     }
-                    
+
                     this.addSujeto2(Sujeto,this.nombre,this.edad);
                     /*
                     console.log("NUEVO SUJETO PARA GUARDAR:");
@@ -394,7 +394,7 @@
                 this.myDiagram.commitTransaction("make new link");
                 counter++;
             },
-            mostartJson(){  
+            mostartJson(){
                 console.log(this.myDiagram.model.toJson());
             },
             guardarDiagrama(){
@@ -443,12 +443,12 @@
             this.myDiagram.addDiagramListener("TextEdited",
                 function(e) {
                     var nuevo = e.subject;
-                    
+
                     const  genoma= {
                     texto: nuevo,
                     idSujeto: idSujeto};
 
-                    axios.put(`/genoma/${seleccionado}`,genoma)                             
+                    axios.put(`/genoma/${seleccionado}`,genoma)
             });
 
             function makePort(name, spot, output, input) {
@@ -521,12 +521,13 @@
                 makePort("R", go.Spot.Right, true, true),
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
-                    mouseEnter: function(e, node) { showSmallPorts(node, true);},                    
+                    mouseEnter: function(e, node) { showSmallPorts(node, true);},
                     mouseLeave: function(e, node) { showSmallPorts(node, false);},
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
                     selectionChanged: function(part){
                         seleccionado = part.data.key;
                         console.log(seleccionado);
-                    }
+                    },
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Mujer",
@@ -554,6 +555,8 @@
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
                     mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                     selectionChanged: function(part){
                         seleccionado = part.data.key;
                     }
@@ -584,6 +587,8 @@
                         click: function(e, node){actualizarNodosSeleccionados(e, node);},
                         mouseEnter: function(e, node) { showSmallPorts(node, true); },
                         mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                            click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                         selectionChanged: function(part){
                         seleccionado = part.data.key;
                         console.log(seleccionado);
@@ -615,6 +620,8 @@
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
                     mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                     selectionChanged: function(part){
                         seleccionado = part.data.key;
                     }
@@ -644,7 +651,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Desconocido",
@@ -672,6 +681,8 @@
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
                     mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                     selectionChanged: function(part){
                         seleccionado = part.data.key;
                     }
@@ -701,7 +712,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Espontaneo",
@@ -728,10 +741,12 @@
                     { // handle mouse enter/leave events to show/hide the ports
                         click: function(e, node){actualizarNodosSeleccionados(e, node);},
                         mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                        mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                        mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                        click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                     }
                 ));
-                
+
             this.myDiagram.nodeTemplateMap.add( "Aborto",
                 $(go.Node, "Spot",
                 { locationSpot: go.Spot.Center },
@@ -756,7 +771,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Muerte",
@@ -783,7 +800,9 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
+
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Mellizos",
@@ -810,7 +829,8 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node);},
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Identicos",
@@ -837,7 +857,8 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    click: function(e, node){ actualizarNodosSeleccionados(e, node); },
                 }
             ));
 
@@ -852,7 +873,7 @@
             function actualizarNodosSeleccionados(entorno, nodo){
                 nodosSeleccionados = [];
                 entorno.diagram.selection.each(function(nodo){
-                    nodosSeleccionados.push(nodo.data.text);
+                    nodosSeleccionados.push(nodo.data.key);
                 });
                 console.log("-> nodos seleccionados: [" + nodosSeleccionados + "]");
             }
@@ -1421,11 +1442,11 @@
 
             // Whenever a new Link is drawng by the LinkingTool, it also adds a node data object
             // that acts as the label node for the link, to allow links to be drawn to/from the link.
-            
+
             this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData ={ category: "LinkLabel" };
 
             },
-            
+
         }
 
 </script>
