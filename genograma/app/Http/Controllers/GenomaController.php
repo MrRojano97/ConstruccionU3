@@ -38,13 +38,13 @@ class GenomaController extends Controller
         return $posts;
     }
 
-    public function show( $id){
-        $sujeto = Genoma::findOrFail($id);
+    public function show( $idGenoma,$idSujeto){
+        $sujeto = Genoma::where('id', '=', $idGenoma, 'and', 'idSujeto', '=', $idSujeto );
         //return view('genoma.show',compact('sujeto'));
         return $sujeto;
     }
 
-    public function update(Request $request, $id){
+    public function update($idGenoma,$idSujeto,Request $reques ){
         $request->validate(
             [
             'nombre'=>'',
@@ -54,7 +54,7 @@ class GenomaController extends Controller
             'loc'=>'',
             'idSujeto'=>'']
         );
-        $genograma = Genoma::find($id);
+        $genograma = Genoma::where('id', '=', $idGenoma, 'and', 'idSujeto', '=', $idSujeto );
         $genograma->nombre=$request->nombre;
         $genograma->apellido=$request->apellido;
         $genograma->edad=$request->edad;
@@ -66,8 +66,8 @@ class GenomaController extends Controller
         return $genograma;
     }
 
-    public function destroy($id){
-        $genograma= Genoma::findOrFail($id);
+    public function destroy($idGenoma,$idSujeto){
+        $genograma= Genoma::where('id', '=', $idGenema, 'and', 'idSujeto', '=', $idSujeto );
         $genograma->delete();
         return $id;
     } 

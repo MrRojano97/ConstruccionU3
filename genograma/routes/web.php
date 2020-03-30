@@ -27,9 +27,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/informeGenomaUnNodo/{post}','InformesController@informeGenomaUnNodo' );
 Route::get('/informeGenomaDosNodo/{post}','InformesController@informeGenomaUnNodo' );
 
-Route::resource('genoma', 'GenomaController');
+//Route::resource('genoma', 'GenomaController');
+
+Route::post('genoma', 'GenomaController@store');
+Route::get('genoma', 'GenomaController@index');
+Route::get('genoma/{idGenoma}/{idSujeto}','GenomaController@show');
+Route::put('genoma/{idGenoma}/{idSujeto}','GenomaController@update');
+Route::delete('genoma/{idGenoma}/{idSujeto}','GenomaController@destroy');
+
 Route::resource('sujeto', 'SujetoController');
-Route::resource('relacion', 'RelacionController');
+//Route::resource('relacion', 'RelacionController');
+
+Route::post('relacion', 'GenomaController@store');
+Route::get('relacion', 'GenomaController@index');
+Route::get('relacion/{idRelacion}/{idSujeto}','GenomaController@show');
+Route::put('relacion/{idRelacion}/{idSujeto}','GenomaController@update');
+Route::delete('relacion/{idRelacion}/{idSujeto}','GenomaController@destroy');
+
 
 Route::get('/welcome', function(){
     return view('welcome');
