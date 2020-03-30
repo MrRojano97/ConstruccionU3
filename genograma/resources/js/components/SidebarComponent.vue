@@ -12,7 +12,7 @@
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="openForm('Hombre')">Hoasdmbre <i class="fa fa-square"></i> </a>
+                                        <a @click="openForm('Hombre')">Hombre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
                                         <a @click="openForm('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
@@ -348,6 +348,28 @@
                     this.esPrincipal = false;
 
             },
+            addRelFamilia(){
+
+
+            },
+            addFamilia()
+            {
+                /*Crear nodo base para relacion*/
+                this.myDiagram.startTransaction("make new node");
+                this.myDiagram.model.addNodeData({ key: counter });
+                this.myDiagram.commitTransaction("make new node");
+
+                /* Crear relacion con formato especificado en 'relacion' */
+                this.myDiagram.startTransaction("make new link");
+                this.myDiagram.model.addLinkData({from :counter, to :counter, labelKeys:[familia],category:'Link'});
+                this.myDiagram.commitTransaction("make new link");
+                /*Crear nodo base para relacion*/
+                this.myDiagram.startTransaction("make new node");
+                this.myDiagram.model.addNodeData({ category:'LinkLabel' ,key:familia});
+                this.myDiagram.commitTransaction("make new node");
+                familia++;
+                counter++;
+            },
             addSujeto2(sujeto,nombre,edad){
                 this.myDiagram.startTransaction("make new node");
                 this.myDiagram.model.addNodeData({ text: nombre + ", "+edad, category : sujeto});
@@ -369,6 +391,9 @@
                 this.myDiagram.commitTransaction("make new link");
                 counter++;
             },
+            mostartJson(){  
+                console.log(this.myDiagram.model.toJson());
+            },
             guardarDiagrama(){
                 var sujeto = {
                     nombre: 'test3',
@@ -378,7 +403,7 @@
                     archivoJson: this.myDiagram.model.toJson()
                 }
                 const nuevoSujeto = sujeto;
-                axios.post('/rutaSujeto', nuevoSujeto)
+                axios.post('/sujeto', nuevoSujeto)
                     .then((res) =>{
                     })
             }
@@ -1370,103 +1395,6 @@
 
             },
             
-            
-                   
-            methods: {
-                relaciones(){
-                    alert('al presionar llega aqui');
-                },
-                guardartest()
-                {
-
-                },
-                openForm(Sujeto) {
-                    this.Sujeto = Sujeto;
-                    document.getElementById("myForm").style.display = "block";
-                },
-                closeForm() {
-                    document.getElementById("myForm").style.display = "none";
-                },
-               saveData(Sujeto) {
-                    var sujeto = {
-                        nombre : this.nombre,
-                        apellido : this.apellido,
-                        edad : this.edad,
-                    }
-                    this.addSujeto2(Sujeto,this.nombre,this.apellido,this.edad);
-                    /*
-                    console.log("NUEVO SUJETO PARA GUARDAR:");
-                    console.log(sujeto);
-                    */
-                    this.nombre = "";
-                    this.apellido = "";
-                    this.edad = "";
-
-
-
-                },
-                addRelFamilia(){
-
-
-                },
-                addFamilia()
-                {
-                    /*Crear nodo base para relacion*/
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ key: counter });
-                    this.myDiagram.commitTransaction("make new node");
-
-                    /* Crear relacion con formato especificado en 'relacion' */
-                    this.myDiagram.startTransaction("make new link");
-                    this.myDiagram.model.addLinkData({from :counter, to :counter, labelKeys:[familia],category:'Link'});
-                    this.myDiagram.commitTransaction("make new link");
-                    /*Crear nodo base para relacion*/
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ category:'LinkLabel' ,key:familia});
-                    this.myDiagram.commitTransaction("make new node");
-                    familia++;
-                    counter++;
-                },
-                addSujeto2(sujeto,nombre,edad){
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: nombre+" "+apellido+", "+edad, category : sujeto});
-                    this.myDiagram.commitTransaction("make new node");
-                },
-                addSujeto(sujeto){
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: "sujeto", category : sujeto});
-                    this.myDiagram.commitTransaction("make new node");
-                },
-                relFamiliar(relacion){
-                    /*Crear nodo base para relacion*/
-                    this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ key: counter });
-                    this.myDiagram.commitTransaction("make new node");
-                    /* Crear relacion con formato especificado en 'relacion' */
-                    this.myDiagram.startTransaction("make new link");
-                    this.myDiagram.model.addLinkData({from : counter, to :counter, category:relacion});
-                    this.myDiagram.commitTransaction("make new link");
-                    counter++;
-                },
-                mostartJson()
-                {
-                    
-                    console.log(this.myDiagram.model.toJson());
-                },
-                guardarDiagrama(){
-                    var sujeto = {
-                        nombre: 'test3',
-                        apellido: 'testeo3',
-                        genero: 'M',
-                        edad: '2',
-                        archivoJson: this.myDiagram.model.toJson()
-                    }
-                    const nuevoSujeto = sujeto;
-                    axios.post('/rutaSujeto', nuevoSujeto)
-                        .then((res) =>{
-                        })
-                }
-            }
         }
 
 </script>

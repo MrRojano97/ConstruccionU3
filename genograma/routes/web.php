@@ -28,7 +28,7 @@ Route::get('/informeGenomaUnNodo/{post}','InformesController@informeGenomaUnNodo
 Route::get('/informeGenomaDosNodo/{post}','InformesController@informeGenomaUnNodo' );
 
 Route::resource('genoma', 'GenomaController');
-Route::resource('rutaSujeto', 'SujetoController');
+Route::resource('sujeto', 'SujetoController');
 Route::resource('relacion', 'RelacionController');
 
 Route::get('/welcome', function(){
