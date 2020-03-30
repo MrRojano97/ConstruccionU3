@@ -10,7 +10,7 @@ Use App\Genoma;
  
 class GenomaTest extends TestCase
 {
-    
+     
     use RefreshDatabase; 
 
     /** @test */
@@ -31,43 +31,52 @@ class GenomaTest extends TestCase
 
         $this->assertEquals($post->text,'test text');
         $this->assertEquals($post->category,'test category');
-
-        $response->assertRedirect('/genoma/'.$post->id);
-
-
-      // $response->assertViewIs('genoma.store');
-        //$response->assertViewHas('genograma', $posts);
     }
 
     /** @test */
     public function testListarGenoma(){
 
         $this->withoutExceptionHandling();// desactivamos las excepciones
-
-        $sujeto1=factory(Sujeto::class)->create();
         $sujeto2=factory(Sujeto::class)->create();
-        $response1= $this->post('/genoma',[
+        $sujeto1=factory(Sujeto::class)->create();//tengo datos par mis pruebas
+         $genoma= $this->post('/genoma',[
             'text'=>'test text',
             'category'=>'test category',
             'idSujeto'=>$sujeto1->id
         ]);
-        $response2= $this->post('/genoma',[
+        // primer genoma
+        $post= Genoma::findOrFail(1);// aca nos aprovechamos que sabemos que hay dos genomas con los id 1 y 2
+
+        $response= $this->get('/genoma/'.$post->id);//llamo a la ruta;
+        $response->assertOk();
+
+        $this->assertDatabaseHas('genomas', [
+            'text' => $post->text,
+            'category' => $post->category,
+            'idSujeto' => $post->idSujeto
+        ]);
+        // segundo genoma
+
+        $genoma= $this->post('/genoma',[
             'text'=>'test text',
             'category'=>'test category',
             'idSujeto'=>$sujeto2->id
         ]);
+        // primer genoma
+        $post= Genoma::findOrFail(2);// aca nos aprovechamos que sabemos que hay dos genomas con los id 1 y 2
 
-
-
-        $response= $this->get('/genoma');//llamo a la ruta
-        $posts= Genoma::all();
+        $response= $this->get('/genoma/'.$post->id);//llamo a la ruta;
         $response->assertOk();
 
-        $response->assertViewIs('genoma.index');
-        $response->assertViewHas('posts',$posts);
+        $this->assertDatabaseHas('genomas', [
+            'text' => $post->text,
+            'category' => $post->category,
+            'idSujeto' => $post->idSujeto
+        ]);
+
     }
 
-    /**no lo e probado aun */
+    /** @test */
     public function testObtenerUnGenoma(){
         $this->withoutExceptionHandling();// desactivamos las excepciones
 
@@ -77,14 +86,17 @@ class GenomaTest extends TestCase
             'category'=>'test category',
             'idSujeto'=>$sujeto1->id
         ]);
-        $post= Sujeto::first();
-
-        $response= $this->get('/genoma/'.$post->id);//llamo a la ruta
         $post= Genoma::first();
+
+        $response= $this->get('/genoma/'.$post->id);//llamo a la ruta;
         $response->assertOk();
 
-        $response->assertViewIs('genoma.show');
-        $response->assertViewHas('sujeto',$post);// el primer parametro corresponde al parametro que retornas en la vista.
+        $this->assertDatabaseHas('genomas', [
+            'text' => $post->text,
+            'category' => $post->category,
+            'idSujeto' => $post->idSujeto
+        ]);
+
     }
 
     /** @test */
@@ -115,7 +127,6 @@ class GenomaTest extends TestCase
         $this->assertEquals($post->text,'test nombre');
         $this->assertEquals($post->category,'test apellido');
 
-        $response->assertRedirect('/genoma/'.$post->id);
     }
 
     /** @test */
@@ -137,7 +148,5 @@ class GenomaTest extends TestCase
         //confirma que estas contando un post en mi tabla de post
         $this->assertCount(0,Genoma::all());//confirma si por lo menos hay un post en la tabla post
 
-
-        $response->assertRedirect('/genoma');
     }
 }

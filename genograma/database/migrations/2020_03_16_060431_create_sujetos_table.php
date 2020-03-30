@@ -19,14 +19,7 @@ class CreateSujetosTable extends Migration
             $table->string('apellido');
             $table->string('genero');
             $table->integer('edad');
-            /*
-            $table->text('archivoJson')->default('{ "class": "go.GraphLinksModel",
-                "linkFromPortIdProperty": "fromPort",
-                "linkToPortIdProperty": "toPort",
-                "nodeDataArray": [
-               ],
-                "linkDataArray": [
-               ]}');*/
+            $table->text('archivoJson');
             $table->timestamps();
         });
     }
