@@ -15,8 +15,11 @@ class CreateGenomasTable extends Migration
     {
         Schema::create('genomas', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string("text");
+            $table->string("nombre");
+            $table->string("apellido");
+            $table->integer("edad");
             $table->string("category");
+            $table->string("loc");
             $table->integer("idSujeto");
             $table->timestamps();
             $table->foreign('idsujeto')->references('id')->on('sujetos');
