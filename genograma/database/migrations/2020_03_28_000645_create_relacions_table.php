@@ -12,7 +12,7 @@ class CreateRelacionsTable extends Migration
      * @return void
      */
     public function up()
-    {
+    { 
         Schema::create('relacions', function (Blueprint $table) {
             $table->integer('id')->primary();
             $table->string("category");

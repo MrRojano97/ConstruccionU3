@@ -7,15 +7,18 @@ use App\Relacion;
 
 class RelacionController extends Controller
 {
-     //
+     // 
      public function store(Request $request){
         $request->validate(
-            ['category'=>'',
+            [
+            'id'=>'',
+            'category'=>'',
             'from'=>'',
             'to'=>'',
             'idSujeto'=>'']
         );
         $relacion = new Relacion();
+        $relacion->id=$request->id;
         $relacion->category=$request->category;
         $relacion->from=$request->from;
         $relacion->to=$request->to;

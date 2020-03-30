@@ -10,13 +10,21 @@ class GenomaController extends Controller
     //
     public function store(Request $request){
         $request->validate(
-            ['text'=>'',
+            ['id=>',
+            'nombre'=>'',
+            'apellido'=>'',
+            'edad'=>'',
             'category'=>'',
+            'loc'=>'',
             'idSujeto'=>'']
         );
         $genograma = new Genoma();
-        $genograma->text=$request->text;
+        $genograma->id=$request->id;
+        $genograma->nombre=$request->nombre;
+        $genograma->apellido=$request->apellido;
+        $genograma->edad=$request->edad;
         $genograma->category=$request->category;
+        $genograma->loc=$request->loc;
         $genograma->idSujeto=$request->idSujeto;
         $genograma->save();
         //return redirect('/genoma/'.$genograma->id);
@@ -38,14 +46,20 @@ class GenomaController extends Controller
 
     public function update(Request $request, $id){
         $request->validate(
-            ['nombre'=>'',
+            [
+            'nombre'=>'',
             'apellido'=>'',
-            'genero'=>'',
-            'edad'=>'']
+            'edad'=>'',
+            'category'=>'',
+            'loc'=>'',
+            'idSujeto'=>'']
         );
         $genograma = Genoma::find($id);
-        $genograma->text=$request->text;
+        $genograma->nombre=$request->nombre;
+        $genograma->apellido=$request->apellido;
+        $genograma->edad=$request->edad;
         $genograma->category=$request->category;
+        $genograma->loc=$request->loc;
         $genograma->idSujeto=$request->idSujeto;
         $genograma->save();
         //return redirect('/genoma/'.$genograma->id);
