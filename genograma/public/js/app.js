@@ -2094,75 +2094,6 @@ module.exports = {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 function traerDatos() {
   var xhttp = new XMLHttpRequest();
   xhttp.open('GET', 'archivoJson', true);
@@ -42024,128 +41955,36 @@ var staticRenderFns = [
       _c("div", { attrs: { id: "botonDetalles" } }, [
         _c("details", [
           _c("summary", { attrs: { role: "button" } }, [
-            _vm._v("\n    \t\t Relacion de un Nodo\n    \t")
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", { attrs: { id: "example2", type: "text" } }),
-            _vm._v(" "),
-            _c("input", { attrs: { id: "btn", type: "submit" } }),
-            _vm._v(" "),
-            _c("table", { staticClass: "table" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Relacion")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Ignacia")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Barrios")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("25")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Matrimonio")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "botonDetalles" } }, [
-        _c("details", [
-          _c("summary", { attrs: { role: "button" } }, [
-            _vm._v("\n    \t\t Relacion entre 2 Nodos\n    \t")
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", { attrs: { id: "example2", type: "text" } }),
-            _vm._v(" "),
-            _c("input", { attrs: { id: "btn", type: "submit" } }),
-            _vm._v(" "),
-            _c("input", { attrs: { id: "example2", type: "text" } }),
-            _vm._v(" "),
-            _c("input", { attrs: { id: "btn", type: "submit" } }),
-            _vm._v(" "),
-            _c("table", { staticClass: "table" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Relacion")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("2")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Emilio")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("amistad")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("3")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Nicole")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "botonDetalles" } }, [
-        _c("details", [
-          _c("summary", { attrs: { role: "button" } }, [
-            _vm._v("\n    \t\t Tipos de Nodos\n    \t")
+            _vm._v("\n    \t\t Informacion Reportes\n    \t")
           ]),
           _vm._v(" "),
           _c("div", [
             _c("table", { staticClass: "table" }, [
               _c("thead", [
                 _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col1")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col2")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col3")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Genero")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col4")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")])
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col5")])
                 ])
               ]),
               _vm._v(" "),
               _c("tbody", [
                 _c("tr", [
-                  _c("td", [_vm._v("4")]),
+                  _c("th", [_vm._v("info1")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Juan")]),
+                  _c("th", [_vm._v("info2")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Ramirez")]),
+                  _c("th", [_vm._v("info3")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Hombre")]),
+                  _c("th", [_vm._v("info4")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("22")])
+                  _c("th", [_vm._v("info5")])
                 ])
               ])
             ])
