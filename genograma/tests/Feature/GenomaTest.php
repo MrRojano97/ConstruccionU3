@@ -22,11 +22,8 @@ class GenomaTest extends TestCase
         
         $response= $this->post('/genoma',[
             'id'=>1,
-            'nombre'=>'test nombre',
-            'apellido'=>'test apellido',
-            'edad'=>'test edad',
+            'text'=>'test text',
             'category'=>'test category',
-            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
         $this->assertCount(1,Genoma::all());//confirma si por lo menos hay un post en la tabla post 
@@ -34,11 +31,8 @@ class GenomaTest extends TestCase
         
 
         $this->assertEquals($post->id,1);
-        $this->assertEquals($post->nombre,'test nombre');
-        $this->assertEquals($post->apellido,'test apellido');
-        $this->assertEquals($post->edad,'test edad');
+        $this->assertEquals($post->text,'test text');
         $this->assertEquals($post->category,'test category');
-        $this->assertEquals($post->loc,'test loc');
         $this->assertEquals($post->idSujeto,$sujeto->id);
     }
 
@@ -50,11 +44,8 @@ class GenomaTest extends TestCase
         $sujeto1=factory(Sujeto::class)->create();//tengo datos par mis pruebas
         $genoma= $this->post('/genoma',[
             'id'=>1,
-            'nombre'=>'test nombre',
-            'apellido'=>'test apellido',
-            'edad'=>'test edad',
+            'text'=>'test text',
             'category'=>'test category',
-            'loc'=>'test loc',
             'idSujeto'=>$sujeto1->id
         ]);
         // primer genoma
@@ -65,11 +56,8 @@ class GenomaTest extends TestCase
 
         $this->assertDatabaseHas('genomas', [
             'id' => $post->id,
-            'nombre' => $post->nombre,
-            'apellido' => $post->apellido,
-            'edad' => $post->edad,
+            'text' => $post->text,
             'category' => $post->category,
-            'loc' => $post->loc,
             'idSujeto' => $post->idSujeto
         ]);
 
@@ -78,11 +66,8 @@ class GenomaTest extends TestCase
 
         $response= $this->post('/genoma',[
             'id'=>2,
-            'nombre'=>'test nombre',
-            'apellido'=>'test apellido',
-            'edad'=>'test edad',
+            'text'=>'test text',
             'category'=>'test category',
-            'loc'=>'test loc',
             'idSujeto'=>$sujeto2->id
         ]);
         // primer genoma
@@ -93,11 +78,8 @@ class GenomaTest extends TestCase
 
         $this->assertDatabaseHas('genomas', [
             'id' => $post->id,
-            'nombre' => $post->nombre,
-            'apellido' => $post->apellido,
-            'edad' => $post->edad,
+            'text' => $post->text,
             'category' => $post->category,
-            'loc' => $post->loc,
             'idSujeto' => $post->idSujeto
         ]);
 
@@ -106,29 +88,22 @@ class GenomaTest extends TestCase
     /** @test */
     public function testObtenerUnGenoma(){
         $this->withoutExceptionHandling();// desactivamos las excepciones
-
          $sujeto1=factory(Sujeto::class)->create();//tengo datos par mis pruebas
          $genoma= $this->post('/genoma',[
             'id'=>1,
-            'nombre'=>'test nombre',
-            'apellido'=>'test apellido',
-            'edad'=>'test edad',
+            'text'=>'test text',
             'category'=>'test category',
-            'loc'=>'test loc',
             'idSujeto'=>$sujeto1->id
         ]);
         $post= Genoma::first();
-
-        $response= $this->get('/genoma/'.$post->id);//llamo a la ruta;
+        
+        $response= $this->get('/genoma/{'.$post->id.'}/{'.$post->idSujeto.'}');//llamo a la ruta;
         $response->assertOk();
 
         $this->assertDatabaseHas('genomas', [
             'id' => $post->id,
-            'nombre' => $post->nombre,
-            'apellido' => $post->apellido,
-            'edad' => $post->edad,
+            'text' => $post->text,
             'category' => $post->category,
-            'loc' => $post->loc,
             'idSujeto' => $post->idSujeto
         ]);
 
@@ -142,11 +117,8 @@ class GenomaTest extends TestCase
         
         $response= $this->post('/genoma',[
             'id'=>1,
-            'nombre'=>'test nombre',
-            'apellido'=>'test apellido',
-            'edad'=>'test edad',
+            'text'=>'test text',
             'category'=>'test category',
-            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
         $this->assertCount(1,Genoma::all());
@@ -157,11 +129,8 @@ class GenomaTest extends TestCase
        $post= Genoma::first();
  
         $response= $this->put('/genoma/'.$post->id,[
-            'nombre'=>'test nombre actualizado',
-            'apellido'=>'test apellido actualizado',
-            'edad'=>'test edad actualizado',
+            'text'=>'test text actualizado',
             'category'=>'test category actualizado',
-            'loc'=>'test loc actualizado',
             'idSujeto'=>$sujeto->id
         ]);
 
@@ -171,9 +140,7 @@ class GenomaTest extends TestCase
             
         $post = $post->fresh();
 
-        $this->assertEquals($post->nombre,'test nombre actualizado');
-        $this->assertEquals($post->apellido,'test apellido actualizado');
-        $this->assertEquals($post->edad,'test edad actualizado');
+        $this->assertEquals($post->text,'test text actualizado');
         $this->assertEquals($post->category,'test category actualizado');
         $this->assertEquals($post->loc,'test loc actualizado');
         $this->assertEquals($post->idSujeto,$sujeto->id);
@@ -190,10 +157,7 @@ class GenomaTest extends TestCase
         $response= $this->post('/genoma',[
             'id'=>1,
             'nombre'=>'test nombre',
-            'apellido'=>'test apellido',
-            'edad'=>'test edad',
             'category'=>'test category',
-            'loc'=>'test loc',
             'idSujeto'=>$sujeto->id
         ]);
         $this->assertCount(1,Genoma::all());

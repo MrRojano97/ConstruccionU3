@@ -16,11 +16,8 @@ class CreateGenomasTable extends Migration
         //LA ID DEL SUJETO MAS ID DEL GENOMA SERA LA PRIMARI KEY
         Schema::create('genomas', function (Blueprint $table) {
             $table->integer('id');
-            $table->string("nombre");
-            $table->string("apellido");
-            $table->integer("edad");
+            $table->text("text");
             $table->string("category");
-            $table->string("loc");
             $table->integer("idSujeto");
             $table->timestamps();
             $table->primary(['id', 'idSujeto']);

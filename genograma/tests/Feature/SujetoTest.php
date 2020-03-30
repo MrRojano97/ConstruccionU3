@@ -17,10 +17,8 @@ class SujetoTest extends TestCase
 
         $this->withoutExceptionHandling();// desactivamos las excepciones
         $response= $this->post('/sujeto',[
-            'id'=>1,
             'nombre'=>'test nombre',
             'apellido'=>'test apellido',
-            'edad'=>'test edad',
             'archivoJson'=>'mi archivo'
 
         ]);
@@ -32,7 +30,6 @@ class SujetoTest extends TestCase
         $this->assertEquals($post->id,1);
         $this->assertEquals($post->nombre,'test nombre');
         $this->assertEquals($post->apellido,'test apellido');
-        $this->assertEquals($post->edad,'test edad');
     }
 
     /** 
@@ -53,10 +50,8 @@ class SujetoTest extends TestCase
         $response->assertOk();
         
         $this->assertDatabaseHas('sujetos', [
-            'id' => $post->id,
             'nombre' => $post->nombre,
             'apellido' => $post->apellido,
-            'edad' => $post->edad,
             'archivoJson' => $post->archivoJson
         ]);
     }
@@ -72,10 +67,8 @@ class SujetoTest extends TestCase
         $response->assertOk();
         
         $this->assertDatabaseHas('sujetos', [
-            'id' => $post->id,
             'nombre' => $post->nombre,
             'apellido' => $post->apellido,
-            'edad' => $post->edad,
             'archivoJson' => $post->archivoJson
         ]);
     }
@@ -89,7 +82,6 @@ class SujetoTest extends TestCase
         $response= $this->put('/sujeto/'.$post->id,[
             'nombre'=>'test nombre',
             'apellido'=>'test apellido',
-            'edad'=>'test edad',
             'archivoJson'=>'archivo json'
         ]);
 
@@ -100,7 +92,6 @@ class SujetoTest extends TestCase
         $post =$post->fresh();
         $this->assertEquals($post->nombre,'test nombre');
         $this->assertEquals($post->apellido,'test apellido');
-        $this->assertEquals($post->edad,'test edad');
         $this->assertEquals($post->archivoJson,'archivo json');
 
     }

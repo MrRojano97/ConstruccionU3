@@ -14,10 +14,9 @@ class CreateSujetosTable extends Migration
     public function up()
     {
         Schema::create('sujetos', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id')->autoIncrement();
             $table->string('nombre');
             $table->string('apellido');
-            $table->integer('edad');
             $table->text('archivoJson');
             $table->timestamps();
         });
