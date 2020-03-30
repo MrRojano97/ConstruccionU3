@@ -4,25 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSujetosTable extends Migration
+class CreateGenomasTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 
      * @return void
      */
     public function up()
     {
-        Schema::create('sujetos', function (Blueprint $table) {
+        Schema::create('genomas', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('genero');
-            $table->integer('edad');
-            $table->text('archivoJson');
+            $table->string("text");
+            $table->string("category");
+            $table->integer("idSujeto");
             $table->timestamps();
+            $table->foreign('idsujeto')->references('id')->on('sujetos');
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.
@@ -31,6 +30,6 @@ class CreateSujetosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sujetos');
+        Schema::dropIfExists('genomas');
     }
 }
