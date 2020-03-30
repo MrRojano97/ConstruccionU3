@@ -21,7 +21,6 @@ class RelacionController extends Controller
         $relacion->to=$request->to;
         $relacion->idsujeto=$request->idSujeto;
         $relacion->save();
-        //return redirect('/relacion/'.$genograma->id);
         return $relacion;
     }
 
@@ -35,7 +34,7 @@ class RelacionController extends Controller
     public function show( $id){
         $sujeto = Relacion::findOrFail($id);
         //return view('relacion.show',compact('sujeto'));
-        return $posts;
+        return $sujeto ;
     }
 
     public function update(Request $request, $id){
@@ -45,7 +44,7 @@ class RelacionController extends Controller
             'to'=>'',
             'idSujeto'=>'']
         );
-        $relacion = new Relacion();
+        $relacion = Relacion::find($id);
         $relacion->category=$request->category;
         $relacion->from=$request->from;
         $relacion->to=$request->to;
@@ -59,6 +58,6 @@ class RelacionController extends Controller
         $relacion= Relacion::findOrFail($id);
         $relacion->delete();
         //return redirect('/relacion');
-        return $$id;
+        return $id;
     }
 }
