@@ -2094,31 +2094,6 @@ module.exports = {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 function traerDatos() {
   var xhttp = new XMLHttpRequest();
   xhttp.open('GET', 'archivoJson', true);
@@ -2142,7 +2117,6 @@ function traerDatos() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2287,6 +2261,9 @@ $(document).ready(function () {});
   methods: {
     openModal: function openModal() {
       document.getElementById('id01').style.display = 'block';
+    },
+    closeModal: function closeModal() {
+      document.getElementById('id01').style.display = 'none';
     }
   },
   beforeMount: function beforeMount() {
@@ -2305,6 +2282,28 @@ $(document).ready(function () {});
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2578,8 +2577,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 var counter = 0;
+var familia = 10000; // nodos desde el 10000 en adelante, suponemos que no los nodos no van a superar los 10000
+
 var $ = go.GraphObject.make;
 var myDiagram;
+var seleccionado;
+var nodosSeleccionados = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Diagram',
   data: function data() {
@@ -2588,10 +2591,127 @@ var myDiagram;
       apellido: "",
       genero: "",
       edad: "",
-      Sujeto: ""
+      nodosSeleccionado: nodosSeleccionados,
+      esPrincipal: false
     };
   },
+  methods: {
+    relaciones: function relaciones() {
+      alert('al presionar llega aqui');
+    },
+    linktest: function linktest() {},
+    guardartest: function guardartest() {},
+    openForm: function openForm(Sujeto) {
+      this.Sujeto = Sujeto;
+      document.getElementById("myForm").style.display = "block";
+    },
+    closeForm: function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    },
+    saveData: function saveData(Sujeto) {
+      var sujeto = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad,
+        esPrincipal: this.esPrincipal
+      };
+      this.addSujeto2(Sujeto, this.nombre, this.edad);
+      /*
+      console.log("NUEVO SUJETO PARA GUARDAR:");
+      console.log(sujeto);
+      */
+
+      console.log(this.esPrincipal);
+      this.nombre = "";
+      this.apellido = "";
+      this.edad = "";
+      this.esPrincipal = false;
+    },
+    addRelFamilia: function addRelFamilia() {},
+    addFamilia: function addFamilia() {
+      /*Crear nodo base para relacion*/
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter
+      });
+      this.myDiagram.commitTransaction("make new node");
+      /* Crear relacion con formato especificado en 'relacion' */
+
+      this.myDiagram.startTransaction("make new link");
+      this.myDiagram.model.addLinkData({
+        from: counter,
+        to: counter,
+        labelKeys: [familia],
+        category: 'Link'
+      });
+      this.myDiagram.commitTransaction("make new link");
+      /*Crear nodo base para relacion*/
+
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        category: 'LinkLabel',
+        key: familia
+      });
+      this.myDiagram.commitTransaction("make new node");
+      familia++;
+      counter++;
+    },
+    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter,
+        text: nombre + ", " + edad,
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
+      counter++;
+    },
+    addSujeto: function addSujeto(sujeto) {
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter,
+        text: "sujeto",
+        category: sujeto
+      });
+      this.myDiagram.commitTransaction("make new node");
+      counter++;
+    },
+    relFamiliar: function relFamiliar(relacion) {
+      /*Crear nodo base para relacion*/
+      this.myDiagram.startTransaction("make new node");
+      this.myDiagram.model.addNodeData({
+        key: counter
+      });
+      this.myDiagram.commitTransaction("make new node");
+      /* Crear relacion con formato especificado en 'relacion' */
+
+      this.myDiagram.startTransaction("make new link");
+      this.myDiagram.model.addLinkData({
+        from: counter,
+        to: counter,
+        category: relacion
+      });
+      this.myDiagram.commitTransaction("make new link");
+      counter++;
+    },
+    mostartJson: function mostartJson() {
+      console.log(this.myDiagram.model.toJson());
+    },
+    guardarDiagrama: function guardarDiagrama() {
+      var sujeto = {
+        nombre: 'test3',
+        apellido: 'testeo3',
+        genero: 'M',
+        edad: '2',
+        archivoJson: this.myDiagram.model.toJson()
+      };
+      var nuevoSujeto = sujeto;
+      axios.post('/sujeto', nuevoSujeto).then(function (res) {});
+    }
+  },
   mounted: function mounted() {
+    var _$;
+
     this.myDiagram = $(go.Diagram, "myDiagramDiv", // nombre que se utiliza para referenciar desde el DIV
     {
       grid: $(go.Panel, "Grid", $(go.Shape, "LineH", {
@@ -2639,6 +2759,14 @@ var myDiagram;
       "rotatingTool.snapAngleMultiple": 15,
       "rotatingTool.snapAngleEpsilon": 15,
       "undoManager.isEnabled": true
+    });
+    this.myDiagram.addDiagramListener("TextEdited", function (e) {
+      var nuevo = e.subject;
+      var genoma = {
+        texto: nuevo,
+        idSujeto: idSujeto
+      };
+      axios.put("/genoma/".concat(seleccionado), genoma);
     });
 
     function makePort(name, spot, output, input) {
@@ -2753,7 +2881,8 @@ var myDiagram;
     $(go.Picture, "imagenes/hombre.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2762,6 +2891,13 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
+        console.log(seleccionado);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Mujer", $(go.Node, "Spot", {
@@ -2780,7 +2916,8 @@ var myDiagram;
     $(go.Picture, "imagenes/mujer.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2789,6 +2926,12 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
       }
     }));
     this.myDiagram.nodeTemplateMap.add("AdopLegal", $(go.Node, "Spot", {
@@ -2809,15 +2952,23 @@ var myDiagram;
       maxSize: new go.Size(100, 30),
       isMultiline: false
     }, new go.Binding("text")), // four small named ports, one on each side:
-    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), (_$ = {
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
       }
-    }));
+    }, _defineProperty(_$, "click", function click(e, node) {
+      actualizarNodosSeleccionados(e, node);
+    }), _defineProperty(_$, "selectionChanged", function selectionChanged(part) {
+      seleccionado = part.data.key;
+      console.log(seleccionado);
+    }), _$)));
     this.myDiagram.nodeTemplateMap.add("AdopTemporal", $(go.Node, "Spot", {
       locationSpot: go.Spot.Center
     }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
@@ -2834,7 +2985,8 @@ var myDiagram;
     $(go.Picture, "imagenes/hijo_adoptivo_temporal.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2843,6 +2995,12 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Mascota", $(go.Node, "Spot", {
@@ -2861,7 +3019,8 @@ var myDiagram;
     $(go.Picture, "imagenes/mascota.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2870,6 +3029,9 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Desconocido", $(go.Node, "Spot", {
@@ -2888,7 +3050,8 @@ var myDiagram;
     $(go.Picture, "imagenes/genero_indefinido.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2897,6 +3060,12 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
+      selectionChanged: function selectionChanged(part) {
+        seleccionado = part.data.key;
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Embarazo", $(go.Node, "Spot", {
@@ -2915,7 +3084,8 @@ var myDiagram;
     $(go.Picture, "imagenes/embarazada.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2924,6 +3094,9 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Espontaneo", $(go.Node, "Spot", {
@@ -2944,15 +3117,20 @@ var myDiagram;
       maxSize: new go.Size(100, 30),
       isMultiline: false
     }, new go.Binding("text")), // four small named ports, one on each side:
-    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
+    makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), _defineProperty({
       // handle mouse enter/leave events to show/hide the ports
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
+      },
       mouseEnter: function mouseEnter(e, node) {
         showSmallPorts(node, true);
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
       }
-    }));
+    }, "click", function click(e, node) {
+      actualizarNodosSeleccionados(e, node);
+    })));
     this.myDiagram.nodeTemplateMap.add("Aborto", $(go.Node, "Spot", {
       locationSpot: go.Spot.Center
     }, new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify), {
@@ -2969,7 +3147,8 @@ var myDiagram;
     $(go.Picture, "imagenes/aborto.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -2978,6 +3157,9 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Muerte", $(go.Node, "Spot", {
@@ -2996,7 +3178,8 @@ var myDiagram;
     $(go.Picture, "imagenes/muerte.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -3005,6 +3188,9 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Mellizos", $(go.Node, "Spot", {
@@ -3023,7 +3209,8 @@ var myDiagram;
     $(go.Picture, "imagenes/gemelos.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -3032,6 +3219,9 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
     this.myDiagram.nodeTemplateMap.add("Identicos", $(go.Node, "Spot", {
@@ -3050,7 +3240,8 @@ var myDiagram;
     $(go.Picture, "imagenes/gemelos_identicos.png"), $(go.TextBlock, {
       margin: new go.Margin(3, 0, 0, 0),
       maxSize: new go.Size(100, 30),
-      isMultiline: false
+      isMultiline: false,
+      editable: true
     }, new go.Binding("text")), // four small named ports, one on each side:
     makePort("T", go.Spot.Top, true, true), makePort("L", go.Spot.Left, true, true), makePort("R", go.Spot.Right, true, true), makePort("B", go.Spot.Bottom, true, true), {
       // handle mouse enter/leave events to show/hide the ports
@@ -3059,6 +3250,9 @@ var myDiagram;
       },
       mouseLeave: function mouseLeave(e, node) {
         showSmallPorts(node, false);
+      },
+      click: function click(e, node) {
+        actualizarNodosSeleccionados(e, node);
       }
     }));
 
@@ -3069,6 +3263,14 @@ var myDiagram;
           port.fill = show ? "rgba(0,0,0,.3)" : null;
         }
       });
+    }
+
+    function actualizarNodosSeleccionados(entorno, nodo) {
+      nodosSeleccionados = [];
+      entorno.diagram.selection.each(function (nodo) {
+        nodosSeleccionados.push(nodo.data.key);
+      });
+      console.log("-> nodos seleccionados: [" + nodosSeleccionados + "]");
     }
 
     var linkSelectionAdornmentTemplate = $(go.Adornment, "Link", $(go.Shape, // isPanelMain declares that this Shape shares the Link.geometry
@@ -3084,7 +3286,8 @@ var myDiagram;
       fill: null,
       stroke: "deepskyblue",
       strokeWidth: 0
-    }));
+    })); //RELACIONES FAMILIARES
+
     /*Template para relacion de Matrimonio*/
 
     this.myDiagram.linkTemplateMap.add("Matrimonio", $(go.Link, {
@@ -3184,7 +3387,7 @@ var myDiagram;
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "blue",
-      strokeDashArray: [5, 5],
+      strokeDashArray: [5, 2],
       strokeWidth: 2
     })));
     /*Template para relacion de Comprometidos y Cohabitacion*/
@@ -3201,7 +3404,7 @@ var myDiagram;
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "blue",
-      strokeDashArray: [5, 5],
+      strokeDashArray: [5, 2],
       strokeWidth: 2
     }), $(go.Shape, {
       toArrow: "BigEndArrow",
@@ -3223,7 +3426,7 @@ var myDiagram;
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "blue",
-      strokeDashArray: [5, 5],
+      strokeDashArray: [5, 2],
       strokeWidth: 2
     }), $(go.Shape, {
       toArrow: "OpenTriangleTop",
@@ -3245,7 +3448,6 @@ var myDiagram;
       curve: go.Link.JumpOver
     }, $(go.Shape, {
       stroke: "red",
-      strokeDashArray: [5, 5],
       strokeWidth: 2
     }), $(go.Shape, {
       toArrow: "TripleForwardSlash",
@@ -3253,6 +3455,192 @@ var myDiagram;
       strokeWidth: 3,
       scale: 1.3
     })));
+    /*Template para relacion de Cohabitacion Legal (1) */
+
+    this.myDiagram.linkTemplateMap.add("Leg-Coh", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [3, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion Legal y Separacion por hecho (4)*/
+
+    this.myDiagram.linkTemplateMap.add("LCoh-Sep", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleTop",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion Legal y Separacino Oficial Legal (6) */
+
+    this.myDiagram.linkTemplateMap.add("LCoh-LSep", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [5, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleBottom",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Comprometidos (commited relationship) (9)*/
+
+    /*Template  para relacion de Cohabitacion (2)*/
+
+    this.myDiagram.linkTemplateMap.add("Coh", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 1],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion y separacion  (5)*/
+
+    this.myDiagram.linkTemplateMap.add("Coh-Sep", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 2],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "OpenTriangleTop",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion de Cohabitacion No Sentimental(7) */
+
+    this.myDiagram.linkTemplateMap.add("NSen-Coh", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 4],
+      strokeWidth: 2
+    }), $(go.Shape, {
+      toArrow: "BigEndArrow",
+      stroke: "blue",
+      strokeWidth: 3,
+      scale: 1.3
+    })));
+    /*Template para relacion Casual/Saliendo (3)*/
+
+    this.myDiagram.linkTemplateMap.add("Casual", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [1, 1],
+      strokeWidth: 2
+    })));
+    /*Template para relacion de Una Noche (8)*/
+
+    this.myDiagram.linkTemplateMap.add("1Noche", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "blue",
+      strokeDashArray: [2, 2],
+      strokeWidth: 3
+    })));
+    /*Template para relacion de Amorio (10)*/
+
+    this.myDiagram.linkTemplateMap.add("Amorio", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    }, $(go.Shape, {
+      stroke: "DeepPink",
+      strokeDashArray: [2, 2],
+      strokeWidth: 3
+    }))); //RELACIONES EMOCIONALES
+
     /*Template para relacion de indiferencia*/
 
     this.myDiagram.linkTemplateMap.add("indiferencia", $(go.Link, {
@@ -3369,6 +3757,79 @@ var myDiagram;
     {
       toArrow: "Standard",
       stroke: "blue",
+      fill: "white"
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "PlusCircle",
+      stroke: "blue",
+      fill: "blue",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de abuso fisico*/
+
+    this.myDiagram.linkTemplateMap.add("abusoFisico", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "blue",
+      strokeWidth: 2
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Standard",
+      stroke: "blue",
+      fill: "blue"
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "PlusCircle",
+      stroke: "blue",
+      fill: "blue",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de abuso emosional*/
+
+    this.myDiagram.linkTemplateMap.add("abusoEmocional", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0.3: "blue",
+          0.7: "blue"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Standard",
+      stroke: "blue",
+      fill: null
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Standard",
+      stroke: "blue",
       fill: null
     }), $(go.Shape, // the arrowhead
     {
@@ -3426,6 +3887,108 @@ var myDiagram;
       strokeDashArray: [5, 5],
       strokeWidth: 4
     })));
+    /*Template para relacion de distante hostil*/
+
+    this.myDiagram.linkTemplateMap.add("cercanoHostil", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "red",
+      strokeDashArray: [3, 3],
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de distante_Hostil*/
+
+    this.myDiagram.linkTemplateMap.add("distante_Hostil", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "red",
+      strokeDashArray: [2, 2],
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    })));
+    /*Template para relacion de fusionado_Hostil*/
+
+    this.myDiagram.linkTemplateMap.add("fusionado_Hostil", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0.3: "red",
+          0.7: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "white",
+      strokeWidth: 3
+    })));
     /*Template para relacion de amistad*/
 
     this.myDiagram.linkTemplateMap.add("amistad", $(go.Link, {
@@ -3454,81 +4017,211 @@ var myDiagram;
       stroke: "green",
       strokeWidth: 3
     })));
-  },
-  methods: {
-    relaciones: function relaciones() {
-      alert('al presionar llega aqui');
-    },
-    linktest: function linktest() {},
-    guardartest: function guardartest() {},
-    openForm: function openForm(Sujeto) {
-      this.Sujeto = Sujeto;
-      document.getElementById("myForm").style.display = "block";
-    },
-    closeForm: function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    },
-    saveData: function saveData(Sujeto) {
-      var sujeto = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        edad: this.edad
-      };
-      this.addSujeto2(Sujeto, this.nombre, this.edad);
-      /*
-      console.log("NUEVO SUJETO PARA GUARDAR:");
-      console.log(sujeto);
-      */
+    /*Template para relacion de fusionado*/
 
-      this.nombre = "";
-      this.apellido = "";
-      this.edad = "";
+    this.myDiagram.linkTemplateMap.add("fusionado", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
     },
-    addSujeto2: function addSujeto2(sujeto, nombre, edad) {
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        text: nombre + ", " + edad,
-        category: sujeto
-      });
-      this.myDiagram.commitTransaction("make new node");
-    },
-    addSujeto: function addSujeto(sujeto) {
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        text: "sujeto",
-        category: sujeto
-      });
-      this.myDiagram.commitTransaction("make new node");
-    },
-    relFamiliar: function relFamiliar(relacion) {
-      /*Crear nodo base para relacion*/
-      this.myDiagram.startTransaction("make new node");
-      this.myDiagram.model.addNodeData({
-        key: counter
-      });
-      this.myDiagram.commitTransaction("make new node");
-      /* Crear relacion con formato especificado en 'relacion' */
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0: "red",
+          0.5: "red",
+          1: "red"
+        }),
+        strokeCap: "square"
+      })
+    })));
+    /*Template para relacion de violenciaDistante*/
 
-      this.myDiagram.startTransaction("make new link");
-      this.myDiagram.model.addLinkData({
-        from: counter,
-        to: counter,
-        category: relacion
-      });
-      this.myDiagram.commitTransaction("make new link");
-      counter++;
+    this.myDiagram.linkTemplateMap.add("violenciaDistante", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
     },
-    guardarDiagrama: function guardarDiagrama() {
-      var sujeto = {
-        nombre: 'test3',
-        apellido: 'testeo3',
-        genero: 'M',
-        edad: '2',
-        archivoJson: this.myDiagram.model.toJson()
-      };
-      var nuevoSujeto = sujeto;
-      axios.post('/rutaSujeto', nuevoSujeto).then(function (res) {});
-    }
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0.3: "red",
+          0.7: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    })));
+    /*Template para relacion de violenciaCercana*/
+
+    this.myDiagram.linkTemplateMap.add("violenciaCercana", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0: "red",
+          0.5: "red",
+          1: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    })));
+    /*Template para relacion de fusionado violencia*/
+
+    this.myDiagram.linkTemplateMap.add("fusionadoViolencia", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "transparent",
+      strokeWidth: 6,
+      // to make it pickable
+      pathPattern: $(go.Shape, {
+        geometryString: "M0 0 L1 0 M0 3 L1 3 M0 6 L1 6",
+        fill: "transparent",
+        stroke: $(go.Brush, go.Brush.Linear, {
+          0: "red",
+          0.5: "black",
+          1: "red"
+        }),
+        strokeCap: "square"
+      })
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "StretchedDiamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    }), $(go.Shape, // the arrowhead
+    {
+      fromArrow: "Diamond",
+      stroke: "red",
+      fill: "red",
+      strokeWidth: 4
+    })));
+    this.myDiagram.nodeTemplateMap.add("LinkLabel", $(go.Node, {
+      selectable: true,
+      avoidable: false,
+      layerName: "Foreground"
+    }, // always have link label nodes in front of Links
+    $(go.Shape, "Ellipse", {
+      width: 5,
+      height: 5,
+      stroke: null,
+      portId: "",
+      fromLinkable: true,
+      toLinkable: true
+    }))); // the regular link template, a straight blue arrow
+
+    this.myDiagram.linkTemplateMap.add("Link", $(go.Link, {
+      relinkableFrom: true,
+      relinkableTo: true
+    }, $(go.Shape, {
+      stroke: "#2E68CC",
+      strokeWidth: 2
+    }))); // GraphLinksModel support for link label nodes requires specifying two properties.
+
+    this.myDiagram.model = $(go.GraphLinksModel, {
+      linkLabelKeysProperty: "labelKeys"
+    });
+    /*Template para relacion de Amor */
+
+    this.myDiagram.linkTemplateMap.add("Amor", $(go.Link, {
+      selectable: true,
+      selectionAdornmentTemplate: linkSelectionAdornmentTemplate
+    }, {
+      relinkableFrom: true,
+      relinkableTo: true,
+      reshapable: true
+    }, {
+      routing: go.Link.AvoidsNodes,
+      curve: go.Link.JumpOver
+    },
+    /*Forma del Link */
+    $(go.Shape, {
+      stroke: "green",
+      strokeWidth: 2
+    }), $(go.Shape, // the arrowhead
+    {
+      toArrow: "Circle",
+      stroke: "green",
+      strokeWidth: 3,
+      fill: "green"
+    }))); // Whenever a new Link is drawng by the LinkingTool, it also adds a node data object
+    // that acts as the label node for the link, to allow links to be drawn to/from the link.
+
+    this.myDiagram.toolManager.linkingTool.archetypeLabelNodeData = {
+      category: "LinkLabel"
+    };
   }
 });
 
@@ -8065,9 +8758,9 @@ var myDiagram;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss& ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -8078,6 +8771,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "@-webkit-keyframes expand {\n0% {\n    opacity: 0;\n    max-height: 0;\n}\n100% {\n    opacity: 1;\n    max-height: 30em;\n}\n}\n@keyframes expand {\n0% {\n    opacity: 0;\n    max-height: 0;\n}\n100% {\n    opacity: 1;\n    max-height: 30em;\n}\n}\nhtml {\n  overflow-y: scroll;\n}\nbody {\n  position: relative;\n  background: #f0f4f9;\n  line-height: 1.6;\n  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;\n}\n.botonDetalles {\n  display: block;\n  /* IE */\n  width: 70%;\n  max-width: 50em;\n  margin: 3em auto;\n}\np {\n  margin: 0;\n}\np + p {\n  margin-top: 1.5em;\n}\na {\n  color: #05386b;\n}\ndetails > div {\n  position: relative;\n  padding: 0.25em 0.5em;\n  margin-bottom: 0.6em;\n  border-radius: 0.3em;\n  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);\n  background-color: white;\n}\nsummary {\n  position: relative;\n  display: block;\n  background: white;\n  padding-left: 3em;\n  margin-bottom: 0.5em;\n  font-size: 1.4em;\n  line-height: 3;\n  box-sizing: border-box;\n  list-style: none;\n  cursor: pointer;\n  border-radius: 0.3em;\n  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);\n}\nsummary:hover,\nsummary:focus {\n  background: #05386b;\n  color: white;\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);\n  outline: 0;\n}\nsummary::-webkit-details-marker {\n  display: none;\n}\nsummary::before {\n  content: \"+\";\n  position: absolute;\n  top: 50%;\n  left: 1em;\n  transform: translateY(-50%);\n  width: 1em;\n  height: 1em;\n  margin-right: 1em;\n  background: #05386b;\n  color: white;\n  font-family: Arial, sans-serif;\n  font-size: 20px;\n  line-height: 1;\n  text-align: center;\n  border-radius: 50%;\n}\ndetails[open] summary::before {\n  content: \"-\";\n  line-height: 0.9;\n}\ndetails[open] summary:hover::before,\ndetails[open] summary:focus::before {\n  background: white;\n  color: #05386b;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nbody[data-v-c59fa660]{\nbackground-color: #e0e0e0\n}\n#example2[data-v-c59fa660] {\n  padding: 10px;\n  border-radius: 50px;\n  box-shadow: 3px 5px 2px 0px               rgba(0,0,0,0.3) inset,\n  -1px -3px 10px 0px rgba(250,250,250,0.3) inset;\n  border-style: none;\n  outline: none;\n  margin:10px;\n  font-size: 16px; font-family: monospace;\n}\n#btn[data-v-c59fa660]{\n  padding: 4px;\n  border-radius: 50px;\n  box-shadow: 3px 5px 2px 0px rgba(0,0,0,0.3),\n  -1px -3px 10px 0px rgba(250,250,250,0.3);\n  border-style: none;\n  outline: none;\n\tmargin:12px;\n  font-size: 14px; font-family: monospace;\n  cursor: pointer;\n}\n#btn[data-v-c59fa660]:hover{\n  transform : scale(0.98) translateY(2px);\n}\n#btn[data-v-c59fa660]:active\n  {\n   box-shadow: 3px 5px 2px 0px            rgba(0,0,0,0.3) inset,\n  -1px -3px 10px 0px rgba(250,250,250,0.3) inset;\n}\n\n", ""]);
 
 // exports
 
@@ -41110,15 +41822,45 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&":
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=1&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -41784,10 +42526,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41810,116 +42552,36 @@ var staticRenderFns = [
       _c("div", { attrs: { id: "botonDetalles" } }, [
         _c("details", [
           _c("summary", { attrs: { role: "button" } }, [
-            _vm._v("\n    \t\t Relacion de un Nodo\n    \t")
+            _vm._v("\n    \t\t Informacion Reportes\n    \t")
           ]),
           _vm._v(" "),
           _c("div", [
             _c("table", { staticClass: "table" }, [
               _c("thead", [
                 _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col1")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col2")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col3")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")]),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col4")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Relacion")])
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("col5")])
                 ])
               ]),
               _vm._v(" "),
               _c("tbody", [
                 _c("tr", [
-                  _c("td", [_vm._v("1")]),
+                  _c("th", [_vm._v("info1")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Ignacia")]),
+                  _c("th", [_vm._v("info2")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Barrios")]),
+                  _c("th", [_vm._v("info3")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("25")]),
+                  _c("th", [_vm._v("info4")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Matrimonio")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "botonDetalles" } }, [
-        _c("details", [
-          _c("summary", { attrs: { role: "button" } }, [
-            _vm._v("\n    \t\t Relacion entre 2 Nodos\n    \t")
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("table", { staticClass: "table" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Relacion")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("2")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Emilio")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("amistad")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("3")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Nicole")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "botonDetalles" } }, [
-        _c("details", [
-          _c("summary", { attrs: { role: "button" } }, [
-            _vm._v("\n    \t\t Tipos de Nodos\n    \t")
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("table", { staticClass: "table" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Genero")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("4")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Juan")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Ramirez")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Hombre")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("22")])
+                  _c("th", [_vm._v("info5")])
                 ])
               ])
             ])
@@ -41981,54 +42643,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("body", [
-      _c("div", { staticClass: "w3-container" }, [
-        _c("div", { staticClass: "w3-modal", attrs: { id: "id01" } }, [
-          _c("div", { staticClass: "w3-modal-content" }, [
-            _c("div", { staticClass: "w3-container" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "w3-button w3-display-topright",
-                  attrs: {
-                    onclick:
-                      "document.getElementById('id01').style.display='none'"
+  return _c("body", [
+    _c("div", { staticClass: "w3-container" }, [
+      _c("div", { staticClass: "w3-modal", attrs: { id: "id01" } }, [
+        _c("div", { staticClass: "w3-modal-content" }, [
+          _c("div", { staticClass: "w3-container" }, [
+            _c(
+              "span",
+              {
+                staticClass: "w3-button w3-display-topright",
+                attrs: {
+                  onclick:
+                    "document.getElementById('id01').style.display='none'"
+                }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "                  Bienvenido. ¿Qué desea realizar?           "
+              )
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "label1" }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "button",
+                on: {
+                  click: function($event) {
+                    return _vm.closeModal()
                   }
-                },
-                [_vm._v("×")]
-              ),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "                  Bienvenido. ¿Qué desea realizar?           "
-                )
-              ]),
-              _vm._v(" "),
-              _c("label", { staticClass: "label1" }),
-              _vm._v(" "),
-              _c("button", { staticClass: "button" }, [_vm._v("Nuevo")]),
-              _vm._v(" "),
-              _c("label", { staticClass: "label2" }),
-              _vm._v(" "),
-              _c("button", { staticClass: "button" }, [_vm._v("Cargar")]),
-              _vm._v(" "),
-              _c("label", { staticClass: "label1" }),
-              _vm._v(" "),
-              _c("p")
-            ])
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c("label", { staticClass: "label2" }),
+            _vm._v(" "),
+            _c("button", { staticClass: "button" }, [_vm._v("Cargar")]),
+            _vm._v(" "),
+            _c("label", { staticClass: "label1" }),
+            _vm._v(" "),
+            _c("p")
           ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -42052,7 +42718,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "conteiner" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
+      _c("div", { staticClass: "col-2" }, [
         _c("div", { staticClass: "side-div" }, [
           _c("nav", { attrs: { id: "sidebar" } }, [
             _vm._m(0),
@@ -42312,6 +42978,24 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
+                              return _vm.addFamilia()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Familia    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
                               return _vm.relFamiliar("Matrimonio")
                             }
                           }
@@ -42449,29 +43133,176 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Leg-Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia legal    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("LCoh-Sep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "Convivencia legal con separacion por hecho     "
+                          ),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("LCoh-LSep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia legal con separacion legal    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
                     _vm._m(1),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Coh-Sep")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia y separacion    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("NSen-Coh")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Convivencia no sentimental    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _vm._m(2),
                     _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("1Noche")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Relación esporádica    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "disabled",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Casual")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Relación casual    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
                     _vm._m(3),
                     _vm._v(" "),
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _vm._m(7),
-                    _vm._v(" "),
-                    _vm._m(8),
-                    _vm._v(" "),
-                    _vm._m(9),
-                    _vm._v(" "),
-                    _vm._m(10),
-                    _vm._v(" "),
-                    _vm._m(11),
-                    _vm._v(" "),
-                    _vm._m(12)
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Amorio")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Amorío    "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -42628,6 +43459,120 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
+                              return _vm.relFamiliar("distante_Hostil")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Distante Hostil"),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("cercanoHostil")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Cercano Hostil "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("fusionado")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Fusionado  "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("abusoEmocional")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Abuso Emocional  "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("violenciaDistante")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Violencia Distante "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("violenciaCercana")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Violencia Cercana "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
                               return _vm.relFamiliar("amistad")
                             }
                           }
@@ -42638,6 +43583,36 @@ var render = function() {
                         ]
                       )
                     ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.relFamiliar("Amor")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Amor "),
+                          _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _vm._m(11),
+                    _vm._v(" "),
+                    _vm._m(12),
                     _vm._v(" "),
                     _vm._m(13),
                     _vm._v(" "),
@@ -42657,39 +43632,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(21),
                     _vm._v(" "),
-                    _vm._m(22),
-                    _vm._v(" "),
-                    _vm._m(23),
-                    _vm._v(" "),
-                    _vm._m(24),
-                    _vm._v(" "),
-                    _vm._m(25),
-                    _vm._v(" "),
-                    _vm._m(26),
-                    _vm._v(" "),
-                    _vm._m(27),
-                    _vm._v(" "),
-                    _vm._m(28),
-                    _vm._v(" "),
-                    _vm._m(29),
-                    _vm._v(" "),
-                    _vm._m(30),
-                    _vm._v(" "),
-                    _vm._m(31),
-                    _vm._v(" "),
-                    _vm._m(32),
-                    _vm._v(" "),
-                    _vm._m(33),
-                    _vm._v(" "),
-                    _vm._m(34),
-                    _vm._v(" "),
-                    _vm._m(35),
-                    _vm._v(" "),
-                    _vm._m(36),
-                    _vm._v(" "),
-                    _vm._m(37),
-                    _vm._v(" "),
-                    _vm._m(38)
+                    _vm._m(22)
                   ]
                 ),
                 _vm._v(" "),
@@ -42730,16 +43673,101 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(39),
+                    _vm._m(23),
                     _vm._v(" "),
-                    _vm._m(40),
+                    _vm._m(24),
                     _vm._v(" "),
-                    _vm._m(41)
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.mostartJson()
+                            }
+                          }
+                        },
+                        [_vm._v("ETC")]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-toggle",
+                    attrs: {
+                      href: "#homeSubmenu4",
+                      "data-toggle": "collapse",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [_vm._v("Generar Reportes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse list-unstyled",
+                    attrs: { id: "homeSubmenu4" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 1 nodo      "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Reporte Relaciones 2 nodos    "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.guardarDiagrama()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("Listado tipo de nodos     "),
+                          _c("i", { staticClass: "fa fa-edit" })
+                        ]
+                      )
+                    ])
                   ]
                 )
               ]),
               _vm._v(" "),
-              _vm._m(42)
+              _vm._m(25)
             ])
           ]),
           _vm._v(" "),
@@ -42749,9 +43777,9 @@ var render = function() {
                 "form",
                 { staticClass: "form-container", attrs: { action: "#" } },
                 [
-                  _c("h1", [_vm._v("Ingresar Datos de " + _vm._s(_vm.Sujeto))]),
+                  _c("h1", [_vm._v("Ingresar Datos")]),
                   _vm._v(" "),
-                  _vm._m(43),
+                  _vm._m(26),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42780,7 +43808,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(44),
+                  _vm._m(27),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42809,7 +43837,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(45),
+                  _vm._m(28),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -42837,6 +43865,48 @@ var render = function() {
                       }
                     }
                   }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.esPrincipal,
+                        expression: "esPrincipal"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "checkbox" },
+                    domProps: {
+                      checked: Array.isArray(_vm.esPrincipal)
+                        ? _vm._i(_vm.esPrincipal, null) > -1
+                        : _vm.esPrincipal
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.esPrincipal,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.esPrincipal = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.esPrincipal = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.esPrincipal = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "checkbox" } }, [
+                    _vm._v(" ¿Es Sujeto Principal? ")
+                  ]),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -42872,9 +43942,9 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(46),
+      _vm._m(29),
       _vm._v(" "),
-      _c("div", { staticClass: "col" }, [_c("button-component")], 1)
+      _c("div", { staticClass: "col-3" }, [_c("button-component")], 1)
     ])
   ])
 }
@@ -42892,40 +43962,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia legal    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia legal con separacion por hecho     "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia legal con separacion legal    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Relacion comprometida    "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -42936,40 +43973,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia y separacion    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Convivencia no sentimental    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Convivencia no sentimental y separacion    "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -42980,29 +43984,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Relación esporádica    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Relación casual    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Relación casual y separacion   "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43013,29 +43995,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Amorío    "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Abuso físico "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Control "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43046,18 +44006,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Cortada "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Mejores amigos "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43068,63 +44017,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Hostilidad cercana "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Violencia cercana "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Abuso emocional "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Celos "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Cortada y reparada "),
-        _c("i", { staticClass: "fa fa-arrow-circle-right" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _vm._v("Amor "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
     ])
@@ -43156,7 +44050,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Abuso sexual "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43189,7 +44083,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Enamorados "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43222,7 +44116,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { staticClass: "disabled", attrs: { href: "#" } }, [
         _vm._v("Negligencia "),
         _c("i", { staticClass: "fa fa-arrow-circle-right" })
       ])
@@ -43331,12 +44225,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", [_vm._v("ETC")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Accion")])])
   },
   function() {
@@ -43365,12 +44253,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6", attrs: { onload: "init()" } }, [
+    return _c("div", { staticClass: "col-7", attrs: { onload: "init()" } }, [
       _c("div", {
         staticStyle: {
           "flex-grow": "1",
           border: "solid 1px black",
-          height: "630px"
+          height: "900px"
         },
         attrs: { id: "myDiagramDiv" }
       })
@@ -55640,11 +56528,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=template&id=c59fa660& */ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&");
+/* harmony import */ var _ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& */ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&");
 /* harmony import */ var _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ButtonComponent.vue?vue&type=script&lang=js&");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& */ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&");
+/* harmony import */ var _ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ButtonComponent.vue?vue&type=style&index=1&lang=scss& */ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -55653,13 +56543,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _ButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "c59fa660",
   null
   
 )
@@ -55687,35 +56577,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&":
+/***/ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&":
 /*!***************************************************************************************!*\
-  !*** ./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  !*** ./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss& ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=1&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=style&index=1&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=template&id=c59fa660& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ButtonComponent.vue?vue&type=template&id=c59fa660&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_c59fa660_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -55982,8 +56888,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Escritorio\Construccion\ConstruccionU3\genograma\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Escritorio\Construccion\ConstruccionU3\genograma\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/matiasescobar/Sites/web-projects/ConstruccionU3/genograma/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
