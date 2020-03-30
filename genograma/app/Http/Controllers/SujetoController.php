@@ -16,9 +16,10 @@ class SujetoController extends Controller
         $sujeto->genero=$request->genero;
         $sujeto->edad=$request->edad;
         $sujeto->archivoJson=$request->archivoJson;
-        $sujeto->save();
+        $a=$sujeto->save();
+        //print_r(($a->id));
         //return redirect('/rutaSujeto/'.$sujeto->id);
-        return $sujeto;
+        return compact('sujeto');
     } 
 
     public function index(){
