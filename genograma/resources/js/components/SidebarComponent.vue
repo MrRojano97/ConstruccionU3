@@ -448,7 +448,7 @@
 
                     const  genoma= {
                     texto: nuevo,
-                    idSujeto: idSujeto};
+                    idSujeto: id};
 
                     axios.put(`/genoma/${seleccionado}`,genoma)
             });
