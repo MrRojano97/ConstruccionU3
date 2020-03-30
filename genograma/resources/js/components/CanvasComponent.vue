@@ -1,11 +1,14 @@
 <template>
-   <div id="myDiagramDiv" style="flex-grow: 1; height: 900px; border: solid 1px black"></div>
+
+    <div id="myDiagramDiv" style="flex-grow: 1; height: 100px; border: solid 1px black"></div>
+
+
 </template>
 
 <style scoped>
     /* Aca va le stilo del componente */
     .myDivDiagram{
-        z-index: -1;
+        z-index: 1;
     }
 
     .myDiagramDiv{
@@ -15,6 +18,16 @@
     }
 
 </style>
+
+<script>
+    var $ = go.GraphObject.make;
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        }
+
+    }
+</script-->
 
 <script>
 

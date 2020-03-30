@@ -93,6 +93,18 @@
         display: block;
         color: white;
     }
+    #sidebar ul li a.disabled {
+        padding: 10px;
+        font-size: 1.1em;
+        font-family: "Lucida Console", Monaco, monospace;
+        display: block;
+        pointer-events: none;
+        cursor: default;
+        color: white;
+        opacity: 0.5;
+
+    }
+    
     #sidebar ul li a:hover {
         color: #7386D5;
         background: #fff;
