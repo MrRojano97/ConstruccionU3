@@ -274,6 +274,7 @@
     var counter = 0;
     var $ = go.GraphObject.make;
     var myDiagram;
+    var seleccionado;
     export default {
         name: 'Diagram',
         data (){
@@ -315,6 +316,16 @@
             });
 
 
+            this.myDiagram.addDiagramListener("TextEdited",
+                function(e) {
+                    var nuevo = e.subject;
+                    
+                    const  genoma= {
+                    texto: nuevo,
+                    idSujeto: idSujeto};
+
+                    axios.put(`/genoma/${seleccionado}`,genoma)                             
+            });
             //
 
             function makePort(name, spot, output, input) {
@@ -361,7 +372,7 @@
                 { locationSpot: go.Spot.Center, locationObjectName: "CIRCLE" },
                 $(go.Shape, "Circle", { name: "CIRCLE", cursor: "pointer", desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
                 $(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
-                );
+            );
 
             this.myDiagram.nodeTemplateMap.add( "Hombre",
                 $(go.Node, "Spot",
@@ -387,8 +398,12 @@
                 makePort("R", go.Spot.Right, true, true),
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
-                    mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseEnter: function(e, node) { showSmallPorts(node, true);},                    
+                    mouseLeave: function(e, node) { showSmallPorts(node, false);},
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                        console.log(seleccionado);
+                    }
                 }
             ));
 
@@ -416,7 +431,10 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "AdopLegal",
@@ -443,7 +461,10 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "AdopTemporal",
@@ -470,7 +491,10 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Mascota",
@@ -524,7 +548,10 @@
                 makePort("B", go.Spot.Bottom, true, true),
                 { // handle mouse enter/leave events to show/hide the ports
                     mouseEnter: function(e, node) { showSmallPorts(node, true); },
-                    mouseLeave: function(e, node) { showSmallPorts(node, false); }
+                    mouseLeave: function(e, node) { showSmallPorts(node, false); },
+                    selectionChanged: function(part){
+                        seleccionado = part.data.key;
+                    }
                 }
             ));
             this.myDiagram.nodeTemplateMap.add( "Embarazo",
@@ -1102,13 +1129,15 @@
                 },
                 addSujeto2(sujeto,nombre,apellido,edad){
                     this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: nombre+" "+apellido+", "+edad, category : sujeto});
+                    this.myDiagram.model.addNodeData({ key: counter, text: nombre+" "+apellido+", "+edad, category : sujeto});
                     this.myDiagram.commitTransaction("make new node");
+                    counter++;
                 },
                 addSujeto(sujeto){
                     this.myDiagram.startTransaction("make new node");
-                    this.myDiagram.model.addNodeData({ text: "sujeto", category : sujeto});
+                    this.myDiagram.model.addNodeData({ key:counter, text: "sujeto", category : sujeto});
                     this.myDiagram.commitTransaction("make new node");
+                    counter++;
                 },
                 relFamiliar(relacion){
                     /*Crear nodo base para relacion*/
