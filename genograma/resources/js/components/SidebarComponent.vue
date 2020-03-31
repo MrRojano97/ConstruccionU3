@@ -13,7 +13,7 @@
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Nueva Persona</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
                                     <li>
-                                        <a @click="openForm('Hombre')">{{id}} Hombre <i class="fa fa-square"></i> </a>
+                                        <a @click="openForm('Hombre')"> Hombre <i class="fa fa-square"></i> </a>
                                     </li>
                                     <li>
                                         <a @click="openForm('Mujer')">Mujer <i class="fa fa-circle"></i> </a>
@@ -485,7 +485,7 @@
                 { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
                 new go.Binding("angle").makeTwoWay(),
                 // the main object is a Panel that surrounds a TextBlock with a Shape
-                $(go.Picture, "imagenes/hombre2.png"
+                $(go.Picture, "imagenes/hombre.png"
                 ),
                 $(go.TextBlock,
                     { margin: new go.Margin(3, 0, 0, 0),
